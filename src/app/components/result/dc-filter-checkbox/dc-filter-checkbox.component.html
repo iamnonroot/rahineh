@@ -1,0 +1,10 @@
+<app-filter-section-result
+  [title]="Injected!.title"
+  [opened]="Injected!.opened != false"
+>
+  <div class="flex flex-col gap-2">
+    <mat-checkbox *ngFor="let item of Injected!.options">
+      {{ item.text }}
+    </mat-checkbox>
+  </div>
+</app-filter-section-result>

@@ -1,0 +1,62 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+@function GetRGBColor($color) {
+  @return red($color) + ", " + green($color) + ", " + blue($color);
+}
+
+@mixin GenerateThemeRoot($primary, $accent, $warn, $surface, $outline) {
+  $primary: mat.get-color-from-palette($primary);
+  $accent: mat.get-color-from-palette($accent);
+  $warn: mat.get-color-from-palette($warn);
+  --tikban-theme-primary: #{$primary};
+  --tikban-theme-primary-rgb: #{GetRGBColor($primary)};
+  --tikban-theme-accent: #{$accent};
+  --tikban-theme-accent-rgb: #{GetRGBColor($accent)};
+  --tikban-theme-warn: #{$warn};
+  --tikban-theme-warn-rgb: #{GetRGBColor($warn)};
+  --tikban-theme-surface: #{$surface};
+  --tikban-theme-surface-rgb: #{GetRGBColor($surface)};
+  --tikban-theme-outline: #{$outline};
+}
+
+@mixin GenerateTheme($primary, $accent, $warn, $dark: false) {
+  $theme_option: (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+  );
+
+  $surface: transparent;
+  $outline: transparent;
+
+  @if $dark {
+    $theme: mat.define-dark-theme($theme_option);
+    @include mat.all-component-themes($theme);
+    $surface: #424242;
+    $outline: rgba(255, 255, 255, 0.12);
+  } @else {
+    $theme: mat.define-light-theme($theme_option);
+    @include mat.all-component-themes($theme);
+    $surface: #ffffff;
+    $outline: rgba(0, 0, 0, 0.12);
+  }
+
+  @include GenerateThemeRoot($primary, $accent, $warn, $surface, $outline);
+
+  ::before,
+  ::after {
+    @include GenerateThemeRoot($primary, $accent, $warn, $surface, $outline);
+  }
+}
+
+.tikban-theme-indigo_pink {
+  @include GenerateTheme(
+    mat.define-palette(mat.$green-palette, A700),
+    mat.define-palette(mat.$orange-palette, A400),
+    mat.define-palette(mat.$red-palette)
+  );
+}

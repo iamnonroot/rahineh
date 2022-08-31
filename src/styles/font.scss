@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "IRANSansX";
+  font-style: normal;
+  font-size: 400;
+  src: url("/assets/fonts/IRANSansXFaNum-Regular.woff2");
+}
+
+@font-face {
+  font-family: "IRANSansX";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/assets/fonts/IRANSansXFaNum-Bold.woff2");
+}
+
+@font-face {
+  font-family: "IRANSansXNoEn";
+  font-style: 400;
+  src: url("/assets/fonts/IRANSansXNoEn-Regular.woff2");
+}
+
+@font-face {
+  font-family: "IRANSansXNoEn";
+  font-weight: 700;
+  src: url("/assets/fonts/IRANSansXNoEn-Bold.woff2");
+}
+
+*:not(mat-icon) {
+  font-family: "IRANSansX", Tahoma !important;
+}

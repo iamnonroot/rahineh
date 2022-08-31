@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./styles/material.scss";
+@import "./styles/retieral.scss";
+@import "./styles/tailwind.scss";
+@import "./styles/font.scss";
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  // mat dialog
+  top: 0 !important;
+  left: 0 !important;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+picture.zoom-on-picture:hover img {
+  transform: scale(1.1);
+}

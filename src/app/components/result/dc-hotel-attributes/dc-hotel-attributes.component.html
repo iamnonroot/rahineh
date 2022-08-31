@@ -1,0 +1,7 @@
+<div
+  *ngFor="let item of Injected"
+  class="flex flex-nowrap items-center gap-4 opacity-70 hover:opacity-100"
+>
+  <img [src]="item.icon" [alt]="item.text" />
+  <span>{{ item.text }}</span>
+</div>

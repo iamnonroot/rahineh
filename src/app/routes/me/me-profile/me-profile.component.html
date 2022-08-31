@@ -1,0 +1,81 @@
+<mat-card class="!border my-8">
+    <p>اطلاعات حساب کاربری راهینه شما</p>
+
+  <div class="grid grid-cols-4 gap-4">
+    <mat-form-field appearance="outline">
+      <mat-label>نام</mat-label>
+      <input matInput autocomplete="off" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>نام خانوادگی</mat-label>
+      <input matInput autocomplete="off" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>شماره موبایل</mat-label>
+      <input matInput autocomplete="off" type="tel" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>ایمیل</mat-label>
+      <input matInput autocomplete="off" type="email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>جنسیت</mat-label>
+      <mat-select>
+        <mat-option value="male">مرد</mat-option>
+        <mat-option value="female">زن</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>ملیت</mat-label>
+      <mat-select>
+        <mat-option value="iranian">ایرانی</mat-option>
+        <mat-option value="non-iranian">غیر ایرانی</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>کد ملی</mat-label>
+      <input matInput autocomplete="off" type="tel" />
+    </mat-form-field>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-xs -mt-5 mr-1">تاریخ تولد</span>
+      <div class="grid grid-cols-3 gap-2">
+        <mat-form-field appearance="outline">
+          <mat-label>روز</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of Days" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--  -->
+        <mat-form-field appearance="outline">
+          <mat-label>ماه</mat-label>
+          <mat-select>
+            <mat-option
+              *ngFor="let item of Months; let i = index"
+              [value]="i + 1"
+            >
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--  -->
+        <mat-form-field appearance="outline">
+          <mat-label>سال</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of Years" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-nowrap justify-end">
+    <button mat-flat-button color="primary">ثبت و ذخیره</button>
+  </div>
+</mat-card>

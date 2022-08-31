@@ -1,0 +1,20 @@
+<div
+  class="container mx-auto h-screen flex flex-col gap-8 items-center justify-center"
+>
+  <a routerLink="/">
+    <img
+      src="/assets/images/logo.svg"
+      alt="لوگو راهینه"
+      height="100px"
+      class="h-[100px]"
+    />
+  </a>
+
+  <mat-card class="border w-[340px] !p-6 !shadow-xl !rounded-2xl">
+    <router-outlet></router-outlet>
+  </mat-card>
+
+  <a routerLink="/" class="opacity-50 hover:opacity-100 hover:text-accent">
+    بازگشت به صفحه اول
+  </a>
+</div>

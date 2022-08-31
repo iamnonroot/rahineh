@@ -1,0 +1,6 @@
+$card-rounded: 0.75em;
+
+.mat-card {
+  box-shadow: none !important;
+  border-radius: $card-rounded !important;
+}

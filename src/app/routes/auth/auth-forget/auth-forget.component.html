@@ -1,0 +1,20 @@
+<h2 class="font-bold">فراموشی کلمه عبور</h2>
+<p class="opacity-70">بازگردانی کلمه عبور حساب کاربری راهینه</p>
+
+<mat-form-field class="w-full" appearance="outline">
+  <mat-label>آدرس ایمیل</mat-label>
+  <input matInput type="email" autocomplete="off" />
+</mat-form-field>
+
+<button class="w-full" mat-flat-button color="primary">تایید و ورود</button>
+
+<div class="flex flex-nowrap items-center gap-2 my-4">
+  <div class="w-full h-[1px] bg-slate-200"></div>
+  <span class="px-2 text-xs opacity-70">یا</span>
+  <div class="w-full h-[1px] bg-slate-200"></div>
+</div>
+
+<div class="flex flex-nowrap items-center justify-center gap-6 text-xs">
+  <a class="hover:text-accent" routerLink="/auth/login">ورود با ایمیل</a>
+  <a class="hover:text-accent" routerLink="/auth">ورود با موبایل</a>
+</div>

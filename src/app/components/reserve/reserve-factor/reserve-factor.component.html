@@ -1,0 +1,34 @@
+<mat-card class="border">
+  <h3>صورتحساب سفر</h3>
+
+  <table class="w-full" mat-table [dataSource]="Data">
+    <ng-container matColumnDef="text">
+      <th class="w-full" mat-header-cell *matHeaderCellDef>هزینه برای</th>
+      <td class="w-full" mat-cell *matCellDef="let element">
+        {{ element.text }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="count">
+      <th class="min-w-[56px]" mat-header-cell *matHeaderCellDef>تعداد</th>
+      <td class="min-w-[56px]" mat-cell *matCellDef="let element">
+        {{ element.count }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th class="min-w-[130px]" mat-header-cell *matHeaderCellDef>مبلغ</th>
+      <td class="min-w-[130px]" mat-cell *matCellDef="let element">
+        {{ element.price | format: "price" }} تومان
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="Columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: Columns"></tr>
+  </table>
+
+  <div class="flex flex-nowrap items-center justify-between py-4 px-2 text-primary">
+    <span>مبلغ قابل پرداخت</span>
+    <span class="min-w-[122px]">{{ GetTotalPrice() | format: "price" }} تومان</span>
+  </div>
+</mat-card>

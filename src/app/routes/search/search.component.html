@@ -1,0 +1,20 @@
+<div class="flex flex-col px-2 border-b bg-white z-[2] sticky -top-[50px]">
+  <div class="container mx-auto">
+    <app-card-search
+      [tabless]="true"
+      class="!shadow-none !bg-transparent -m-4"
+    ></app-card-search>
+  </div>
+</div>
+
+<app-header-result></app-header-result>
+
+<div class="container mx-auto my-6 grid grid-cols-12 gap-4">
+  <div class="flex flex-col col-span-3">
+    <app-filter-result></app-filter-result>
+  </div>
+  <tik-dynamic-component
+    class="col-span-9"
+    key="@tikban/#/result"
+  ></tik-dynamic-component>
+</div>

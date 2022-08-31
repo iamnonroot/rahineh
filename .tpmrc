@@ -1,0 +1,5 @@
+@tik/dynamic-component
+@tik/utils
+@tik/sdk
+@tik/eventer
+@tik/enum

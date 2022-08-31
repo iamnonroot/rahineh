@@ -1,0 +1,18 @@
+<div
+  class="flex flex-col items-center justify-center gap-4 p-4 overflow-hidden"
+>
+  <p>لینک این صفحه را به اشتراک بگذارید</p>
+
+  <div class="flex flex-wrap items-center justify-center gap-2">
+    <button
+      *ngFor="let item of Apps"
+      mat-icon-button
+      [matTooltip]="item.title"
+      class="!border !border-solid !border-black/20 hover:!border-accent"
+    >
+      <div class="flex items-center justify-center">
+        <img [src]="item.logo" [alt]="item.title" class="w-[20px] h-[20px]" />
+      </div>
+    </button>
+  </div>
+</div>

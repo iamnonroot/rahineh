@@ -1,0 +1,118 @@
+<mat-card
+  class="flex flex-col !shadow-none border !rounded-2xl hover:!shadow-lg"
+>
+  <div class="flex flex-nowrap gap-2">
+    <div class="flex flex-col gap-8 w-full">
+      <ng-container *ngFor="let item of ways">
+        <div class="flex flex-nowrap gap-2">
+          <img
+            [src]="item.image"
+            [alt]="item.title"
+            width="50px"
+            height="50px"
+            class="w-[50px] h-[50px]"
+          />
+
+          <div class="flex flex-col mt-2 gap-1 min-w-fit">
+            <strong>{{ item.title }}</strong>
+            <span class="text-xs">{{ item.subtitle }}</span>
+          </div>
+
+          <div
+            class="flex flex-nowrap items-center gap-4 w-full max-w-[600px] px-6 mx-auto"
+          >
+            <div class="flex flex-col gap-1">
+              <span class="text-lg font-bold">{{ item.fromText }}</span>
+              <span class="opacity-70">{{ item.fromValue }}</span>
+            </div>
+
+            <div class="w-[1px] h-1/2 bg-slate-200"></div>
+
+            <span class="text-lg text-accent">{{ item.start }}</span>
+
+            <div
+              class="flex flex-nowrap items-center justify-center relative mx-2 w-full"
+            >
+              <div class="h-[2px] w-full bordered absolute"></div>
+
+              <div
+                class="flex flex-col items-center text-slate-400 w-full z-[1]"
+              >
+                <div
+                  *ngIf="item.stops.length != 0"
+                  class="flex flex-nowrap mb-1 mt-2 z-[1] w-full"
+                >
+                  <div
+                    *ngFor="let stop of item.stops"
+                    class="flex flex-col items-center mx-auto"
+                  >
+                    <span class="text-xs uppercase opacity-70">{{ stop }}</span>
+                    <span
+                      class="block w-[12px] h-[12px] bg-white border-2 border-slate-200 rounded-full -mb-1"
+                    ></span>
+                  </div>
+                </div>
+                <span class="text-xs bg-white p-1">{{ item.duration }}</span>
+              </div>
+            </div>
+
+            <span class="text-lg text-accent">{{ item.end }}</span>
+
+            <div class="w-[1px] h-1/2 bg-slate-200"></div>
+
+            <div class="flex flex-col gap-1 text-left">
+              <span class="text-lg font-bold">{{ item.toText }}</span>
+              <span class="opacity-70">{{ item.toValue }}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="flex flex-nowrap gap-2">
+      <div
+        class="flex flex-col items-center justify-center min-w-[150px] gap-1"
+      >
+        <span class="text-xs">قیمت برای هر مسافر</span>
+        <span class="text-lg font-bold">
+          {{ price.adult | format: "price" }} تومان
+        </span>
+
+        <div
+          class="px-4 py-2 mt-1 bg-slate-200 text-xs rounded-lg"
+          [ngClass]="{
+            '!bg-emerald-500 ': 4 < remaining && remaining <= 8,
+            '!bg-red-500': remaining <= 4,
+            'text-white': remaining <= 8
+          }"
+        >
+          {{ remaining }} صندلی مانده
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-nowrap items-center mt-4 gap-2">
+    <div
+      *ngFor="let item of tags"
+      [ngClass]="item.class"
+      class="px-4 py-3 rounded-xl"
+    >
+      {{ item.text }}
+    </div>
+    <div class="flex-1"></div>
+    <button
+      (click)="more.emit()"
+      mat-ripple
+      class="px-4 py-3 rounded-xl bg-slate-200"
+    >
+      اطلاعات بیشتر
+    </button>
+    <button
+      (click)="Select.emit()"
+      mat-ripple
+      class="px-4 py-3 rounded-xl bg-primary text-white"
+    >
+      انتخاب بلیط
+    </button>
+  </div>
+</mat-card>

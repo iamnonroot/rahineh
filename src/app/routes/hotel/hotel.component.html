@@ -1,0 +1,96 @@
+<div class="container mx-auto flex flex-col gap-2">
+  <app-header-breadcrumb-result></app-header-breadcrumb-result>
+
+  <div class="flex flex-nowrap items-center justify-between gap-2 my-6 mx-2">
+    <div class="flex flex-col">
+      <h1 class="!text-4xl">هتل مارینا پارک کیش</h1>
+
+      <div class="flex flex-nowrap items-center gap-2">
+        <mat-icon class="text-yellow-500">star</mat-icon>
+        <span class="opacity-70">5 ستاره</span>
+        <span class="text-blue-500">9.1/10</span>
+        <span class="opacity-70">امتیاز کاربران</span>
+        <mat-icon class="text-emerald-500">flag</mat-icon>
+        <span class="opacity-70">کیش، بلوار مرجان، جنب برج های دوقلو</span>
+      </div>
+    </div>
+
+    <button
+      mat-icon-button
+      matTooltip="اشتراک گذاری"
+      [matMenuTriggerFor]="share"
+      class="!border !border-solid !border-black/20"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
+
+    <mat-menu class="!border !mt-2 !-ml-2" #share="matMenu">
+      <app-share></app-share>
+    </mat-menu>
+  </div>
+
+  <div class="grid grid-cols-12 gap-2">
+    <picture
+      class="col-span-10 overflow-hidden rounded-2xl max-h-[600px] relative zoom-on-picture"
+    >
+      <img
+        class="w-full h-full object-cover object-center transition-all"
+        src="https://cdn.alibaba.ir/inh/domestic-hotel/image_08c2a9fa-b9a5-440c-976d-46dd09daf524.jpg"
+        alt=""
+      />
+      <button mat-button class="!bg-white absolute bottom-14 right-4 z-[1]">
+        <mat-icon class="ml-2">image</mat-icon>
+        <span>15 تصویر دیگر</span>
+      </button>
+    </picture>
+    <div class="grid grid-rows-3 gap-2 col-span-2 h-fit my-auto">
+      <picture class="overflow-hidden rounded-xl relative zoom-on-picture">
+        <img
+          class="w-full h-full object-cover object-center transition-all"
+          src="https://cdn.alibaba.ir/inh/domestic-hotel/image_26228608-ae97-44dc-89d8-351e3a385f3c.jpg"
+          alt=""
+        />
+      </picture>
+      <picture class="overflow-hidden rounded-xl relative zoom-on-picture">
+        <img
+          class="w-full h-full object-cover object-center transition-all"
+          src="https://cdn.alibaba.ir/inh/domestic-hotel/image_8533eaf9-caf6-4047-9a9e-ed16210db273.jpg"
+          alt=""
+        />
+      </picture>
+      <picture class="overflow-hidden rounded-xl relative zoom-on-picture">
+        <img
+          class="w-full h-full object-cover object-center transition-all"
+          src="https://cdn.alibaba.ir/inh/domestic-hotel/image_a3857a2e-bfc1-41ab-9390-55b8646c391d.jpg"
+          alt=""
+        />
+      </picture>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-8 gap-6 my-6">
+    <div class="flex flex-col gap-4 col-span-6"></div>
+    <mat-card class="!border !shadow-xl col-span-2 h-fit">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <span class="opacity-70">شروع قیمت هر شب از</span>
+          <div class="flex flex-nowrap items-center gap-2 text-xl">
+            <span class="opacity-40 line-through">
+              {{ 12900000 | format: "price" }}
+            </span>
+            <span class="opacity-40">/</span>
+            <span>{{ 7700000 | format: "price" }} تومان</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 p-4 rounded-xl bg-slate-50">
+          <app-input-search-calendar
+            type="departure"
+          ></app-input-search-calendar>
+
+          <app-input-search-calendar type="return"></app-input-search-calendar>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

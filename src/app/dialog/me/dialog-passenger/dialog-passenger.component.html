@@ -1,0 +1,29 @@
+<mat-list class="w-[300px]">
+  <button mat-ripple mat-list-item mat-dialog-close="adult">
+    <mat-icon>add</mat-icon>
+    <div class="flex flex-col gap-1 mr-4">
+      <span class="text-sm">افزودن بزرگسال</span>
+      <span class="text-xs opacity-70">12 سال به بالا</span>
+    </div>
+  </button>
+  <br />
+  <button mat-ripple mat-list-item mat-dialog-close="child">
+    <mat-icon>add</mat-icon>
+    <div class="flex flex-col gap-1 mr-4">
+      <span class="text-sm">افزودن کودک</span>
+      <span class="text-xs opacity-70">از 2 سال تا 12 سال</span>
+    </div>
+  </button>
+  <br />
+  <button mat-ripple mat-list-item mat-dialog-close="infant">
+    <mat-icon>add</mat-icon>
+    <div class="flex flex-col gap-1 mr-4">
+      <span class="text-sm">افزودن نوزاد</span>
+      <span class="text-xs opacity-70">از 10 روز تا 2 سال</span>
+    </div>
+  </button>
+</mat-list>
+
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" mat-dialog-close>بستن</button>
+</mat-dialog-actions>

@@ -1,0 +1,27 @@
+<div class="flex flex-nowrap items-center gap-4 px-4 mb-4">
+  <a class="opacity-70 hover:text-primary hover:opacity-100">درباره ما</a>
+  <a class="opacity-70 hover:text-primary hover:opacity-100">تماس با ما</a>
+  <a class="opacity-70 hover:text-primary hover:opacity-100">مجله راهینه</a>
+  <div class="flex-1"></div>
+  <a class="hover:text-primary">پیگیری یا استرداد</a>
+</div>
+
+<div
+  class="flex flex-nowrap items-center gap-4 bg-slate-100 text-slate-700 pt-2 pl-2 pr-4 pb-8 rounded-t-2xl -mb-6"
+>
+  <mat-icon>event</mat-icon>
+  <span class="ml-auto">تقویم رویداد ها</span>
+
+  <button mat-stroked-button class="!text-xs">نمایش تقویم</button>
+</div>
+
+<section
+  class="flex flex-col justify-center gap-2 rounded-2xl h-[360px] px-32 bg-no-repeat bg-cover bg-center"
+  [ngStyle]="{ 'background-image': 'url(' + Image + ')', color: Color }"
+>
+  <h1 class="!text-4xl">{{ Title }}</h1>
+  <p class="text-xl opacity-70">{{ Subtitle }}</p>
+  <br /><br />
+</section>
+
+<app-card-search [type]="type" class="mx-32 -mt-20"></app-card-search>

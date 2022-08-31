@@ -1,0 +1,28 @@
+<div
+  (click)="OnClick()"
+  class="flex flex-nowrap gap-3 text-slate-600 cursor-pointer group"
+>
+  <mat-icon
+    class="mt-1 opacity-70 group-hover:text-primary group-focus-within:text-primary group-hover:opacity-100 group-focus-within:opacity-100"
+    [ngClass]="{ 'text-red-500': error }"
+  >
+    {{ icon }}
+  </mat-icon>
+  <div class="flex flex-col gap-2">
+    <strong
+      class="group-hover:text-primary group-focus-within:text-primary"
+      [ngClass]="{ 'text-red-500': error }"
+    >
+      {{ title }}
+    </strong>
+    <input
+      #input
+      type="text"
+      class="bg-transparent outline-none !text-sm opacity-70"
+      [readonly]="readonly"
+      [placeholder]="subtitle"
+      [ngModel]="value"
+      (ngModelChange)="valueChange.emit($event)"
+    />
+  </div>
+</div>

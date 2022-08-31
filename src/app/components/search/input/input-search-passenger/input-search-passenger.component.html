@@ -1,0 +1,115 @@
+<app-input-search
+  [matMenuTriggerFor]="menu"
+  icon="group"
+  title="مسافرین"
+  subtitle="1 بزرگسال"
+  [readonly]="true"
+  [value]="Value"
+></app-input-search>
+
+<mat-menu class="w-[300px] border mt-2" #menu="matMenu">
+  <div (click)="$event.stopPropagation()" class="flex flex-col gap-4 py-3 px-5">
+    <!-- Adult -->
+    <div class="flex flex-nowrap items-center justify-between">
+      <div class="flex flex-col gap-2">
+        <span class="font-bold">بزرگسال</span>
+        <span class="!text-xs opacity-70">12 سال به بالا</span>
+      </div>
+
+      <div class="flex flex-nowrap items-center">
+        <button
+          mat-icon-button
+          [disabled]="value ? value.adult == 1 : true"
+          (click)="remove.emit('adult')"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+        >
+          <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+            remove
+          </mat-icon>
+        </button>
+
+        <span class="w-[32px] text-center">
+          {{ value ? value.adult : 1 }}
+        </span>
+
+        <button
+          mat-icon-button
+          (click)="add.emit('adult')"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+        >
+          <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+            add
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- Child -->
+    <div class="flex flex-nowrap items-center justify-between">
+      <div class="flex flex-col gap-2">
+        <span class="font-bold">کودک</span>
+        <span class="!text-xs opacity-70">از 2 سال تا 12 سال</span>
+      </div>
+
+      <div class="flex flex-nowrap items-center">
+        <button
+          mat-icon-button
+          [disabled]="value ? value.child == 0 : true"
+          (click)="remove.emit('child')"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+        >
+          <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+            remove
+          </mat-icon>
+        </button>
+
+        <span class="w-[32px] text-center">
+          {{ value ? value.child : 0 }}
+        </span>
+
+        <button
+          mat-icon-button
+          (click)="add.emit('child')"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+        >
+          <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+            add
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- Infant -->
+    <div class="flex flex-nowrap items-center justify-between">
+      <div class="flex flex-col gap-2">
+        <span class="font-bold">نوزاد</span>
+        <span class="!text-xs opacity-70">از 10 روز تا 2 سال</span>
+      </div>
+
+      <div class="flex flex-nowrap items-center">
+        <button
+          mat-icon-button
+          [disabled]="value ? value.infant == 0 : true"
+          (click)="remove.emit('infant')"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+        >
+          <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+            remove
+          </mat-icon>
+        </button>
+
+        <span class="w-[32px] text-center">
+          {{ value ? value.infant : 0 }}
+        </span>
+
+        <button
+          mat-icon-button
+          (click)="add.emit('infant')"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+        >
+          <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+            add
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-menu>

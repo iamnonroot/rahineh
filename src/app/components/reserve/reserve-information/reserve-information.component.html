@@ -1,0 +1,32 @@
+<mat-card class="border">
+  <p>بلیط و اطلاع‌ رسانی‌ های سفر به شماره موبایل و ایمیل زیر ارسال می‌شود.</p>
+
+  <div class="grid grid-cols-3 gap-4">
+    <mat-form-field appearance="outline">
+      <mat-label>نام و نام خانوادگی</mat-label>
+      <input matInput autocomplete="off" type="text" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>شماره موبایل</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        type="tel"
+        dir="ltr"
+        class="!text-left"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>ایمیل</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        type="email"
+        dir="ltr"
+        class="!text-left"
+      />
+    </mat-form-field>
+  </div>
+</mat-card>

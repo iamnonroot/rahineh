@@ -1,0 +1,37 @@
+<h2 class="font-bold">ایجاد حساب کاربری</h2>
+<p class="opacity-70">ثبت نام و ایجاد حساب کاربری در راهینه</p>
+
+<mat-form-field class="w-full" appearance="outline">
+  <mat-label>نام و نام خانوادگی</mat-label>
+  <input matInput type="text" autocomplete="off" />
+</mat-form-field>
+
+<mat-form-field class="w-full" appearance="outline">
+  <mat-label>آدرس ایمیل</mat-label>
+  <input matInput type="email" autocomplete="off" />
+</mat-form-field>
+
+<mat-form-field class="w-full" appearance="outline">
+  <mat-label>کلمه عبور</mat-label>
+  <input
+    matInput
+    [type]="ShowPassword ? 'text' : 'password'"
+    autocomplete="off"
+  />
+  <button matSuffix mat-icon-button (click)="ShowPassword = !ShowPassword">
+    <mat-icon>{{ ShowPassword ? "visibility_off" : "visibility" }}</mat-icon>
+  </button>
+</mat-form-field>
+
+<button class="w-full" mat-flat-button color="primary">تایید و ثبت نام</button>
+
+<div class="flex flex-nowrap items-center gap-2 my-4">
+  <div class="w-full h-[1px] bg-slate-200"></div>
+  <span class="px-2 text-xs opacity-70">یا</span>
+  <div class="w-full h-[1px] bg-slate-200"></div>
+</div>
+
+<div class="flex flex-nowrap items-center justify-center gap-6 text-xs">
+  <a class="hover:text-accent" routerLink="/auth/login">ورود با ایمیل</a>
+  <a class="hover:text-accent" routerLink="/auth">ورود با موبایل</a>
+</div>

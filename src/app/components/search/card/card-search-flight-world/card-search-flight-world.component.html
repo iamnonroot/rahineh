@@ -1,0 +1,113 @@
+<div class="flex flex-nowrap items-center gap-2">
+  <mat-chip-list class="ml-auto">
+    <mat-chip
+      (click)="Search.SetWayType('go')"
+      class="!cursor-pointer"
+      [ngClass]="{
+        '!bg-accent !text-white': Search.GetWayType() == 'go' ? 'accent' : ''
+      }"
+    >
+      یک طرفه
+    </mat-chip>
+    <mat-chip
+      (click)="Search.SetWayType('go-back')"
+      class="!cursor-pointer"
+      [ngClass]="{
+        '!bg-accent !text-white':
+          Search.GetWayType() == 'go-back' ? 'accent' : ''
+      }"
+    >
+      رفت و برگشت
+    </mat-chip>
+    <mat-chip
+      (click)="Search.SetWayType('multi')"
+      class="!cursor-pointer"
+      [ngClass]="{
+        '!bg-accent !text-white': Search.GetWayType() == 'multi' ? 'accent' : ''
+      }"
+    >
+      چند مسیره
+    </mat-chip>
+  </mat-chip-list>
+  <button
+    *ngIf="Search.GetWayType() == 'multi'"
+    (click)="Search.AddWay()"
+    mat-stroked-button
+    style="min-height: 32px !important; height: 32px !important"
+  >
+    <mat-icon class="ml-2">add</mat-icon>
+    <span>افزودن مسیر</span>
+  </button>
+</div>
+
+<div class="grid grid-cols-11 items-center gap-2 relative">
+  <div
+    *ngFor="
+      let item of Search.GetWayType() == 'multi'
+        ? Search.GetWays()
+        : Search.GetWays().slice(0, 1);
+      let i = index
+    "
+    class="grid grid-cols-8 gap-2 col-span-8"
+  >
+    <app-input-search-city
+      type="origin"
+      [value]="Search.GetWayOriginByStep(i)"
+      (valueChange)="Search.SetWayOriginByStep($event, i)"
+      [error]="Errors.includes('origin/' + i)"
+      class="col-span-2"
+    ></app-input-search-city>
+    <app-input-search-city
+      type="destination"
+      [value]="Search.GetWayDestinationByStep(i)"
+      (valueChange)="Search.SetWayDestinationByStep($event, i)"
+      [error]="Errors.includes('destination/' + i)"
+      class="col-span-2"
+    ></app-input-search-city>
+
+    <app-input-search-calendar
+      type="departure"
+      [value]="Search.GetWayDateByStep(i)"
+      (valueChange)="Search.SetWayDateByStep($event, i)"
+      [error]="Errors.includes('date/' + i)"
+      class="col-span-2"
+    ></app-input-search-calendar>
+    <app-input-search-calendar
+      type="return"
+      [value]="Search.GetWayDateByStep(1)"
+      (valueChange)="Search.SetWayDateByStep($event, 1)"
+      [error]="Errors.includes('date/1')"
+      class="col-span-2 transition-all"
+      [ngClass]="{
+        'opacity-30': Search.GetWayType() != 'go-back',
+        hidden: Search.GetWayType() == 'multi',
+        'pointer-events-none': Search.GetWayType() != 'go'
+      }"
+    ></app-input-search-calendar>
+    <div
+      *ngIf="
+        Search.GetWayType() == 'multi' &&
+        Search.GetWays().length > 1 &&
+        i < Search.GetWays().length - 1
+      "
+      class="col-span-1 flex justify-end absolute left-2"
+    >
+      <button (click)="Search.RemoveWay(i)" mat-button color="warn">
+        <mat-icon class="ml-2">delete</mat-icon>
+        <span>حذف مسیر</span>
+      </button>
+    </div>
+  </div>
+
+  <app-input-search-passenger
+    [value]="Search.CountPassengers()"
+    (add)="Search.AddPassengerByType($event)"
+    (remove)="Search.RemovePassengerByType($event)"
+    class="col-span-2"
+  ></app-input-search-passenger>
+
+  <button mat-flat-button color="primary" (click)="Submit()">
+    <mat-icon class="ml-2">search</mat-icon>
+    <span>بگرد</span>
+  </button>
+</div>

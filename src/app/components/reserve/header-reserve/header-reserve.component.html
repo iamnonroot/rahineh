@@ -1,0 +1,39 @@
+<div class="flex flex-col gap-2">
+  <div class="flex flex-nowrap items-center gap-2">
+    <ng-container *ngFor="let item of Steps; let i = index">
+      <div class="flex flex-nowrap items-center gap-2 min-w-fit">
+        <div
+          class="min-w-[36px] h-[36px] border rounded-full flex items-center justify-center"
+          [ngClass]="{
+            'bg-accent text-white': step == i,
+            'bg-accent/10 text-accent': step > i,
+            'border-transparent': step >= i
+          }"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <span>{{ item.text }}</span>
+          <span class="text-xs opacity-70">{{ item.subtext }}</span>
+        </div>
+      </div>
+
+      <div
+        *ngIf="i != Steps.length - 1"
+        class="w-full h-[1px] bg-slate-200 mx-2"
+      ></div>
+    </ng-container>
+  </div>
+  <app-header-breadcrumb-result>
+    <a
+      *ngFor="let item of Steps.slice(0, step + 1); let i = index"
+      [routerLink]="step == i || !item.link ? undefined : item.link"
+      [attr.matBreadcrumbActive]="i != step"
+      (click)="item.link ? undefined : Back()"
+      matBreadcrumb
+    >
+      <span>{{ item.subtext ? item.subtext : item.text }}</span>
+    </a>
+  </app-header-breadcrumb-result>
+</div>

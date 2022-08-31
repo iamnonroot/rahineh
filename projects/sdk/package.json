@@ -1,0 +1,12 @@
+{
+  "name": "@tik/sdk",
+  "version": "0.0.157",
+  "peerDependencies": {
+    "@angular/common": "^14.1.0",
+    "@angular/core": "^14.1.0"
+  },
+  "dependencies": {
+    "qs": "^6.11.0",
+    "tslib": "^2.3.0"
+  }
+}

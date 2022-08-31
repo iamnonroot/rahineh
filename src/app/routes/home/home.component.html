@@ -1,0 +1,9 @@
+<div class="container mx-auto mt-4" *ngIf="Type">
+  <app-hero [type]="Type"></app-hero>
+  <br /><br />
+  <tik-dynamic-component
+    key="@tikban/#/home"
+    [data]="{ type: Type }"
+  ></tik-dynamic-component>
+  <br /><br />
+</div>

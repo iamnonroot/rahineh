@@ -1,0 +1,163 @@
+<mat-card class="border">
+  <div class="flex flex-nowrap items-center gap-2 mb-2">
+    <span class="ml-auto text-base">{{ title }}</span>
+
+    <button
+      *ngIf="removeable"
+      (click)="remove.emit()"
+      mat-flat-button
+      color="warn"
+    >
+      حذف مسافر
+    </button>
+
+    <button *ngIf="selectable" mat-flat-button color="primary">
+      انتخاب مسافر سابق
+    </button>
+
+    <button *ngIf="saveable" (click)="save.emit()" mat-flat-button color="primary">
+      ذخیره
+    </button>
+  </div>
+
+  <div class="grid grid-cols-8 gap-4">
+    <mat-form-field class="col-span-2" appearance="outline">
+      <mat-label>نام ( انگلیسی )</mat-label>
+      <input
+        matInput
+        required
+        autocomplete="off"
+        type="text"
+        [(ngModel)]="value.firstname_en"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="col-span-2" appearance="outline">
+      <mat-label>نام خانوادگی ( انگلیسی )</mat-label>
+      <input
+        matInput
+        required
+        autocomplete="off"
+        type="text"
+        [(ngModel)]="value.lastname_en"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="col-span-2" appearance="outline">
+      <mat-label>نام ( فارسی )</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        type="text"
+        [(ngModel)]="value.firstname_fa"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="col-span-2" appearance="outline">
+      <mat-label>نام خانوادگی ( فارسی )</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        type="text"
+        [(ngModel)]="value.lastname_fa"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="col-span-2" appearance="outline">
+      <mat-label>جنسیت</mat-label>
+      <mat-select required [(ngModel)]="value.gender">
+        <mat-option value="male">مرد</mat-option>
+        <mat-option value="female">زن</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      [ngClass]="{
+        'col-span-2': value.nationality == 'iranian',
+        'col-span-1': value.nationality == 'non-iranian'
+      }"
+      appearance="outline"
+    >
+      <mat-label>ملیت</mat-label>
+      <mat-select required [(ngModel)]="value.nationality">
+        <mat-option value="iranian">ایرانی</mat-option>
+        <mat-option value="non-iranian">غیر ایرانی</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      class="col-span-2"
+      *ngIf="value.nationality == 'iranian'"
+      appearance="outline"
+    >
+      <mat-label>کد ملی</mat-label>
+      <input
+        matInput
+        required
+        autocomplete="off"
+        type="tel"
+        [(ngModel)]="value.national_code"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      class="col-span-1"
+      *ngIf="value.nationality == 'non-iranian'"
+      appearance="outline"
+    >
+      <mat-label>کشور</mat-label>
+      <mat-select> </mat-select>
+      <mat-hint>کشور صادر کننده گذرنامه</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field
+      class="col-span-2"
+      *ngIf="value.nationality == 'non-iranian'"
+      appearance="outline"
+    >
+      <mat-label>شماره گذرنامه</mat-label>
+      <input
+        matInput
+        required
+        autocomplete="off"
+        type="tel"
+        [(ngModel)]="value.passport_id"
+      />
+    </mat-form-field>
+
+    <div class="flex flex-col gap-1 col-span-2">
+      <span class="text-xs -mt-5 mr-1">تاریخ تولد</span>
+      <div class="grid grid-cols-3 gap-2">
+        <mat-form-field appearance="outline">
+          <mat-label>روز</mat-label>
+          <mat-select required [(ngModel)]="value.birth_date!.day">
+            <mat-option *ngFor="let item of Days" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--  -->
+        <mat-form-field appearance="outline">
+          <mat-label>ماه</mat-label>
+          <mat-select required [(ngModel)]="value.birth_date!.month">
+            <mat-option
+              *ngFor="let item of Months; let i = index"
+              [value]="i + 1"
+            >
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--  -->
+        <mat-form-field appearance="outline">
+          <mat-label>سال</mat-label>
+          <mat-select required [(ngModel)]="value.birth_date!.year">
+            <mat-option *ngFor="let item of Years" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</mat-card>

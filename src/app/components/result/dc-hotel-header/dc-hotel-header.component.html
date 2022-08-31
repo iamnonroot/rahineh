@@ -1,0 +1,9 @@
+<h2 class="!text-xl">{{ Injected!.title }}</h2>
+<button
+  *ngIf="Injected!.more"
+  (click)="More()"
+  class="flex flex-nowrap items-center gap-2 hover:text-primary"
+>
+  <span>{{ Injected!.more.text }}</span>
+  <mat-icon>chevron_left</mat-icon>
+</button>

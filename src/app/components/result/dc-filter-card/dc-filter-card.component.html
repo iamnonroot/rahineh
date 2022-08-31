@@ -1,0 +1,22 @@
+<app-filter-section-result
+  [title]="Injected!.title"
+  [opened]="Injected!.opened != false"
+>
+  <div class="grid grid-cols-3 gap-2">
+    <div
+      *ngFor="let item of Injected!.options"
+      class="flex flex-col items-center justify-center gap-2 p-2 border rounded-xl cursor-pointer hover:border-accent"
+    >
+      <img
+        *ngIf="item.image"
+        [src]="item.image"
+        [alt]="item.title"
+        width="36px"
+        height="36px"
+        class="w-[36px] h-[36px] my-2"
+      />
+      <span class="text-base">{{ item.title }}</span>
+      <span *ngIf="item.subtitle" class="text-xs opacity-70">{{ item.subtitle }}</span>
+    </div>
+  </div>
+</app-filter-section-result>

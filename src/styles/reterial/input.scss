@@ -1,0 +1,19 @@
+$input-rounded: 12px;
+
+.mat-form-field-outline-start {
+  border-radius: 0 $input-rounded $input-rounded 0 !important;
+  min-width: $input-rounded !important;
+}
+
+.mat-form-field-label {
+  margin-right: $input-rounded !important;
+}
+
+.mat-form-field-outline-end {
+  border-radius: $input-rounded 0 0 $input-rounded !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: var(--tikban-theme-surface) !important;
+  border-radius: $input-rounded;
+}

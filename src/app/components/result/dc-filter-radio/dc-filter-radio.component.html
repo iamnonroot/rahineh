@@ -1,0 +1,13 @@
+<app-filter-section-result
+  [title]="Injected!.title"
+  [opened]="Injected!.opened != false"
+>
+  <mat-radio-group class="flex flex-col gap-4">
+    <mat-radio-button
+      *ngFor="let item of Injected!.options"
+      [value]="item.value"
+    >
+      {{ item.text }}
+    </mat-radio-button>
+  </mat-radio-group>
+</app-filter-section-result>

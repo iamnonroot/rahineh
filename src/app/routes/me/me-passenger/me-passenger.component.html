@@ -1,0 +1,40 @@
+<header class="flex flex-nowrap items-center gap-4 py-2 px-4">
+  <mat-icon>airline_seat_recline_normal</mat-icon>
+  <span class="ml-auto">مسافرین سابق</span>
+
+  <button (click)="AddPassenger()" mat-flat-button color="accent">
+    <mat-icon>add</mat-icon>
+    <span class="mr-2">افزودن مسافر</span>
+  </button>
+</header>
+
+<div class="flex flex-col gap-4">
+  <mat-card class="border">
+    <div class="grid grid-cols-7 gap-4">
+      <mat-form-field class="col-span-2 -mb-4" appearance="outline">
+        <mat-label>نام</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
+      <mat-form-field class="col-span-2 -mb-4" appearance="outline">
+        <mat-label>نام خانوادگی</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
+      <mat-form-field class="col-span-2 -mb-4" appearance="outline">
+        <mat-label>کد ملی</mat-label>
+        <input matInput type="tel" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="!min-h-[56px]">
+        جستجو
+      </button>
+    </div>
+  </mat-card>
+  <ng-container *ngFor="let item of Passengers; let i = index">
+    <app-passenger-card
+      [selectable]="false"
+      [saveable]="true"
+      [value]="item"
+      (remove)="RemovePassengerByIndex(i)"
+    ></app-passenger-card>
+  </ng-container>
+</div>

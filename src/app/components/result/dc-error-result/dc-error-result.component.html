@@ -1,0 +1,10 @@
+<h1 class="text-6xl">{{ Injected.code }}</h1>
+<p class="opacity-70 !font-sans">{{ Injected.message }}</p>
+
+<br />
+<br />
+
+<button *ngIf="Injected.retry" mat-stroked-button color="warn">
+  <mat-icon class="ml-2">refresh</mat-icon>
+  <span>تلاش مجدد</span>
+</button>

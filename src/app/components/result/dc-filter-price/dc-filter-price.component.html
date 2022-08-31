@@ -1,0 +1,10 @@
+<app-filter-section-result title="فیلتر بر اساس قیمت">
+  <ngx-slider
+    *ngIf="Options"
+    [value]="Value[0]"
+    [highValue]="Value[1]"
+    [options]="Options"
+    (valueChange)="Change($event, Value[1])"
+    (highValueChange)="Change(Value[0], $event)"
+  ></ngx-slider>
+</app-filter-section-result>

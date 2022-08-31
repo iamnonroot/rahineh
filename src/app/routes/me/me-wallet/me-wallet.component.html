@@ -1,0 +1,18 @@
+<div class="grid grid-cols-12 gap-4 my-8">
+  <div class="flex flex-col gap-4 col-span-3">
+    <mat-card class="!bg-emerald-600 !text-white !p-6 !rounded-2xl">
+      <div class="flex flex-col gap-1">
+        <br />
+        <span class="opacity-70">موجودی اعتبار</span>
+        <span class="text-2xl mb-4">{{ 0 | format: "price" }} تومان</span>
+
+        <button mat-stroked-button class="!border-white/30 !min-h-[48px]">
+          <div class="flex flex-nowrap items-center gap-4">
+            <mat-icon>add</mat-icon>
+            <span>افزایش موجودی</span>
+          </div>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

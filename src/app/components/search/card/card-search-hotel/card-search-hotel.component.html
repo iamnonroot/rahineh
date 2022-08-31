@@ -1,0 +1,44 @@
+<div class="flex flex-nowrap items-center gap-2">
+  <mat-chip-list>
+    <mat-chip
+      class="!cursor-pointer"
+      [ngClass]="{
+        '!bg-accent !text-white': true
+      }"
+    >
+      هتل داخلی
+    </mat-chip>
+    <mat-chip
+      class="!cursor-pointer"
+      [ngClass]="{
+        '!bg-accent !text-white': false
+      }"
+    >
+      هتل خارجی
+    </mat-chip>
+  </mat-chip-list>
+</div>
+
+<div class="grid grid-cols-9 items-center gap-2">
+  <app-input-search-city
+    type="origin"
+    class="col-span-2"
+  ></app-input-search-city>
+
+  <app-input-search-calendar
+    type="departure"
+    class="col-span-2"
+  ></app-input-search-calendar>
+
+  <app-input-search-calendar
+    type="return"
+    class="col-span-2"
+  ></app-input-search-calendar>
+
+  <app-input-search-room class="col-span-2"></app-input-search-room>
+
+  <button mat-flat-button color="primary" (click)="Submit()">
+    <mat-icon class="ml-2">search</mat-icon>
+    <span>بگرد</span>
+  </button>
+</div>

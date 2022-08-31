@@ -1,0 +1,23 @@
+<mat-breadcrumbs class="ml-auto">
+  <a href="/" matBreadcrumb>
+    <mat-icon>home</mat-icon>
+    <span>صفحه اصلی</span>
+  </a>
+  <a
+    class="cursor-pointer"
+    matBreadcrumb
+    matBreadcrumbActive
+    [matMenuTriggerFor]="menu"
+  >
+    <span>پرواز داخلی</span>
+    <mat-icon class="-ml-1">expand_more</mat-icon>
+  </a>
+  <ng-content></ng-content>
+</mat-breadcrumbs>
+
+<mat-menu class="mt-2 !border !min-w-[180px]" #menu="matMenu">
+  <a *ngFor="let item of Tabs" [routerLink]="item.link" mat-menu-item>
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span> {{ item.text }} </span>
+  </a>
+</mat-menu>

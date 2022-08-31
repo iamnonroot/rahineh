@@ -1,0 +1,7 @@
+mat-expansion-panel-header {
+  padding: 0 16px !important;
+
+  ::ng-deep .mat-expansion-indicator::after {
+    border-color: rgba($color: #000000, $alpha: 0.6) !important;
+  }
+}

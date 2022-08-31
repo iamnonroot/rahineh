@@ -1,0 +1,19 @@
+$button-rounded: 2em;
+
+a:is([mat-button], [mat-raised-button], [mat-flat-button], [mat-stroked-button]),
+button:is([mat-button], [mat-raised-button], [mat-flat-button], [mat-stroked-button]) {
+  height: 42px !important;
+  border-radius: $button-rounded !important;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+
+  .mat-button-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: inherit;
+  }
+}

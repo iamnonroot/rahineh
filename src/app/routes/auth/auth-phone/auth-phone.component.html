@@ -1,0 +1,55 @@
+<h2 class="font-bold">ورود به حساب کاربری</h2>
+<p class="opacity-70">
+  یک کد ورود 6 رقمی به شماره موبایل شما برای ورود ارسال می شود
+</p>
+
+<mat-form-field *ngIf="Step == 0" class="w-full" appearance="outline">
+  <mat-label>شماره موبایل</mat-label>
+  <input
+    matInput
+    type="tel"
+    autocomplete="off"
+    minlength="11"
+    maxlength="11"
+    placeholder="09"
+    dir="ltr"
+    class="!text-left"
+    [(ngModel)]="Phone"
+  />
+</mat-form-field>
+
+<mat-form-field *ngIf="Step == 1" class="w-full" appearance="outline">
+  <mat-label>کد تایید</mat-label>
+  <input
+    matInput
+    type="tel"
+    autocomplete="off"
+    class="!text-center"
+    dir="ltr"
+    [attr.minlength]="CodeLength"
+    [attr.maxlength]="CodeLength"
+    [(ngModel)]="Code"
+  />
+</mat-form-field>
+
+<div
+  *ngIf="Step == 1"
+  class="grid grid-cols-2 gap-4 text-center text-sm mt-auto hidden-on-keyboard"
+>
+  <span (click)="Step = 0">اصلاح شماره موبایل</span>
+  <span *ngIf="Timer != 0">انقضا تا {{ Timer | format: "time" }}</span>
+  <span *ngIf="Timer == 0" (click)="ResendCode()">ارسال مجدد</span>
+</div>
+
+<button class="w-full" mat-flat-button color="primary">تایید و ارسال</button>
+
+<div class="flex flex-nowrap items-center gap-2 my-4">
+  <div class="w-full h-[1px] bg-slate-200"></div>
+  <span class="px-2 text-xs opacity-70">یا</span>
+  <div class="w-full h-[1px] bg-slate-200"></div>
+</div>
+
+<div class="flex flex-nowrap items-center justify-center gap-6 text-xs">
+  <a class="hover:text-accent" routerLink="/auth/login">ورود با ایمیل</a>
+  <a class="hover:text-accent" routerLink="/auth/register">ثبت نام</a>
+</div>

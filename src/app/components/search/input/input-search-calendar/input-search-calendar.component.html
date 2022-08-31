@@ -1,0 +1,56 @@
+<app-input-search
+  [matMenuTriggerFor]="menu"
+  (menuOpened)="Generate()"
+  [icon]="type == 'departure' ? 'today' : 'event'"
+  [title]="type == 'departure' ? 'تاریخ رفت' : 'تاریخ برگشت'"
+  [subtitle]="type == 'departure' ? 'امروز' : 'فردا'"
+  [value]="Value"
+  [error]="error"
+  [readonly]="true"
+></app-input-search>
+
+<mat-menu class="w-[300px] border mt-2" #menu="matMenu">
+  <div (click)="$event.stopPropagation()" class="flex flex-col">
+    <div class="flex flex-nowrap items-center justify-between gap-2 px-2">
+      <button (click)="MonthBefore()" mat-icon-button>
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <span>
+        {{ Label }}
+      </span>
+      <button (click)="MonthNext()" mat-icon-button>
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+    </div>
+
+    <!-- Calendar -->
+    <div class="grid grid-cols-7 mt-2">
+      <div
+        *ngFor="let item of Calendar.week"
+        class="p-1 flex items-center justify-center border-b"
+      >
+        <span class="text-sm opacity-50">{{ item }}</span>
+      </div>
+      <button
+        *ngFor="let item of Days"
+        mat-icon-button
+        matTooltip="انتخاب روز"
+        matTooltipPosition="above"
+        class="hover:!text-accent"
+        [disabled]="IsInPast(item.day)"
+        [ngClass]="{ '!bg-accent/20 !text-accent': IsSelectedDay(item.day) }"
+        (click)="SetDay(item.day)"
+      >
+        <span class="text-sm">{{ item.day == 0 ? "" : item.day }}</span>
+      </button>
+    </div>
+
+    <button
+      (click)="ToggleFormatter()"
+      mat-stroked-button
+      class="!mx-4 !mt-2 !rounded-[6px]"
+    >
+      تبدیل به {{ Current.format == "gregorian" ? "شمسی" : "میلادی" }}
+    </button>
+  </div>
+</mat-menu>

@@ -1,0 +1,14 @@
+<app-input-search
+  [matMenuTriggerFor]="menu"
+  icon="group"
+  title="مسافرین"
+  subtitle="1 بزرگسال"
+  [readonly]="true"
+></app-input-search>
+
+<mat-menu class="w-[300px] border mt-2" #menu="matMenu">
+  <div
+    (click)="$event.stopPropagation()"
+    class="flex flex-col gap-4 py-3 px-5"
+  ></div>
+</mat-menu>
