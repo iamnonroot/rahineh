@@ -45,7 +45,8 @@ export class SearchQueryService {
 
     for (let index in splited) {
       const i = Number(index);
-      if (i / 2 == 0) {
+      
+      if (i % 2 == 0) {
         const [origin, destination] = splited[i].split('-');
         ways.push({
           origin: {
@@ -72,7 +73,7 @@ export class SearchQueryService {
         };
       }
     }
-
+        
     return ways;
   }
 }

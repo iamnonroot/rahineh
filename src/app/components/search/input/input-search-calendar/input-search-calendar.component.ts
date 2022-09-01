@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { Calendaring } from 'calendaring';
 import {
   ICalendaringDay,
@@ -25,6 +33,8 @@ export class InputSearchCalendarComponent implements OnInit {
 
   @Output()
   public valueChange: EventEmitter<ILiveSearchWayDate> = new EventEmitter();
+
+  @ViewChild(MatMenuTrigger) menu!: MatMenuTrigger;
 
   public Days: ICalendaringDay<DayValue | null>[] = [];
   public Calendars: { jalali: Week; gregorian: Week } = {
@@ -115,6 +125,18 @@ export class InputSearchCalendarComponent implements OnInit {
     }
   }
 
+  public CloseOnClickOutSide(): void {
+    setTimeout(() => {
+      const close = () => {
+        this.menu.closeMenu();
+        document.querySelector('app-root')?.removeEventListener('click', close);
+      };
+
+      document.querySelector('app-root')?.removeEventListener('click', close);
+      document.querySelector('app-root')?.addEventListener('click', close);
+    }, 50);
+  }
+
   private today(format: TCalendaringFormatter = this.Current.format) {
     const today = this.functions.Today(format == 'jalali' ? 'fa' : 'en');
     this.Past = {
@@ -131,6 +153,7 @@ export class InputSearchCalendarComponent implements OnInit {
       this.Current!.month
     );
     this.Days = array;
+    this.CloseOnClickOutSide();
   }
 
   public IsInPast(day: number): boolean {
@@ -163,8 +186,9 @@ export class InputSearchCalendarComponent implements OnInit {
         day,
       };
 
-      this.valueChange.emit(this.Selected);
       this.error = false;
+      this.menu.closeMenu();
+      this.valueChange.emit(this.Selected);
     }
   }
 

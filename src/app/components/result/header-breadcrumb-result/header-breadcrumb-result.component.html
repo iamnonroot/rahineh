@@ -8,8 +8,9 @@
     matBreadcrumb
     matBreadcrumbActive
     [matMenuTriggerFor]="menu"
+    *ngIf="ActiveTab"
   >
-    <span>پرواز داخلی</span>
+    <span>{{ ActiveTab.text }}</span>
     <mat-icon class="-ml-1">expand_more</mat-icon>
   </a>
   <ng-content></ng-content>

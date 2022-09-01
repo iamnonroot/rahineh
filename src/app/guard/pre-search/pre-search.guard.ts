@@ -50,7 +50,7 @@ export class PreSearchGuard implements CanActivate {
 
     const ways = this.query.ConvertFromQuery(
       url.replace(`/search/${type}/`, '').split('?')[0]
-    );
+    );    
 
     // setting result
     this.result.Step = 0;

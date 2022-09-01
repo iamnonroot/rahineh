@@ -1,5 +1,6 @@
 <app-input-search
   [matMenuTriggerFor]="menu"
+  (menuOpened)="CloseOnClickOutSide()"
   icon="group"
   title="مسافرین"
   subtitle="1 بزرگسال"
@@ -7,7 +8,7 @@
   [value]="Value"
 ></app-input-search>
 
-<mat-menu class="w-[300px] border mt-2" #menu="matMenu">
+<mat-menu [hasBackdrop]="false" class="w-[300px] border mt-2" #menu="matMenu">
   <div (click)="$event.stopPropagation()" class="flex flex-col gap-4 py-3 px-5">
     <!-- Adult -->
     <div class="flex flex-nowrap items-center justify-between">

@@ -1,7 +1,9 @@
 <header class="bg-slate-100 w-full p-4 pb-0">
   <div class="container mx-auto flex flex-col">
     <div class="flex flex-nowrap items-center">
-      <app-header-breadcrumb-result></app-header-breadcrumb-result>
+      <app-header-breadcrumb-result
+        [activeType]="Result.Type"
+      ></app-header-breadcrumb-result>
 
       <span class="opacity-70 mr-auto">0 نتیجه یافت شد</span>
     </div>

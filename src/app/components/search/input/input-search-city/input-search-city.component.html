@@ -1,5 +1,6 @@
 <app-input-search
   [matMenuTriggerFor]="menu"
+  (menuOpened)="CloseOnClickOutSide()"
   [icon]="type == 'origin' ? 'near_me' : 'place'"
   [title]="type == 'origin' ? 'مبدا از کجا ؟' : 'مقصد به کجا ؟'"
   [subtitle]="value ? value.text : type == 'origin' ? 'از کجا' : 'به کجا'"
@@ -7,8 +8,8 @@
   [error]="error"
 ></app-input-search>
 
-<mat-menu class="w-[220px] border mt-2" #menu="matMenu">
-  <div (click)="$event.stopPropagation()" class="flex flex-col">
+<mat-menu [hasBackdrop]="false" class="w-[220px] border mt-2" #menu="matMenu">
+  <div class="flex flex-col">
     <mat-selection-list #city [multiple]="false">
       <ng-container *ngFor="let item of FilteredCities()">
         <div mat-subheader>{{ item.text }}</div>

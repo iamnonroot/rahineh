@@ -1,1 +1,36 @@
-<footer class="container mx-auto"></footer>
+<footer>
+  <section class="border-t">
+    <div
+      class="container mx-auto flex flex-nowrap items-center justify-center gap-8 py-2"
+    >
+      <a
+        *ngFor="let item of Tabs"
+        mat-button
+        class="opacity-70 hover:!opacity-100 hover:!text-accent"
+        [routerLink]="item.link"
+      >
+        <mat-icon class="ml-2">{{ item.icon }}</mat-icon>
+        <span>{{ item.text }}</span>
+      </a>
+    </div>
+  </section>
+  <section class="border-t"></section>
+  <section class="border-t">
+    <div
+      class="container mx-auto py-2 flex flex-nowrap items-center justify-between"
+    >
+      <p class="opacity-70">
+        &copy; 1401 - تمامی حقوق برای هلدینگ هفت اورنگ محفوظ است
+      </p>
+      <span class="text-xs opacity-70">نسخه 0.0.1</span>
+
+      <div class="flex flex-nowrap items-center gap-2">
+        <a mat-icon-button class="!border">
+          <div class="flex items-center justify-center w-full h-full">
+            <img src="/assets/images/logo/applications/telegram.png" />
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</footer>

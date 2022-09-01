@@ -1,12 +1,13 @@
 <app-input-search
   [matMenuTriggerFor]="menu"
+  (menuOpened)="CloseOnClickOutSide()"
   icon="group"
-  title="مسافرین"
-  subtitle="1 بزرگسال"
+  title="اتاق ها"
+  subtitle="1 بزرگسال و 1 اتاق"
   [readonly]="true"
 ></app-input-search>
 
-<mat-menu class="w-[300px] border mt-2" #menu="matMenu">
+<mat-menu [hasBackdrop]="false" class="w-[300px] border mt-2" #menu="matMenu">
   <div
     (click)="$event.stopPropagation()"
     class="flex flex-col gap-4 py-3 px-5"

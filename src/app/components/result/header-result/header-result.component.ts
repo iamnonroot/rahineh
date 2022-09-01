@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResultService } from 'src/app/services/result/result.service';
 
 @Component({
   selector: 'app-header-result',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderResultComponent implements OnInit {
   public ActiveCalendar: number = 0;
 
-  constructor() {}
+  constructor(public Result: ResultService) {}
 
   ngOnInit(): void {}
 }

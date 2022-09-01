@@ -77,6 +77,8 @@ import { DcHotelHeaderComponent } from './components/result/dc-hotel-header/dc-h
 import { DcHotelRoomComponent } from './components/result/dc-hotel-room/dc-hotel-room.component';
 import { InputSearchRoomComponent } from './components/search/input/input-search-room/input-search-room.component';
 import { DcErrorResultComponent } from './components/result/dc-error-result/dc-error-result.component';
+import { DcFooterComponent } from './components/dc-footer/dc-footer.component';
+import { ContainerComponent } from './components/container/container.component';
 
 @NgModule({
   declarations: [
@@ -139,6 +141,8 @@ import { DcErrorResultComponent } from './components/result/dc-error-result/dc-e
     DcHotelRoomComponent,
     InputSearchRoomComponent,
     DcErrorResultComponent,
+    DcFooterComponent,
+    ContainerComponent,
   ],
   imports: [
     NgxSliderModule,
@@ -170,6 +174,10 @@ import { DcErrorResultComponent } from './components/result/dc-error-result/dc-e
           name: 'dc-error-result',
           component: DcErrorResultComponent,
         },
+        {
+          name: 'dc-footer',
+          component: DcFooterComponent
+        }
       ],
     }),
     MaterialModule,

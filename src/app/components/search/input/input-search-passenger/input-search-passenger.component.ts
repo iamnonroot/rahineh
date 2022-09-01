@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import {
   ILiveSearchPassenger,
   TLiveSearchPasenger,
@@ -19,6 +27,8 @@ export class InputSearchPassengerComponent implements OnInit {
   @Output()
   public add: EventEmitter<TLiveSearchPasenger> = new EventEmitter();
 
+  @ViewChild(MatMenuTrigger) menu!: MatMenuTrigger;
+
   public get Value(): string {
     let value: string[] = [];
 
@@ -33,4 +43,19 @@ export class InputSearchPassengerComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  public CloseOnClickOutSide(): void {
+    setTimeout(() => {
+      const close = () => {
+        this.menu.closeMenu();
+        document.querySelector('app-root')?.removeEventListener('click', close);
+      };
+
+      document.querySelector('app-root')?.addEventListener('click', close);
+    }, 50);
+  }
+
+  public Close() {
+    this.menu.closeMenu();
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ISearchTab, SearchTabs } from 'src/app/database/components/search';
 
 @Component({
@@ -8,6 +8,13 @@ import { ISearchTab, SearchTabs } from 'src/app/database/components/search';
 })
 export class HeaderBreadcrumbResultComponent implements OnInit {
   public Tabs: ISearchTab[] = SearchTabs;
+
+  @Input()
+  public activeType: string = '';
+
+  public get ActiveTab(): ISearchTab {
+    return SearchTabs.find((item) => item.type == this.activeType)!;
+  }
 
   constructor() {}
 

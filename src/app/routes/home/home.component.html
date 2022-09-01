@@ -1,4 +1,4 @@
-<div class="container mx-auto mt-4" *ngIf="Type">
+<app-container class="mt-4" *ngIf="Type">
   <app-hero [type]="Type"></app-hero>
   <br /><br />
   <tik-dynamic-component
@@ -6,4 +6,4 @@
     [data]="{ type: Type }"
   ></tik-dynamic-component>
   <br /><br />
-</div>
+</app-container>

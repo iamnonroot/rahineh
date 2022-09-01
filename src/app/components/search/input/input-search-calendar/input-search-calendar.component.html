@@ -9,7 +9,7 @@
   [readonly]="true"
 ></app-input-search>
 
-<mat-menu class="w-[300px] border mt-2" #menu="matMenu">
+<mat-menu [hasBackdrop]="false" class="w-[300px] border mt-2" #menu="matMenu">
   <div (click)="$event.stopPropagation()" class="flex flex-col">
     <div class="flex flex-nowrap items-center justify-between gap-2 px-2">
       <button (click)="MonthBefore()" mat-icon-button>

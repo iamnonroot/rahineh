@@ -22,7 +22,7 @@
   </mat-chip-list>
 </div>
 
-<div class="grid grid-cols-11 items-center gap-2">
+<div class="grid -lg:grid-cols-4 lg:grid-cols-11 items-center gap-2">
   <app-input-search-city
     type="origin"
     [value]="Search.GetWayOriginByStep(0)"
@@ -60,11 +60,11 @@
     [value]="Search.CountPassengers()"
     (add)="Search.AddPassengerByType($event)"
     (remove)="Search.RemovePassengerByType($event)"
-    class="col-span-2"
+    class="-lg:col-span-4 lg:col-span-2"
   ></app-input-search-passenger>
 
-  <button mat-flat-button color="primary" (click)="Submit()">
-    <mat-icon class="ml-2">search</mat-icon>
+  <button mat-flat-button color="primary" class="-lg:col-span-4 -md:!mr-0 -lg:!mr-auto" (click)="Submit()">
+    <mat-icon class="ml-2 min-w-[24px]">search</mat-icon>
     <span>بگرد</span>
   </button>
 </div>

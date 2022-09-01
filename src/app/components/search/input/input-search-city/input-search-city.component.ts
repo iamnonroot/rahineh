@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { FilterPipe } from 'src/app/pipe/filter/filter.pipe';
 import { ILiveSearchWayLocation } from 'src/app/services/search/search/search.interface';
 
@@ -19,6 +27,8 @@ export class InputSearchCityComponent implements OnInit {
 
   @Output()
   public valueChange: EventEmitter<ILiveSearchWayLocation> = new EventEmitter();
+
+  @ViewChild(MatMenuTrigger) menu!: MatMenuTrigger;
 
   public Search: string = '';
 
@@ -49,6 +59,17 @@ export class InputSearchCityComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  public CloseOnClickOutSide(): void {
+    setTimeout(() => {
+      const close = () => {
+        this.menu.closeMenu();
+        document.querySelector('app-root')?.removeEventListener('click', close);
+      };
+
+      document.querySelector('app-root')?.addEventListener('click', close);
+    }, 50);
+  }
+
   public FilteredCities(): any[] {
     const result = this.filter.transform(this.Cities, this.Search, 'cities');
     this.Length = result.length;
@@ -57,8 +78,9 @@ export class InputSearchCityComponent implements OnInit {
 
   public SetCity(location: ILiveSearchWayLocation) {
     this.valueChange.emit(location);
-    this.Search = '';
+    this.menu.closeMenu();
     this.error = false;
+    this.Search = '';
   }
 }
 

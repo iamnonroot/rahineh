@@ -1,34 +1,43 @@
 <mat-toolbar [ngClass]="{ '!hidden': hidden }" class="!bg-transparent">
-  <mat-toolbar-row class="container mx-auto gap-2">
-    <a routerLink="/" class="h-[42px]">
-      <picture>
-        <img
-          class="w-full h-full object-contains"
-          src="/assets/images/logo.png"
-          alt="لوگوی راهینه"
-        />
-      </picture>
-    </a>
-
-    <div class="w-[2px] h-[24px] bg-slate-200 mx-2"></div>
-
-    <div class="flex flex-nowrap items-center gap-2">
-      <a
-        *ngFor="let item of HeaderLinks"
-        [routerLink]="item.href"
-        class="mat-button !text-slate-500 hover:!text-primary"
-      >
-        {{ item.text }}
+  <app-container>
+    <mat-toolbar-row class="gap-2">
+      <button class="md:!hidden" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <a routerLink="/" class="h-[42px] -md:mx-auto">
+        <picture>
+          <img
+            class="w-full h-full object-contains"
+            src="/assets/images/logo.png"
+            alt="لوگوی راهینه"
+          />
+        </picture>
       </a>
-    </div>
 
-    <div class="flex-1"></div>
+      <div class="w-[2px] h-[24px] bg-slate-200 mx-2 -md:hidden"></div>
 
-    <a routerLink="/auth" mat-stroked-button>ورود یا ثبت نام</a>
+      <div class="flex flex-nowrap items-center md:gap-3 lg:gap-6 -md:hidden">
+        <a
+          *ngFor="let item of HeaderLinks"
+          [routerLink]="item.href"
+          class="text-sm !text-slate-500 hover:!text-primary"
+        >
+          {{ item.text }}
+        </a>
+      </div>
 
-    <a href="tel://0213311" mat-flat-button color="accent">
-      <span class="mt-1">0213311</span>
-      <mat-icon class="mr-3">phone</mat-icon>
-    </a>
-  </mat-toolbar-row>
+      <div class="flex-1"></div>
+
+      <a class="-md:!hidden" href="tel://0213311" mat-button>
+        <span class="mt-1">0213311</span>
+        <mat-icon class="mr-3">phone</mat-icon>
+      </a>
+
+      <div class="w-[2px] h-[24px] bg-slate-200 mx-2 -md:hidden"></div>
+
+      <a class="-md:!hidden" routerLink="/auth" mat-flat-button color="accent">
+        ورود یا ثبت نام
+      </a>
+    </mat-toolbar-row>
+  </app-container>
 </mat-toolbar>
