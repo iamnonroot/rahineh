@@ -1,0 +1,38 @@
+<app-input-search
+  [matMenuTriggerFor]="menu"
+  (menuOpened)="CloseOnClickOutSide()"
+  [icon]="type == 'origin' ? 'near_me' : 'place'"
+  [title]="type == 'origin' ? 'مبدا از کجا ؟' : 'مقصد به کجا ؟'"
+  [subtitle]="value ? value.text : type == 'origin' ? 'از کجا' : 'به کجا'"
+  [(value)]="Search"
+  (valueChange)="OnSearching()"
+  [error]="error"
+></app-input-search>
+
+<mat-menu [hasBackdrop]="false" class="w-[220px] border mt-2" #menu="matMenu">
+  <div class="flex flex-col">
+    <mat-selection-list #city [multiple]="false">
+      <ng-container *ngFor="let item of FilteredCities()">
+        <div mat-subheader>{{ item.text }}</div>
+        <mat-list-option
+          *ngFor="let city of item.cities"
+          [value]="city.value"
+          (click)="SetCity(city)"
+        >
+          <div class="flex flex-nowrap items-center justify-between">
+            <span>{{ city.text }}</span>
+            <span class="-ml-2 text-sm uppercase">{{ city.value }}</span>
+          </div>
+        </mat-list-option>
+      </ng-container>
+    </mat-selection-list>
+
+    <div
+      *ngIf="Length == 0"
+      class="flex flex-col items-center justify-center gap-6 h-[100px]"
+    >
+      <mat-icon>push_pin</mat-icon>
+      <span class="text-sm opacity-70">نتیجه ای یافت نشد</span>
+    </div>
+  </div>
+</mat-menu>

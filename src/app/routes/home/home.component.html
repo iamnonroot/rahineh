@@ -1,9 +1,9 @@
-<app-container class="mt-4" *ngIf="Type">
-  <app-hero [type]="Type"></app-hero>
+<app-container class="mt-4" *ngIf="Result.Type">
+  <app-hero class="-md:border-b -md:block" [type]="Result.Type"></app-hero>
   <br /><br />
   <tik-dynamic-component
     key="@tikban/#/home"
-    [data]="{ type: Type }"
+    [data]="{ type: Result.Type }"
   ></tik-dynamic-component>
   <br /><br />
 </app-container>

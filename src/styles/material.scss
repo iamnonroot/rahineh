@@ -10,15 +10,15 @@
   $primary: mat.get-color-from-palette($primary);
   $accent: mat.get-color-from-palette($accent);
   $warn: mat.get-color-from-palette($warn);
-  --tikban-theme-primary: #{$primary};
-  --tikban-theme-primary-rgb: #{GetRGBColor($primary)};
-  --tikban-theme-accent: #{$accent};
-  --tikban-theme-accent-rgb: #{GetRGBColor($accent)};
-  --tikban-theme-warn: #{$warn};
-  --tikban-theme-warn-rgb: #{GetRGBColor($warn)};
-  --tikban-theme-surface: #{$surface};
-  --tikban-theme-surface-rgb: #{GetRGBColor($surface)};
-  --tikban-theme-outline: #{$outline};
+  --rahineh-theme-primary: #{$primary};
+  --rahineh-theme-primary-rgb: #{GetRGBColor($primary)};
+  --rahineh-theme-accent: #{$accent};
+  --rahineh-theme-accent-rgb: #{GetRGBColor($accent)};
+  --rahineh-theme-warn: #{$warn};
+  --rahineh-theme-warn-rgb: #{GetRGBColor($warn)};
+  --rahineh-theme-surface: #{$surface};
+  --rahineh-theme-surface-rgb: #{GetRGBColor($surface)};
+  --rahineh-theme-outline: #{$outline};
 }
 
 @mixin GenerateTheme($primary, $accent, $warn, $dark: false) {
@@ -53,7 +53,7 @@
   }
 }
 
-.tikban-theme-indigo_pink {
+.rahineh-theme-green_yellow {
   @include GenerateTheme(
     mat.define-palette(mat.$green-palette, A700),
     mat.define-palette(mat.$orange-palette, A400),

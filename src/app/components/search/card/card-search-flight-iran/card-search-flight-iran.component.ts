@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchQueryService } from 'src/app/services/search-query/search-query.service';
 import { SearchFlightIranService } from 'src/app/services/search/flight-iran/flight-iran.service';
@@ -8,10 +8,15 @@ import { SearchFlightIranService } from 'src/app/services/search/flight-iran/fli
   templateUrl: './card-search-flight-iran.component.html',
   styleUrls: ['./card-search-flight-iran.component.scss'],
   host: {
-    class: 'flex flex-col p-4 gap-4',
+    class: 'flex flex-col p-4 gap-2',
   },
 })
 export class CardSearchFlightIranComponent implements OnInit {
+  @Input()
+  public expansionable: boolean = false;
+
+  public opened: boolean = false;
+
   public Errors: string[] = [];
 
   constructor(
@@ -20,7 +25,9 @@ export class CardSearchFlightIranComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.opened = !this.expansionable;
+  }
 
   public Submit() {
     const { valid, value, errors } = this.Search.Validate();

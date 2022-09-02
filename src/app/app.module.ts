@@ -79,6 +79,9 @@ import { InputSearchRoomComponent } from './components/search/input/input-search
 import { DcErrorResultComponent } from './components/result/dc-error-result/dc-error-result.component';
 import { DcFooterComponent } from './components/dc-footer/dc-footer.component';
 import { ContainerComponent } from './components/container/container.component';
+import { BottomNavBarComponent } from './components/bottom-nav-bar/bottom-nav-bar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { InputSearchFlightIranCityComponent } from './components/search/input/input-search-flight-iran-city/input-search-flight-iran-city.component';
 
 @NgModule({
   declarations: [
@@ -143,8 +146,11 @@ import { ContainerComponent } from './components/container/container.component';
     DcErrorResultComponent,
     DcFooterComponent,
     ContainerComponent,
+    BottomNavBarComponent,
+    InputSearchFlightIranCityComponent,
   ],
   imports: [
+    HttpClientModule,
     NgxSliderModule,
     TikSdkModule,
     TikUtilsModule,

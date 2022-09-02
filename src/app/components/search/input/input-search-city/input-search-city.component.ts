@@ -55,7 +55,7 @@ export class InputSearchCityComponent implements OnInit {
     },
   ];
 
-  constructor(public filter: FilterPipe) {}
+  constructor(private filter: FilterPipe) {}
 
   ngOnInit(): void {}
 

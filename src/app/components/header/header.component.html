@@ -1,7 +1,11 @@
-<mat-toolbar [ngClass]="{ '!hidden': hidden }" class="!bg-transparent">
-  <app-container>
+<app-container>
+  <mat-toolbar [ngClass]="{ '!hidden': hidden }" class="!bg-transparent">
     <mat-toolbar-row class="gap-2">
-      <button class="md:!hidden" mat-icon-button>
+      <button
+        class="md:!hidden"
+        mat-icon-button
+        (click)="OpenedSidenav = !OpenedSidenav"
+      >
         <mat-icon>menu</mat-icon>
       </button>
       <a routerLink="/" class="h-[42px] -md:mx-auto">
@@ -39,5 +43,55 @@
         ورود یا ثبت نام
       </a>
     </mat-toolbar-row>
-  </app-container>
-</mat-toolbar>
+  </mat-toolbar>
+</app-container>
+
+<div
+  *ngIf="OpenedSidenav == true"
+  class="fixed inset-0 bg-black/10 z-30"
+  (click)="OpenedSidenav = false"
+></div>
+
+<mat-sidenav
+  mode="side"
+  class="min-w-[300px] !z-30 !shadow-none !border-l !fixed"
+  [opened]="OpenedSidenav"
+>
+  <div class="flex flex-col h-full">
+    <mat-list>
+      <a
+        *ngFor="let item of SearchTabs"
+        [routerLink]="item.link"
+        (click)="OpenedSidenav = false"
+        mat-ripple
+        mat-list-item
+        class="opacity-70"
+        [ngClass]="{
+          '!opacity-100 bg-accent/10 !text-accent': item.type == Result.Type
+        }"
+      >
+        <mat-icon class="ml-4">{{ item.icon }}</mat-icon>
+        <span class="text-sm">{{ item.text }}</span>
+      </a>
+    </mat-list>
+    <mat-divider></mat-divider>
+    <mat-list>
+      <a
+        *ngFor="let item of HeaderSidenavItems"
+        [routerLink]="item.link"
+        (click)="OpenedSidenav = false"
+        mat-ripple
+        mat-list-item
+        class="opacity-70"
+      >
+        <mat-icon class="ml-4">{{ item.icon }}</mat-icon>
+        <span class="text-sm">{{ item.text }}</span>
+      </a>
+    </mat-list>
+
+    <div class="flex flex-col p-2 mt-auto text-xs opacity-70">
+      <span>نسخه 0.0.0</span>
+      <p>تمامی حقوق محفوظ است</p>
+    </div>
+  </div>
+</mat-sidenav>

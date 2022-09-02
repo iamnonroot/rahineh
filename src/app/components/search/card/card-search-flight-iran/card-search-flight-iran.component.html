@@ -1,70 +1,95 @@
-<div class="flex flex-nowrap items-center gap-2">
-  <mat-chip-list>
-    <mat-chip
-      (click)="Search.SetWayType('go')"
-      class="!cursor-pointer"
-      [ngClass]="{
-        '!bg-accent !text-white': Search.GetWayType() == 'go' ? 'accent' : ''
-      }"
-    >
-      یک طرفه
-    </mat-chip>
-    <mat-chip
-      (click)="Search.SetWayType('go-back')"
-      class="!cursor-pointer"
-      [ngClass]="{
-        '!bg-accent !text-white':
-          Search.GetWayType() == 'go-back' ? 'accent' : ''
-      }"
-    >
-      رفت و برگشت
-    </mat-chip>
-  </mat-chip-list>
+<div
+  *ngIf="expansionable"
+  (click)="opened = !opened"
+  mat-ripple
+  class="flex flex-nowrap items-center justify-between gap-2 p-2 -mx-2 -mt-4 md:!hidden"
+  [ngClass]="{ '-mb-8': !opened }"
+>
+  <span>
+    از
+    {{ Search.GetWayOriginByStep(0)!.text }} به
+    {{ Search.GetWayDestinationByStep(0)!.text }}
+  </span>
+  <mat-icon>expand_more</mat-icon>
 </div>
 
-<div class="grid -lg:grid-cols-4 lg:grid-cols-11 items-center gap-2">
-  <app-input-search-city
-    type="origin"
-    [value]="Search.GetWayOriginByStep(0)"
-    (valueChange)="Search.SetWayOriginByStep($event, 0)"
-    [error]="Errors.includes('origin/0')"
-    class="col-span-2"
-  ></app-input-search-city>
-  <app-input-search-city
-    type="destination"
-    [value]="Search.GetWayDestinationByStep(0)"
-    (valueChange)="Search.SetWayDestinationByStep($event, 0)"
-    [error]="Errors.includes('destination/0')"
-    class="col-span-2"
-  ></app-input-search-city>
+<div
+  class="flex flex-col gap-4 -md:px-2"
+  [ngClass]="{ '-md:h-0 -md:opacity-0 -md:pointer-events-none': !opened }"
+>
+  <div class="flex flex-nowrap items-center gap-2">
+    <mat-chip-list>
+      <mat-chip
+        (click)="Search.SetWayType('go')"
+        class="!cursor-pointer"
+        [ngClass]="{
+          '!bg-accent !text-white': Search.GetWayType() == 'go' ? 'accent' : ''
+        }"
+      >
+        یک طرفه
+      </mat-chip>
+      <mat-chip
+        (click)="Search.SetWayType('go-back')"
+        class="!cursor-pointer"
+        [ngClass]="{
+          '!bg-accent !text-white':
+            Search.GetWayType() == 'go-back' ? 'accent' : ''
+        }"
+      >
+        رفت و برگشت
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 
-  <app-input-search-calendar
-    type="departure"
-    [value]="Search.GetWayDateByStep(0)"
-    (valueChange)="Search.SetWayDateByStep($event, 0)"
-    [error]="Errors.includes('date/0')"
-    class="col-span-2"
-  ></app-input-search-calendar>
-  <app-input-search-calendar
-    type="return"
-    [value]="Search.GetWayDateByStep(1)"
-    (valueChange)="Search.SetWayDateByStep($event, 1)"
-    [error]="Errors.includes('date/1')"
-    class="col-span-2 transition-all"
-    [ngClass]="{
-      'pointer-events-none opacity-30': Search.GetWayType() != 'go-back'
-    }"
-  ></app-input-search-calendar>
+  <div class="grid -lg:grid-cols-4 lg:grid-cols-11 items-center gap-2">
+    <app-input-search-flight-iran-city
+      type="origin"
+      [value]="Search.GetWayOriginByStep(0)"
+      (valueChange)="Search.SetWayOriginByStep($event, 0)"
+      [error]="Errors.includes('origin/0')"
+      class="col-span-2"
+    ></app-input-search-flight-iran-city>
+    <app-input-search-flight-iran-city
+      type="destination"
+      [value]="Search.GetWayDestinationByStep(0)"
+      (valueChange)="Search.SetWayDestinationByStep($event, 0)"
+      [error]="Errors.includes('destination/0')"
+      class="col-span-2"
+    ></app-input-search-flight-iran-city>
 
-  <app-input-search-passenger
-    [value]="Search.CountPassengers()"
-    (add)="Search.AddPassengerByType($event)"
-    (remove)="Search.RemovePassengerByType($event)"
-    class="-lg:col-span-4 lg:col-span-2"
-  ></app-input-search-passenger>
+    <app-input-search-calendar
+      type="departure"
+      [value]="Search.GetWayDateByStep(0)"
+      (valueChange)="Search.SetWayDateByStep($event, 0)"
+      [error]="Errors.includes('date/0')"
+      class="col-span-2"
+    ></app-input-search-calendar>
+    <app-input-search-calendar
+      type="return"
+      [value]="Search.GetWayDateByStep(1)"
+      (valueChange)="Search.SetWayDateByStep($event, 1)"
+      [error]="Errors.includes('date/1')"
+      class="col-span-2 transition-all"
+      [ngClass]="{
+        'pointer-events-none opacity-30': Search.GetWayType() != 'go-back'
+      }"
+    ></app-input-search-calendar>
 
-  <button mat-flat-button color="primary" class="-lg:col-span-4 -md:!mr-0 -lg:!mr-auto" (click)="Submit()">
-    <mat-icon class="ml-2 min-w-[24px]">search</mat-icon>
-    <span>بگرد</span>
-  </button>
+    <app-input-search-passenger
+      [value]="Search.CountPassengers()"
+      (add)="Search.AddPassengerByType($event)"
+      (remove)="Search.RemovePassengerByType($event)"
+      class="-lg:col-span-4 lg:col-span-2"
+    ></app-input-search-passenger>
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="-lg:col-span-4 -md:!mr-0 -lg:!mr-auto"
+      (click)="Submit()"
+    >
+      <mat-icon class="ml-2 min-w-[24px]">search</mat-icon>
+      <span>بگرد</span>
+    </button>
+  </div>
 </div>

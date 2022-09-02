@@ -3,6 +3,12 @@ export interface IHeaderLink {
   href: string;
 }
 
+export interface IHeaderSidenavItem {
+  icon: string;
+  text: string;
+  link: string;
+}
+
 export const HeaderLinks: IHeaderLink[] = [
   {
     text: 'پرواز داخلی',
@@ -28,4 +34,16 @@ export const HeaderLinks: IHeaderLink[] = [
   //   text: 'بیمه مسافرتی',
   //   href: '/insurance',
   // },
+];
+
+export const HeaderSidenavItems: IHeaderSidenavItem[] = [
+  {
+    icon: 'phone',
+    text: 'تماس با ما',
+    link: '/page/contact',
+  },{
+    icon: 'help',
+    text: 'راهنمایی',
+    link: '/help-center'
+  }
 ];

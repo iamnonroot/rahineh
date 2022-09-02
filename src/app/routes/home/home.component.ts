@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResultService } from 'src/app/services/result/result.service';
 import { SearchDefaultTypes } from 'src/app/services/search/search/search.default';
 import { TLiveSearchType } from 'src/app/services/search/search/search.interface';
 
@@ -9,9 +10,11 @@ import { TLiveSearchType } from 'src/app/services/search/search/search.interface
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public Type: TLiveSearchType | undefined;
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public Result: ResultService
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -24,11 +27,9 @@ export class HomeComponent implements OnInit {
     const params = this.route.snapshot.params['type'];
 
     if (SearchDefaultTypes.includes(params)) {
-      this.Type = params;
+      this.Result.Type = params;
     } else {
-      this.Type = 'flight-iran';
+      this.Result.Type = 'flight-iran';
     }
-
-    console.log(this.Type);
   }
 }

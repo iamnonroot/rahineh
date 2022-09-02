@@ -4,6 +4,10 @@
 @import "./styles/tailwind.scss";
 @import "./styles/font.scss";
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 html,
 body {
   height: 100%;
@@ -20,8 +24,7 @@ html {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 picture.zoom-on-picture:hover img {

@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './dc-error-result.component.html',
   styleUrls: ['./dc-error-result.component.scss'],
   host: {
-    class: 'flex flex-col items-center justify-center h-[500px]',
+    class: 'flex flex-col items-center justify-center text-center h-[500px]',
   },
 })
 export class DcErrorResultComponent implements OnInit {

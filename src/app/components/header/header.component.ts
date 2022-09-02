@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HeaderLinks, IHeaderLink } from 'src/app/database/components/header';
+import { HeaderLinks, HeaderSidenavItems, IHeaderLink, IHeaderSidenavItem } from 'src/app/database/components/header';
+import { ISearchTab, SearchTabs } from 'src/app/database/components/search';
+import { ResultService } from 'src/app/services/result/result.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,12 @@ export class HeaderComponent implements OnInit {
   public hidden: boolean = false;
 
   public HeaderLinks: IHeaderLink[] = HeaderLinks;
-  constructor() {}
+  public HeaderSidenavItems: IHeaderSidenavItem[] = HeaderSidenavItems;
+  public SearchTabs: ISearchTab[] = SearchTabs;
+
+  public OpenedSidenav: boolean = false;
+
+  constructor(public Result: ResultService) {}
 
   ngOnInit(): void {}
 }

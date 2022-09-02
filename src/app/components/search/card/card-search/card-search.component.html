@@ -1,4 +1,9 @@
-<nav mat-tab-nav-bar [ngClass]="{ 'tab-less': tabless }" [tabPanel]="tabPanel">
+<nav
+  mat-tab-nav-bar
+  class="scrollable"
+  [ngClass]="{ 'md:!hidden': tabless }"
+  [tabPanel]="tabPanel"
+>
   <a
     mat-tab-link
     *ngFor="let tab of Tabs"
@@ -10,13 +15,18 @@
       <mat-icon>{{ tab.icon }}</mat-icon>
       <span>{{ tab.text }}</span>
 
-      <span *ngIf="tab.disable" class="bg-red-500 text-white p-[0px_6px] rounded-2xl text-[8px] absolute -bottom-2 right-3">بزودی</span>
+      <span
+        *ngIf="tab.disable"
+        class="bg-red-500 text-white p-[0px_6px] rounded-2xl text-[8px] absolute -bottom-2 right-3"
+        >بزودی</span
+      >
     </div>
   </a>
 </nav>
 <mat-tab-nav-panel #tabPanel>
   <ng-container [ngSwitch]="type">
     <app-card-search-flight-iran
+      [expansionable]="expansionable"
       *ngSwitchCase="'flight-iran'"
     ></app-card-search-flight-iran>
     <app-card-search-flight-world

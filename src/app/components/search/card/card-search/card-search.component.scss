@@ -5,14 +5,10 @@ a {
 
 a:hover div.flex.flex-nowrap,
 a.mat-tab-label-active div.flex.flex-nowrap {
-  color: var(--tikban-theme-primary) !important;
+  color: var(--rahineh-theme-primary) !important;
 }
 
 a:hover,
 a.mat-tab-label-active {
   opacity: 1 !important;
-}
-
-nav.tab-less {
-  display: none !important;
 }

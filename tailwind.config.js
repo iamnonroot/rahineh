@@ -1,8 +1,8 @@
 const WithOpacityValue = (variable) => {
   return ({ opacityValue }) => {
     return opacityValue === undefined
-      ? `rgb(var(--tikban-theme-${variable}-rgb))`
-      : `rgba(var(--tikban-theme-${variable}-rgb), ${opacityValue})`;
+      ? `rgb(var(--rahineh-theme-${variable}-rgb))`
+      : `rgba(var(--rahineh-theme-${variable}-rgb), ${opacityValue})`;
   };
 };
 

@@ -1,0 +1,41 @@
+<a
+  routerLink="/"
+  [ngClass]="{ active: ActiveTab == 0 }"
+  class="flex flex-col items-center justify-center gap-2"
+>
+  <div
+    matRipple
+    class="flex items-center justify-center h-[32px] w-[64px] rounded-2xl"
+  >
+    <mat-icon>home</mat-icon>
+  </div>
+  <span class="text-xs">خانه</span>
+</a>
+
+<a
+  routerLink="/blog"
+  [ngClass]="{ active: ActiveTab == 1 }"
+  class="flex flex-col items-center justify-center gap-2 p-2"
+>
+  <div
+    matRipple
+    class="flex items-center justify-center h-[32px] w-[64px] rounded-2xl"
+  >
+    <mat-icon>newspaper</mat-icon>
+  </div>
+  <span class="text-xs">مجله راهینه</span>
+</a>
+
+<a
+  routerLink="/auth"
+  [ngClass]="{ active: ActiveTab == 2 }"
+  class="flex flex-col items-center justify-center gap-2 p-2"
+>
+  <div
+    matRipple
+    class="flex items-center justify-center h-[32px] w-[64px] rounded-2xl"
+  >
+    <mat-icon>person</mat-icon>
+  </div>
+  <span class="text-xs">حساب من</span>
+</a>

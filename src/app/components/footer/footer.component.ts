@@ -5,6 +5,9 @@ import { ISearchTab, SearchTabs } from 'src/app/database/components/search';
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  host: {
+    class: '-md:hidden'
+  }
 })
 export class FooterComponent implements OnInit {
   public Tabs: ISearchTab[] = SearchTabs;

@@ -1,0 +1,17 @@
+a {
+  &.active {
+    div {
+      background-color: rgba(var(--rahineh-theme-primary-rgb), 0.8);
+    }
+
+    mat-icon {
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+    }
+  }
+
+  &:not(.active) {
+    opacity: 0.6;
+  }
+}
