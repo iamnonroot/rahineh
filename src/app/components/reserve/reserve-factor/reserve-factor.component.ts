@@ -18,29 +18,23 @@ export class ReserveFactorComponent implements OnInit {
   }
 
   public GetPrices(): PricePassenger {
-    const selected = this.result.Selected;
+    const selected = this.result.Selected!;
     const count = this.reserve.CountPassengers();
     return {
       adult: {
         text: 'بزرگسال',
         count: count.adult,
-        price:
-          selected.reduce((prev, curr) => prev + curr.price.adult, 0) *
-          count.adult,
+        price: selected.price.adult * count.adult,
       },
       child: {
         text: 'کودک',
         count: count.child,
-        price:
-          selected.reduce((prev, curr) => prev + curr.price.child, 0) *
-          count.child,
+        price: selected.price.child * count.child,
       },
       infant: {
         text: 'نوزاد',
         count: count.infant,
-        price:
-          selected.reduce((prev, curr) => prev + curr.price.infant, 0) *
-          count.infant,
+        price: selected.price.infant * count.infant,
       },
     };
   }

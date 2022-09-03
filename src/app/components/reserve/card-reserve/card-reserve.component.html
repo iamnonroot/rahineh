@@ -1,8 +1,8 @@
 <mat-card class="border">
   <div class="flex flex-col gap-4">
-    <ng-container *ngFor="let select of selected">
+    <ng-container *ngIf="selected">
       <div
-        *ngFor="let item of select.ways"
+        *ngFor="let item of selected.ways"
         class="flex flex-nowrap items-center gap-2"
       >
         <div class="flex flex-col items-center gap-1 min-w-fit">

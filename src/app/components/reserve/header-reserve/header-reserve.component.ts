@@ -48,11 +48,10 @@ export class HeaderReserveComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.result.IsEmpty == false) {
-      const start = this.result.Selected[0].ways[0].fromValue;
+      const start = this.result.Selected!.ways[0].fromValue;
       const end =
-        this.result.Selected[this.result.Length - 1].ways[
-          this.result.Selected[this.result.Length - 1].ways.length - 1
-        ].toValue;
+        this.result.Selected!.ways[this.result.Selected!.ways.length - 1]
+          .toValue;
       this.Steps[0].subtext = `${start}-${end}`;
       const link = '/' + document.referrer.split('/').slice(3).join('/');
     }

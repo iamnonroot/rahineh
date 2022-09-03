@@ -50,15 +50,10 @@ export class PreSearchGuard implements CanActivate {
 
     const ways = this.query.ConvertFromQuery(
       url.replace(`/search/${type}/`, '').split('?')[0]
-    );    
+    );
 
     // setting result
-    this.result.Step = 0;
-    this.result.Length = ways.length;
-    this.result.Selected = Array.from(
-      { length: ways.length },
-      () => undefined
-    ) as any[];
+    this.result.Selected = undefined;
 
     switch (type as TLiveSearchType) {
       case 'flight-iran':

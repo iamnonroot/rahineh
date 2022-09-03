@@ -3,8 +3,9 @@ import { AppService } from 'src/app/services/app/app.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { FilterResultComponent } from 'src/app/components/result/filter-result/filter-result.component';
 import { SearchFlightIranService } from 'src/app/services/search/flight-iran/flight-iran.service';
-import { HttpClient } from '@angular/common/http';
 import { DynamicComponentComponent } from 'projects/dynamic-component/src/lib/dynamic-component/dynamic-component.component';
+import { ResultService } from 'src/app/services/result/result.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -18,12 +19,15 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(
     private app: AppService,
     private bottomSheet: MatBottomSheet,
-    private http: HttpClient,
+    private router: Router,
+    private result: ResultService,
     private searchFlightIran: SearchFlightIranService
   ) {}
 
   ngOnInit(): void {
     this.app.SetBottomNavBarHidden(true);
+    this.makeResultFromSearch();
+    this.router.events.subscribe(() => this.makeResultFromSearch());
   }
 
   ngOnDestroy(): void {
@@ -34,7 +38,23 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.bottomSheet.open(FilterResultComponent);
   }
 
+  private searchForFlightIran() {
+    const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
+    this.searchFlightIran.Search(param).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+    });
+  }
+
   private makeResultFromSearch() {
-    this.http.get('');
+    switch (this.result.Type) {
+      case 'flight-iran':
+        this.searchForFlightIran();
+        break;
+
+      default:
+        break;
+    }
   }
 }

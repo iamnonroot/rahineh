@@ -16,7 +16,7 @@ export class CardReserveComponent implements OnInit {
   public type!: TLiveSearchType;
 
   @Input()
-  public selected: IResultItineraryItem[] = [];
+  public selected?: IResultItineraryItem;
 
   @Input()
   public submitText: string = 'تایید و ادامه';
@@ -37,23 +37,17 @@ export class CardReserveComponent implements OnInit {
       adult: {
         text: 'بزرگسال',
         count: count.adult,
-        price:
-          this.selected.reduce((prev, curr) => prev + curr.price.adult, 0) *
-          count.adult,
+        price: this.selected!.price.adult * count.adult,
       },
       child: {
         text: 'کودک',
         count: count.child,
-        price:
-          this.selected.reduce((prev, curr) => prev + curr.price.child, 0) *
-          count.child,
+        price: this.selected!.price.child * count.child,
       },
       infant: {
         text: 'نوزاد',
         count: count.infant,
-        price:
-          this.selected.reduce((prev, curr) => prev + curr.price.infant, 0) *
-          count.infant,
+        price: this.selected!.price.infant * count.infant,
       },
     };
   }
