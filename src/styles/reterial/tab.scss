@@ -9,6 +9,11 @@ nav.scrollable {
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
 
+  &::-webkit-scrollbar {
+    opacity: 0 !important;
+    height: 0 !important;
+  }
+  
   .mat-tab-header-pagination {
     display: none !important;
   }
@@ -17,8 +22,4 @@ nav.scrollable {
     overflow: unset !important;
   }
 
-  &::-webkit-scrollbar {
-    opacity: 0 !important;
-    height: 0 !important;
-  }
 }
