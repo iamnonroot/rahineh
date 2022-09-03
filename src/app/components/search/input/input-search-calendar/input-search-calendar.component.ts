@@ -127,13 +127,9 @@ export class InputSearchCalendarComponent implements OnInit {
 
   public CloseOnClickOutSide(): void {
     setTimeout(() => {
-      const close = () => {
-        this.menu.closeMenu();
-        document.querySelector('app-root')?.removeEventListener('click', close);
-      };
-
-      document.querySelector('app-root')?.removeEventListener('click', close);
-      document.querySelector('app-root')?.addEventListener('click', close);
+      document
+        .querySelector('app-root')
+        ?.addEventListener('click', this.onCloseOutside.bind(this));
     }, 50);
   }
 
@@ -188,6 +184,7 @@ export class InputSearchCalendarComponent implements OnInit {
 
       this.error = false;
       this.menu.closeMenu();
+      document.querySelector('app-root')?.removeAllListeners!('click');
       this.valueChange.emit(this.Selected);
     }
   }
@@ -229,6 +226,11 @@ export class InputSearchCalendarComponent implements OnInit {
 
     this.today();
     this.Generate();
+  }
+
+  private onCloseOutside() {
+    this.menu.closeMenu();
+    document.querySelector('app-root')?.removeAllListeners!('click');
   }
 }
 

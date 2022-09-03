@@ -36,9 +36,8 @@
         mat-icon-button
         matTooltip="انتخاب روز"
         matTooltipPosition="above"
-        class="hover:!text-accent"
         [disabled]="IsInPast(item.day)"
-        [ngClass]="{ '!bg-accent/20 !text-accent': IsSelectedDay(item.day) }"
+        [ngClass]="{ '!bg-accent/20 !text-accent': IsSelectedDay(item.day), 'hover:!text-accent': !IsInPast(item.day) }"
         (click)="SetDay(item.day)"
       >
         <span class="text-sm">{{ item.day == 0 ? "" : item.day }}</span>

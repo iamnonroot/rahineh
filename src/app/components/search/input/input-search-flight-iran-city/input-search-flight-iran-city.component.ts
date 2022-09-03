@@ -48,6 +48,7 @@ export class InputSearchFlightIranCityComponent implements OnInit {
 
   public CloseOnClickOutSide(): void {
     setTimeout(() => {
+      document.querySelector('app-root')?.removeAllListeners!('click');
       document
         .querySelector('app-root')
         ?.addEventListener('click', this.onCloseOutside.bind(this));

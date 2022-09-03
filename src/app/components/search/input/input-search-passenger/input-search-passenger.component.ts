@@ -46,16 +46,19 @@ export class InputSearchPassengerComponent implements OnInit {
 
   public CloseOnClickOutSide(): void {
     setTimeout(() => {
-      const close = () => {
-        this.menu.closeMenu();
-        document.querySelector('app-root')?.removeEventListener('click', close);
-      };
-
-      document.querySelector('app-root')?.addEventListener('click', close);
+      document.querySelector('app-root')?.removeAllListeners!('click');
+      document
+        .querySelector('app-root')
+        ?.addEventListener('click', this.onCloseOutside.bind(this));
     }, 50);
   }
 
   public Close() {
+    this.onCloseOutside();
+  }
+
+  private onCloseOutside() {
     this.menu.closeMenu();
+    document.querySelector('app-root')?.removeAllListeners!('click');
   }
 }

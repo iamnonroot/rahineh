@@ -22,7 +22,7 @@
           mat-icon-button
           [disabled]="value ? value.adult == 1 : true"
           (click)="remove.emit('adult')"
-          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
         >
           <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
             remove
@@ -36,7 +36,7 @@
         <button
           mat-icon-button
           (click)="add.emit('adult')"
-          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
         >
           <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
             add
@@ -56,7 +56,7 @@
           mat-icon-button
           [disabled]="value ? value.child == 0 : true"
           (click)="remove.emit('child')"
-          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
         >
           <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
             remove
@@ -70,7 +70,7 @@
         <button
           mat-icon-button
           (click)="add.emit('child')"
-          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
         >
           <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
             add
@@ -90,7 +90,7 @@
           mat-icon-button
           [disabled]="value ? value.infant == 0 : true"
           (click)="remove.emit('infant')"
-          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
         >
           <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
             remove
@@ -104,7 +104,7 @@
         <button
           mat-icon-button
           (click)="add.emit('infant')"
-          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px]"
+          class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
         >
           <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
             add
