@@ -1,34 +1,44 @@
 <mat-card
   class="flex flex-col !shadow-none border !rounded-2xl hover:!shadow-lg"
 >
-  <div class="flex flex-nowrap gap-2">
+  <div class="flex -lg:flex-col lg:flex-nowrap gap-2">
     <div class="flex flex-col gap-8 w-full">
       <ng-container *ngFor="let item of ways">
-        <div class="flex flex-nowrap gap-2">
-          <img
-            [src]="item.image"
-            [alt]="item.title"
-            width="50px"
-            height="50px"
-            class="w-[50px] h-[50px]"
-          />
+        <div class="flex -lg:flex-col lg:flex-nowrap gap-2">
+          <div class="flex flex-nowrap gap-2">
+            <img
+              [src]="item.image"
+              [alt]="item.title"
+              class="-md:w-[28px] md:w-[50px] -md:h-[28px] md:h-[50px]"
+            />
 
-          <div class="flex flex-col mt-2 gap-1 min-w-fit">
-            <strong>{{ item.title }}</strong>
-            <span class="text-xs">{{ item.subtitle }}</span>
+            <div class="flex flex-col md:mt-2 gap-1 min-w-fit">
+              <strong>{{ item.title }}</strong>
+              <span class="text-xs">{{ item.subtitle }}</span>
+            </div>
           </div>
 
           <div
-            class="flex flex-nowrap items-center gap-4 w-full max-w-[600px] px-6 mx-auto"
+            class="flex flex-nowrap items-center gap-4 w-full max-w-[600px] md:px-6 mx-auto"
           >
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-1 -lg:!hidden">
               <span class="text-lg font-bold">{{ item.fromText }}</span>
               <span class="opacity-70">{{ item.fromValue }}</span>
             </div>
 
-            <div class="w-[1px] h-1/2 bg-slate-200"></div>
+            <div class="w-[1px] h-1/2 bg-slate-200 -lg:!hidden"></div>
 
-            <span class="text-lg text-accent">{{ item.start }}</span>
+            <span class="text-lg text-accent -lg:!hidden">
+              {{ item.start }}
+            </span>
+
+            <div class="flex flex-col gap-1 lg:!hidden">
+              <span class="text-xl font-bold">{{ item.start }}</span>
+              <div class="flex flex-nowrap items-center gap-2 text-xs">
+                <span>{{ item.fromText }}</span>
+                <span class="opacity-70">{{ item.fromValue }}</span>
+              </div>
+            </div>
 
             <div
               class="flex flex-nowrap items-center justify-center relative mx-2 w-full"
@@ -56,19 +66,27 @@
               </div>
             </div>
 
-            <span class="text-lg text-accent">{{ item.end }}</span>
+            <span class="text-lg text-accent -lg:!hidden">{{ item.end }}</span>
 
-            <div class="w-[1px] h-1/2 bg-slate-200"></div>
+            <div class="w-[1px] h-1/2 bg-slate-200 -lg:!hidden"></div>
 
-            <div class="flex flex-col gap-1 text-left">
+            <div class="flex flex-col gap-1 text-left -lg:!hidden">
               <span class="text-lg font-bold">{{ item.toText }}</span>
               <span class="opacity-70">{{ item.toValue }}</span>
+            </div>
+
+            <div class="flex flex-col items-end gap-1 lg:!hidden">
+              <span class="text-xl font-bold">{{ item.end }}</span>
+              <div class="flex flex-nowrap items-center gap-2 text-xs">
+                <span>{{ item.toText }}</span>
+                <span class="opacity-70">{{ item.toValue }}</span>
+              </div>
             </div>
           </div>
         </div>
       </ng-container>
     </div>
-    <div class="flex flex-nowrap gap-2">
+    <div class="flex flex-nowrap gap-2 -lg:hidden">
       <div
         class="flex flex-col items-center justify-center min-w-[150px] gap-1"
       >
@@ -91,7 +109,7 @@
     </div>
   </div>
 
-  <div class="flex flex-nowrap items-center mt-4 gap-2">
+  <div class="flex flex-nowrap items-center mt-4 gap-2 -lg:hidden">
     <div
       *ngFor="let item of tags"
       [ngClass]="item.class"
@@ -114,5 +132,27 @@
     >
       انتخاب بلیط
     </button>
+  </div>
+
+  <div
+    class="flex flex-nowrap items-center justify-between mt-4 gap-2 lg:hidden"
+  >
+    <div
+      class="px-4 py-2 mt-1 bg-slate-200 text-xs rounded-lg"
+      [ngClass]="{
+        '!bg-emerald-500 ': 4 < remaining && remaining <= 8,
+        '!bg-red-500': remaining <= 4,
+        'text-white': remaining <= 8
+      }"
+    >
+      {{ remaining }} صندلی مانده
+    </div>
+
+    <div class="flex flex-col items-end">
+      <span class="text-xs">قیمت برای هر مسافر</span>
+      <span class="text-lg font-bold">
+        {{ price.adult | format: "price" }} تومان
+      </span>
+    </div>
   </div>
 </mat-card>

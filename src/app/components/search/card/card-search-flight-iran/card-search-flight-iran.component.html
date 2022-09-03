@@ -2,7 +2,7 @@
   *ngIf="expansionable"
   (click)="opened = !opened"
   mat-ripple
-  class="flex flex-nowrap items-center justify-between gap-2 p-2 -mx-2 -mt-4 md:!hidden"
+  class="flex flex-nowrap items-center justify-between gap-2 p-2 -mx-2 -mt-4 lg:!hidden"
   [ngClass]="{ '-mb-8': !opened }"
 >
   <span>
@@ -14,8 +14,8 @@
 </div>
 
 <div
-  class="flex flex-col gap-4 -md:px-2"
-  [ngClass]="{ '-md:h-0 -md:opacity-0 -md:pointer-events-none': !opened }"
+  class="flex flex-col gap-4 -lg:px-2"
+  [ngClass]="{ '-lg:h-0 -lg:opacity-0 -lg:pointer-events-none': !opened }"
 >
   <div class="flex flex-nowrap items-center gap-2">
     <mat-chip-list>

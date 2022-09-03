@@ -26,8 +26,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.app.SetBottomNavBarHidden(true);
-    this.makeResultFromSearch();
     this.router.events.subscribe(() => this.makeResultFromSearch());
+    setTimeout(() => {
+      this.makeResultFromSearch();
+    }, 0);
   }
 
   ngOnDestroy(): void {
@@ -40,14 +42,20 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private searchForFlightIran() {
     const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
+    this.dcSearch.make();
+    console.log(param);
+
     this.searchFlightIran.Search(param).subscribe({
       next: (res) => {
         console.log(res);
+        this.result.Loading = false;
       },
     });
   }
 
   private makeResultFromSearch() {
+    if (this.result.Loading) return;
+    this.result.Loading = true;
     switch (this.result.Type) {
       case 'flight-iran':
         this.searchForFlightIran();

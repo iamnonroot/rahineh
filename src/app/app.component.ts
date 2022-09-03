@@ -7,8 +7,8 @@ import { AppService } from './services/app/app.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   host: {
-    class: 'w-screen h-full flex flex-col'
-  }
+    class: 'w-screen h-full flex flex-col',
+  },
 })
 export class AppComponent implements OnInit {
   constructor(public App: AppService, private dc: TikDynamicComponentService) {}
@@ -18,15 +18,55 @@ export class AppComponent implements OnInit {
       {
         actor: '',
         type: 'component',
-        tag: 'dc-error-result',
+        tag: 'dc-card-flight-iran',
         class: 'mb-2',
         data: {
           type: 'static',
           value: {
-            code: 500,
-            message:
-              'خطا در دریافت اطلاعات رخ داد؛ لطفا دوباره تلاش کنید ! (E2154/FlightEngine-500)',
-            retry: true,
+            ways: [
+              {
+                image: 'https://tikban.com/Flight/GetLogo/Y9',
+                title: 'کیش ایر',
+                subtitle: 'Y9-7055',
+                fromText: 'تهران',
+                fromValue: 'THR',
+                toText: 'کیش',
+                toValue: 'KIH',
+                start: '11:00',
+                end: '13:30',
+                duration: '2 ساعت و 30 دقیقه',
+                stops: ['QZV', 'MHD'],
+              },
+              {
+                image: 'https://tikban.com/Flight/GetLogo/Y9',
+                title: 'کیش ایر',
+                subtitle: 'Y9-7055',
+                fromText: 'تهران',
+                fromValue: 'THR',
+                toText: 'کیش',
+                toValue: 'KIH',
+                start: '11:00',
+                end: '13:30',
+                duration: '2 ساعت و 30 دقیقه',
+                stops: ['QZV', 'MHD'],
+              },
+            ],
+            price: {
+              adult: 920000,
+              child: 860000,
+              infant: 510000,
+            },
+            remaining: 6,
+            tags: [
+              {
+                text: 'اکونومی',
+                class: 'bg-emerald-500 text-white',
+              },
+              {
+                text: 'سیستمی',
+                class: 'border',
+              },
+            ],
           },
         },
       },
