@@ -8,7 +8,7 @@
       (click)="ToggleValue(item.value)"
       [ngClass]="{ 'border-accent': HasValue(item.value) }"
       matRipple
-      class="flex flex-col items-center justify-center gap-2 p-2 border-[1px] rounded-xl cursor-pointer hover:border-accent"
+      class="flex flex-col items-center justify-center gap-2 p-2 border-[2px] rounded-xl cursor-pointer md:hover:border-accent"
     >
       <img
         *ngIf="item.image"

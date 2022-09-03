@@ -1,4 +1,6 @@
-<header class="flex flex-nowrap items-center gap-2 mb-2">
+<header
+  class="flex flex-nowrap items-center gap-2 mb-2 bg-white -md:sticky -md:-top-4 -md:pt-1 -md:z-[1]"
+>
   <mat-icon>filter_alt</mat-icon>
   <span class="ml-auto">فیلتر ها</span>
 
@@ -10,3 +12,5 @@
 <mat-accordion [multi]="true">
   <tik-dynamic-component key="@tikban/#/filter"></tik-dynamic-component>
 </mat-accordion>
+
+<div class="w-full h-[50px] md:hidden"></div>

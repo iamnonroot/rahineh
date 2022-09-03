@@ -1,11 +1,11 @@
 <header class="bg-slate-100 w-full md:px-4 pb-0">
   <div class="container mx-auto flex flex-col">
-    <div class="flex flex-nowrap items-center my-2 -md:mx-4">
+    <div class="flex flex-nowrap items-center my-2 overflow-x-auto -md:mx-4">
       <app-header-breadcrumb-result
         [activeType]="Result.Type"
       ></app-header-breadcrumb-result>
 
-      <span *ngIf="!Result.Loading" class="opacity-70 mr-auto">
+      <span *ngIf="!Result.Loading" class="opacity-70 whitespace-pre mr-auto">
         {{ Result.Results.length }}
         نتیجه در {{ Result.Timer }}
       </span>

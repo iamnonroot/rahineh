@@ -21,11 +21,21 @@
 
   <div class="lg:container -lg:mx-4 lg:mx-auto my-6 grid grid-cols-12 gap-4">
     <div
-      class="flex flex-col md:col-span-5 lg:col-span-3 -md:fixed -md:inset-0 -md:bg-white"
-      [ngClass]="{'top-full':!OpenedFilter}"
+      class="flex flex-col md:col-span-5 lg:col-span-3 -md:fixed -md:inset-0 -md:bg-white -md:h-full transition-all z-10"
+      [ngClass]="{ '!top-full': !OpenedFilter }"
       *ngIf="!Result.Loading"
     >
-      <app-filter-result></app-filter-result>
+      <div class="w-full h-full overflow-x-hidden overflow-y-sroll -md:p-4">
+        <app-filter-result></app-filter-result>
+      </div>
+
+      <div
+        class="flex flex-nowrap items-center justify-end gap-2 border-t px-4 py-2 md:!hidden"
+      >
+        <button (click)="OpenedFilter = false" mat-stroked-button>بستن</button>
+
+        <button mat-flat-button color="primary">اعمال فیلتر</button>
+      </div>
     </div>
     <tik-dynamic-component
       #search
@@ -33,13 +43,15 @@
       [preload]="false"
       (done)="MakeDone()"
     ></tik-dynamic-component>
+
+    <div class="w-full h-[100px]"></div>
   </div>
 
   <button
     (click)="OpenedFilter = true"
     mat-flat-button
     color="accent"
-    class="!fixed bottom-4 left-1/2 -translate-x-1/2 !py-6 !px-6 md:!hidden"
+    class="!fixed bottom-4 left-1/2 -translate-x-1/2 z-[2] !py-6 !px-6 md:!hidden"
   >
     <mat-icon class="ml-2">filter_alt</mat-icon>
     <span>فیلتر ها</span>

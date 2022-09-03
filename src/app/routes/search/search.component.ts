@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       }, 20);
     });
     setTimeout(() => {
-      this.makeResultFromSearch();
+      this.makeResultFromSearch(true);
     }, 0);
   }
 
@@ -80,8 +80,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  private makeResultFromSearch() {
-    if (this.Result.Loading == true) return;
+  private makeResultFromSearch(force: boolean = false) {
+    if (this.Result.Loading == true && force == false) return;
     this.Result.StartTimer();
     this.Result.Loading = true;
     switch (this.Result.Type) {

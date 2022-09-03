@@ -13,7 +13,7 @@ export class ResultService {
   public Type!: TLiveSearchType; // Search type
   public Selected: IResultItineraryItem | undefined = undefined; // Selected Itinerary
   public WayType!: TLiveSearchWayType; // way type 'go' | 'go-back' | 'multi'
-  public Loading: boolean = false;
+  public Loading: boolean = true;
   public Results: any[] = [];
 
   private startTimer: number = 0;
