@@ -5,7 +5,10 @@
   <div class="grid grid-cols-3 gap-2">
     <div
       *ngFor="let item of Injected!.options"
-      class="flex flex-col items-center justify-center gap-2 p-2 border rounded-xl cursor-pointer hover:border-accent"
+      (click)="ToggleValue(item.value)"
+      [ngClass]="{ 'border-accent': HasValue(item.value) }"
+      matRipple
+      class="flex flex-col items-center justify-center gap-2 p-2 border-[1px] rounded-xl cursor-pointer hover:border-accent"
     >
       <img
         *ngIf="item.image"
@@ -16,7 +19,9 @@
         class="w-[36px] h-[36px] my-2"
       />
       <span class="text-base">{{ item.title }}</span>
-      <span *ngIf="item.subtitle" class="text-xs opacity-70">{{ item.subtitle }}</span>
+      <span *ngIf="item.subtitle" class="text-xs opacity-70">{{
+        item.subtitle
+      }}</span>
     </div>
   </div>
 </app-filter-section-result>

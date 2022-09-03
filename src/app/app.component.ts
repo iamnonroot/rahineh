@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(public App: AppService, private dc: TikDynamicComponentService) {}
 
   ngOnInit(): void {
-    this.dc.SetComponentLayout('@tikban/#/filter', [
+    this.dc.SetComponentLayout('@tikban/#/filters', [
       {
         actor: '',
         type: 'component',

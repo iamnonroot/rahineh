@@ -61,7 +61,6 @@ export class DynamicComponentComponent implements AfterViewInit {
 
   public async make() {
     try {
-      
       (<HTMLDivElement>this.vc!.element.nativeElement).innerHTML = '';
       // get all components
       const items = await this.fetchComponents();

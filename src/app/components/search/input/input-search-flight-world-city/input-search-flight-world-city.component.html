@@ -16,6 +16,7 @@
         <div mat-subheader>{{ item.text }}</div>
         <mat-list-option
           *ngFor="let city of item.cities"
+          class="!h-[32px]"
           [value]="city.value"
           (click)="SetCity(city)"
         >

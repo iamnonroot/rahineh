@@ -1,13 +1,13 @@
 <div
-class="flex flex-col px-2 border-b bg-white z-10 sticky -md:pt-4 -md:-mt-4 -md:top-0 md:-top-[50px]"
+  class="flex flex-col px-2 border-b bg-white z-10 sticky -md:pt-4 -md:-mt-4 -md:top-0 md:-top-[50px]"
 >
-<div class="md:container md:mx-auto">
-  <app-card-search
-  [tabless]="true"
-  [expansionable]="true"
-  class="!shadow-none !bg-transparent -mt-4 -mx-2 -md:mb-2"
-  ></app-card-search>
-</div>
+  <div class="md:container md:mx-auto">
+    <app-card-search
+      [tabless]="true"
+      [expansionable]="true"
+      class="!shadow-none !bg-transparent -mt-4 -mx-2 -md:mb-2 md:pb-0"
+    ></app-card-search>
+  </div>
 </div>
 
 <mat-progress-bar
@@ -16,26 +16,32 @@ class="flex flex-col px-2 border-b bg-white z-10 sticky -md:pt-4 -md:-mt-4 -md:t
   *ngIf="Result.Loading"
 ></mat-progress-bar>
 
-<app-header-result></app-header-result>
+<div class="flex flex-col" [ngClass]="{ '!hidden': Result.Loading }">
+  <app-header-result></app-header-result>
 
-<div class="lg:container -lg:mx-4 lg:mx-auto my-6 grid grid-cols-12 gap-4">
-  <div class="flex flex-col md:col-span-5 lg:col-span-3 -md:hidden">
-    <app-filter-result></app-filter-result>
+  <div class="lg:container -lg:mx-4 lg:mx-auto my-6 grid grid-cols-12 gap-4">
+    <div
+      class="flex flex-col md:col-span-5 lg:col-span-3 -md:fixed -md:inset-0 -md:bg-white"
+      [ngClass]="{'top-full':!OpenedFilter}"
+      *ngIf="!Result.Loading"
+    >
+      <app-filter-result></app-filter-result>
+    </div>
+    <tik-dynamic-component
+      #search
+      class="-md:col-span-12 md:col-span-7 lg:col-span-9"
+      [preload]="false"
+      (done)="MakeDone()"
+    ></tik-dynamic-component>
   </div>
-  <tik-dynamic-component
-    #search
-    class="-md:col-span-12 md:col-span-7 lg:col-span-9"
-    [preload]="false"
-    key="@tikban/#/result"
-  ></tik-dynamic-component>
-</div>
 
-<button
-  (click)="OpenFilter()"
-  mat-flat-button
-  color="accent"
-  class="!fixed bottom-4 left-1/2 -translate-x-1/2 !py-6 !px-6 md:!hidden"
->
-  <mat-icon class="ml-2">filter_alt</mat-icon>
-  <span>فیلتر ها</span>
-</button>
+  <button
+    (click)="OpenedFilter = true"
+    mat-flat-button
+    color="accent"
+    class="!fixed bottom-4 left-1/2 -translate-x-1/2 !py-6 !px-6 md:!hidden"
+  >
+    <mat-icon class="ml-2">filter_alt</mat-icon>
+    <span>فیلتر ها</span>
+  </button>
+</div>

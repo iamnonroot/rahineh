@@ -28,3 +28,8 @@ export interface ISearchFlightIranParamStep {
   originCode: string;
   destinationCode: string;
 }
+
+export interface ISearchFlightIranFilterParam {
+  airlines: any[];
+  flights: any[];
+}

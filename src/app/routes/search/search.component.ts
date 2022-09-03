@@ -6,6 +6,7 @@ import { SearchFlightIranService } from 'src/app/services/search/flight-iran/fli
 import { DynamicComponentComponent } from 'projects/dynamic-component/src/lib/dynamic-component/dynamic-component.component';
 import { ResultService } from 'src/app/services/result/result.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -15,6 +16,10 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild('search')
   private dcSearch!: DynamicComponentComponent;
+
+  private subscription!: Subscription;
+
+  public OpenedFilter: boolean = false;
 
   constructor(
     public Result: ResultService,
@@ -26,7 +31,11 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.app.SetBottomNavBarHidden(true);
-    this.router.events.subscribe(() => this.makeResultFromSearch());
+    this.subscription = this.router.events.subscribe(() => {
+      setTimeout(() => {
+        if (this.router.url.startsWith('/search')) this.makeResultFromSearch();
+      }, 20);
+    });
     setTimeout(() => {
       this.makeResultFromSearch();
     }, 0);
@@ -34,10 +43,15 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.app.SetBottomNavBarHidden(false);
+    this.subscription.unsubscribe();
   }
 
   public OpenFilter() {
     this.bottomSheet.open(FilterResultComponent);
+  }
+
+  public MakeDone() {
+    this.Result.Loading = false;
   }
 
   private searchForFlightIran() {
@@ -46,20 +60,24 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchFlightIran.Search(param).subscribe({
       next: (res) => {
         this.Result.EndTimer();
-        this.Result.Loading = false;
         this.Result.SetResults(res.flights);
         if (this.Result.Results.length == 0) return;
-        else this.makeSearchResultForFlightIran();
+        else {
+          // render filter
+          this.searchFlightIran.Filter({
+            airlines: res.airlines_details,
+            flights: res.flights,
+          });
+          // render results
+          this.dcSearch.layouts =
+            this.searchFlightIran.ConvertSearchResultToDynamicComponent(
+              this.Result.Results
+            );
+
+          this.dcSearch.make();
+        }
       },
     });
-  }
-
-  private makeSearchResultForFlightIran() {
-    this.dcSearch.layouts =
-      this.searchFlightIran.ConvertSearchResultToDynamicComponent(
-        this.Result.Results
-      );
-    this.dcSearch.make();
   }
 
   private makeResultFromSearch() {
