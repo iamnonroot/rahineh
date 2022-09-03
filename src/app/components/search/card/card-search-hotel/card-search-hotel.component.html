@@ -19,7 +19,7 @@
   </mat-chip-list>
 </div>
 
-<div class="grid grid-cols-9 items-center gap-2">
+<div class="grid -lg:grid-cols-4 lg:grid-cols-9 items-center gap-2">
   <app-input-search-city
     type="origin"
     class="col-span-2"
@@ -37,7 +37,12 @@
 
   <app-input-search-room class="col-span-2"></app-input-search-room>
 
-  <button mat-flat-button color="primary" (click)="Submit()">
+  <button
+    mat-flat-button
+    color="primary"
+    class="-lg:col-span-4 -md:!mr-0 -lg:!mr-auto"
+    (click)="Submit()"
+  >
     <mat-icon class="ml-2">search</mat-icon>
     <span>بگرد</span>
   </button>

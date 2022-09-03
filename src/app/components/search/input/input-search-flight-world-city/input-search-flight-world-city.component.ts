@@ -1,21 +1,14 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { SearchFlightIranService } from 'src/app/services/search/flight-iran/flight-iran.service';
+import { SearchFlightWorldService } from 'src/app/services/search/flight-world/flight-world.service';
 import { ILiveSearchWayLocation } from 'src/app/services/search/search/search.interface';
 
 @Component({
-  selector: 'app-input-search-flight-iran-city',
-  templateUrl: './input-search-flight-iran-city.component.html',
-  styleUrls: ['./input-search-flight-iran-city.component.scss'],
+  selector: 'app-input-search-flight-world-city',
+  templateUrl: './input-search-flight-world-city.component.html',
+  styleUrls: ['./input-search-flight-world-city.component.scss']
 })
-export class InputSearchFlightIranCityComponent implements OnInit {
+export class InputSearchFlightWorldCityComponent implements OnInit {
   @Input()
   public type: 'origin' | 'destination' = 'origin';
 
@@ -39,7 +32,8 @@ export class InputSearchFlightIranCityComponent implements OnInit {
 
   private timeout: any;
 
-  constructor(private search: SearchFlightIranService) {}
+  
+  constructor(private search: SearchFlightWorldService) { }
 
   ngOnInit(): void {
     this.fetchIndex();

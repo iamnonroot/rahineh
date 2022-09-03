@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchQueryService } from 'src/app/services/search-query/search-query.service';
 import { SearchFlightWorldService } from 'src/app/services/search/flight-world/flight-world.service';
@@ -12,6 +12,11 @@ import { SearchFlightWorldService } from 'src/app/services/search/flight-world/f
   },
 })
 export class CardSearchFlightWorldComponent implements OnInit {
+  @Input()
+  public expansionable: boolean = false;
+
+  public opened: boolean = false;
+
   public Errors: string[] = [];
 
   constructor(
@@ -20,7 +25,9 @@ export class CardSearchFlightWorldComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.opened = !this.expansionable;
+  }
 
   public Submit() {
     const { valid, value, errors } = this.Search.Validate();

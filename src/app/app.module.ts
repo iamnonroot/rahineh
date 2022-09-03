@@ -82,6 +82,7 @@ import { ContainerComponent } from './components/container/container.component';
 import { BottomNavBarComponent } from './components/bottom-nav-bar/bottom-nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InputSearchFlightIranCityComponent } from './components/search/input/input-search-flight-iran-city/input-search-flight-iran-city.component';
+import { InputSearchFlightWorldCityComponent } from './components/search/input/input-search-flight-world-city/input-search-flight-world-city.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +149,7 @@ import { InputSearchFlightIranCityComponent } from './components/search/input/in
     ContainerComponent,
     BottomNavBarComponent,
     InputSearchFlightIranCityComponent,
+    InputSearchFlightWorldCityComponent,
   ],
   imports: [
     HttpClientModule,
