@@ -50,6 +50,14 @@ export class SearchVehacel<T> {
     if (type != 'go') {
       ways.push(SearchDefaultWay);
     }
+    // reverse way origin and destination for new way
+    if (type == 'go-back') {
+      let first = ways[0];
+      let second = ways[1];
+      second.destination = first.origin;
+      second.origin = first.destination;
+    }
+    
     this.setSelf(SEARCH_WAYS, ways);
   }
 
