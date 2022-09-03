@@ -14,64 +14,6 @@ export class AppComponent implements OnInit {
   constructor(public App: AppService, private dc: TikDynamicComponentService) {}
 
   ngOnInit(): void {
-    this.dc.SetComponentLayout('@tikban/#/result', [
-      {
-        actor: '',
-        type: 'component',
-        tag: 'dc-card-flight-iran',
-        class: 'mb-2',
-        data: {
-          type: 'static',
-          value: {
-            ways: [
-              {
-                image: 'https://tikban.com/Flight/GetLogo/Y9',
-                title: 'کیش ایر',
-                subtitle: 'Y9-7055',
-                fromText: 'تهران',
-                fromValue: 'THR',
-                toText: 'کیش',
-                toValue: 'KIH',
-                start: '11:00',
-                end: '13:30',
-                duration: '2 ساعت و 30 دقیقه',
-                stops: ['QZV', 'MHD'],
-              },
-              {
-                image: 'https://tikban.com/Flight/GetLogo/Y9',
-                title: 'کیش ایر',
-                subtitle: 'Y9-7055',
-                fromText: 'تهران',
-                fromValue: 'THR',
-                toText: 'کیش',
-                toValue: 'KIH',
-                start: '11:00',
-                end: '13:30',
-                duration: '2 ساعت و 30 دقیقه',
-                stops: ['QZV', 'MHD'],
-              },
-            ],
-            price: {
-              adult: 920000,
-              child: 860000,
-              infant: 510000,
-            },
-            remaining: 6,
-            tags: [
-              {
-                text: 'اکونومی',
-                class: 'bg-emerald-500 text-white',
-              },
-              {
-                text: 'سیستمی',
-                class: 'border',
-              },
-            ],
-          },
-        },
-      },
-    ]);
-
     this.dc.SetComponentLayout('@tikban/#/filter', [
       {
         actor: '',

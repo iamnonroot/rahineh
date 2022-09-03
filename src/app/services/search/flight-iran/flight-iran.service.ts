@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import moment from 'jalali-moment';
+import { IDynamicComponentItem } from 'projects/dynamic-component/src/public-api';
 import { TikFunctionsService } from 'projects/utils/src/lib/services/functions/functions.service';
 import { filter, map } from 'rxjs';
 import { SearchVehacel } from '../search/search.abstract';
@@ -88,15 +89,53 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     };
   }
 
+  public ConvertSearchResultToDynamicComponent(
+    result: any[]
+  ): IDynamicComponentItem[] {
+    let output: IDynamicComponentItem[] = [];
+    for (let item of result) {
+      output.push({
+        actor: '',
+        type: 'component',
+        tag: 'dc-card-flight-iran',
+        class: 'mb-2',
+        data: {
+          type: 'static',
+          value: {
+            ...item,
+            ways: item.ways.map((item: any) => {
+              const end = moment(item.end);
+              const start = moment(item.start);
+              const duration = moment.duration(end.diff(start));
+
+              return {
+                ...item,
+                start: start.format('HH:mm'),
+                end: end.format('HH:mm'),
+
+                duration: [
+                  duration.days() ? duration.days() + 'روز ' : '',
+                  duration.hours() ? duration.hours() + ' ساعت ' : '',
+                  duration.minutes() ? duration.minutes() + ' دقیقه ' : '',
+                ]
+                  .filter((item) => item.length != 0)
+                  .join(' و '),
+              };
+            }),
+          },
+        },
+      });
+    }
+    return output;
+  }
+
   public Search(param: ISearchFlightIranParam) {
     return this.http
       .post('https://api.rahineh.com/api/v1/flight/search', param)
       .pipe(
         map<any, any>((res) => {
-          console.log(res);
-
           if ('type' in res && res.type == 0) return undefined;
-          else return res.cities_airport;
+          else return res;
         }),
         filter((res) => res != undefined)
       );

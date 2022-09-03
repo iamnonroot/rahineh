@@ -14,6 +14,10 @@ export class ResultService {
   public Selected: IResultItineraryItem | undefined = undefined; // Selected Itinerary
   public WayType!: TLiveSearchWayType; // way type 'go' | 'go-back' | 'multi'
   public Loading: boolean = false;
+  public Results: any[] = [];
+
+  private startTimer: number = 0;
+  private endTimer: number = 0;
 
   constructor(private router: Router) {}
 
@@ -24,5 +28,21 @@ export class ResultService {
 
   public get IsEmpty(): boolean {
     return this.Selected != undefined;
+  }
+
+  public SetResults(value: any[]) {
+    this.Results = value;
+  }
+
+  public get Timer(): string {
+    return ((this.endTimer - this.startTimer) / 1000).toFixed(2) + ' ثانیه';
+  }
+
+  public StartTimer() {
+    this.startTimer = Date.now();
+  }
+
+  public EndTimer() {
+    this.endTimer = Date.now();
   }
 }

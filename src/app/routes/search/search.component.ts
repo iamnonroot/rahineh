@@ -17,10 +17,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   private dcSearch!: DynamicComponentComponent;
 
   constructor(
+    public Result: ResultService,
     private app: AppService,
     private bottomSheet: MatBottomSheet,
     private router: Router,
-    private result: ResultService,
     private searchFlightIran: SearchFlightIranService
   ) {}
 
@@ -42,21 +42,31 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private searchForFlightIran() {
     const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
-    this.dcSearch.make();
-    console.log(param);
 
     this.searchFlightIran.Search(param).subscribe({
       next: (res) => {
-        console.log(res);
-        this.result.Loading = false;
+        this.Result.EndTimer();
+        this.Result.Loading = false;
+        this.Result.SetResults(res.flights);
+        if (this.Result.Results.length == 0) return;
+        else this.makeSearchResultForFlightIran();
       },
     });
   }
 
+  private makeSearchResultForFlightIran() {
+    this.dcSearch.layouts =
+      this.searchFlightIran.ConvertSearchResultToDynamicComponent(
+        this.Result.Results
+      );
+    this.dcSearch.make();
+  }
+
   private makeResultFromSearch() {
-    if (this.result.Loading) return;
-    this.result.Loading = true;
-    switch (this.result.Type) {
+    if (this.Result.Loading == true) return;
+    this.Result.StartTimer();
+    this.Result.Loading = true;
+    switch (this.Result.Type) {
       case 'flight-iran':
         this.searchForFlightIran();
         break;

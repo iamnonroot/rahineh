@@ -5,7 +5,10 @@
         [activeType]="Result.Type"
       ></app-header-breadcrumb-result>
 
-      <span class="opacity-70 mr-auto">0 نتیجه یافت شد</span>
+      <span *ngIf="!Result.Loading" class="opacity-70 mr-auto">
+        {{ Result.Results.length }}
+        نتیجه در {{ Result.Timer }}
+      </span>
     </div>
 
     <nav mat-tab-nav-bar>
