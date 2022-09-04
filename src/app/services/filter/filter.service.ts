@@ -34,10 +34,19 @@ export class FilterService {
     this.Components = [];
     this.Value = {};
     this.defaultValue = {};
+    this.AddHeader()
   }
 
   public Reset() {
     this.Value = { ...this.defaultValue };
+  }
+
+  public AddHeader() {
+    this.Components.push({
+      actor: '',
+      type: 'component',
+      tag: 'dc-filter-header',
+    });
   }
 
   public AddPrice(min: number = 0, max = 0) {

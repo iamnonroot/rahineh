@@ -61,21 +61,20 @@ export class SearchComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.Result.EndTimer();
         this.Result.SetResults(res.flights);
-        if (this.Result.Results.length == 0) return;
-        else {
+        if (this.Result.Results.length != 0) {
           // render filter
           this.searchFlightIran.Filter({
             airlines: res.airlines_details,
             flights: res.flights,
           });
-          // render results
-          this.dcSearch.layouts =
-            this.searchFlightIran.ConvertSearchResultToDynamicComponent(
-              this.Result.Results
-            );
-
-          this.dcSearch.make();
         }
+        // render results
+        this.dcSearch.layouts =
+          this.searchFlightIran.ConvertSearchResultToDynamicComponent(
+            this.Result.Results
+          );
+
+        this.dcSearch.make();
       },
     });
   }

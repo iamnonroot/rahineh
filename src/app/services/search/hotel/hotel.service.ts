@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SearchHotel } from '../search/search.abstract';
+import { SearchDeafultRoom } from '../search/search.default';
 import { SearchService } from '../search/search.service';
 import { ILiveSearchHotel } from './hotel.interface';
 
@@ -13,6 +14,8 @@ export class SearchHotelService extends SearchHotel<ILiveSearchHotel> {
   }
 
   public Clear() {
-    this.search.Set('hotel', {});
+    this.search.Set('hotel', {
+      room: [SearchDeafultRoom],
+    });
   }
 }

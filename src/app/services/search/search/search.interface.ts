@@ -19,7 +19,7 @@ export interface ILiveSearchPassenger {
 
 export interface ILiveSearchRoom {
   adult: number;
-  child: number;
+  child: number[]; // age array
 }
 
 export interface ILiveSearchWayLocation {

@@ -7,9 +7,104 @@
   [readonly]="true"
 ></app-input-search>
 
-<mat-menu [hasBackdrop]="false" class="w-[300px] border mt-2" #menu="matMenu">
-  <div
-    (click)="$event.stopPropagation()"
-    class="flex flex-col gap-4 py-3 px-5"
-  ></div>
+<mat-menu [hasBackdrop]="false" class="w-[300px] max-h-[450px] border mt-2" #menu="matMenu">
+  <div (click)="$event.stopPropagation()" class="flex flex-col gap-4 py-1">
+    <div class="flex flex-nowrap items-center justify-between p-2 !bg-white sticky -top-0 z-[2] -mt-2 -mb-2">
+      <span>اتاق ها</span>
+      <button
+        mat-ripple
+        (click)="Search.AddRoom()"
+        [disabled]="Search.GetRooms().length > 4"
+        class="h-[36px] flex flex-nowrap items-center rounded-2xl px-5 text-accent hover:bg-accent/10"
+      >
+        <mat-icon class="ml-2">add</mat-icon>
+        <span>افزودن اتاق</span>
+      </button>
+    </div>
+
+    <div *ngFor="let item of Search.GetRooms(); let i = index" class="px-4 flex flex-col gap-2">
+      <div class="flex flex-nowrap items-center justify-between h-[36px]">
+        <span class="text-sm text-black/50">اتاق {{ Numbers[i] }}</span>
+        <button
+          *ngIf="Search.GetRooms().length > 1"
+          mat-ripple
+          (click)="Search.RemoveRoomByIndex(i)"
+          class="h-[36px] flex flex-nowrap items-center rounded-2xl px-3 text-warn hover:bg-warn/10"
+        >
+          <span class="text-xs">حذف</span>
+          <mat-icon class="mr-2 text-[16px] !h-[16px] !w-[16px]">
+            delete
+          </mat-icon>
+        </button>
+      </div>
+      <!-- Adult -->
+      <div class="flex flex-nowrap items-center justify-between">
+        <div class="flex flex-col gap-2">
+          <span class="font-bold">بزرگسال</span>
+          <span class="!text-xs opacity-70">12 سال به بالا</span>
+        </div>
+
+        <div class="flex flex-nowrap items-center">
+          <button
+            mat-icon-button
+            [disabled]="Search.CountAdultInRoomByIndex(i) == 1"
+            (click)="Search.LessAdultInRoomByIndex(i)"
+            class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
+          >
+            <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+              remove
+            </mat-icon>
+          </button>
+
+          <span class="w-[32px] text-center">
+            {{ Search.CountAdultInRoomByIndex(i) }}
+          </span>
+
+          <button
+            mat-icon-button
+            (click)="Search.AddAdultToRoomByIndex(i)"
+            class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
+          >
+            <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+              add
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- Child -->
+      <div class="flex flex-nowrap items-center justify-between">
+        <div class="flex flex-col gap-2">
+          <span class="font-bold">کودک</span>
+          <span class="!text-xs opacity-70">از 2 سال تا 12 سال</span>
+        </div>
+
+        <div class="flex flex-nowrap items-center">
+          <button
+            mat-icon-button
+            [disabled]="Search.CountChildInRoomByIndex(i) == 0"
+            (click)="Search.LessChildInRoomByIndex(i)"
+            class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
+          >
+            <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+              remove
+            </mat-icon>
+          </button>
+
+          <span class="w-[32px] text-center">
+            {{ Search.CountChildInRoomByIndex(i) }}
+          </span>
+
+          <button
+            mat-icon-button
+            (click)="Search.AddChildToRoomByIndex(i)"
+            class="!border !border-solid !border-slate-200 !w-[30px] !h-[30px] hover:text-accent"
+          >
+            <mat-icon class="-mt-[18px] !w-[18px] !h-[18px] !text-[18px]">
+              add
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </mat-menu>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterService } from 'src/app/services/filter/filter.service';
 
 @Component({
   selector: 'app-filter-result',
@@ -10,7 +9,7 @@ import { FilterService } from 'src/app/services/filter/filter.service';
   },
 })
 export class FilterResultComponent implements OnInit {
-  constructor(public Filter: FilterService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -96,6 +96,25 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     result: any[]
   ): IDynamicComponentItem[] {
     let output: IDynamicComponentItem[] = [];
+
+    if (result.length == 0) {
+      return [
+        {
+          actor: '',
+          type: 'component',
+          tag: 'dc-error-result',
+          data: {
+            type: 'static',
+            value: {
+              code: 'نتیحه ای یافت نشد',
+              message: 'هیچ بلیط پروازی برای این مسیر یافت نشد',
+              retry: false,
+            },
+          },
+        },
+      ];
+    }
+
     for (let item of result) {
       output.push({
         actor: '',

@@ -83,6 +83,7 @@ import { BottomNavBarComponent } from './components/bottom-nav-bar/bottom-nav-ba
 import { HttpClientModule } from '@angular/common/http';
 import { InputSearchFlightIranCityComponent } from './components/search/input/input-search-flight-iran-city/input-search-flight-iran-city.component';
 import { InputSearchFlightWorldCityComponent } from './components/search/input/input-search-flight-world-city/input-search-flight-world-city.component';
+import { FilterHeaderComponent } from './components/result/filter-header/filter-header.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +151,7 @@ import { InputSearchFlightWorldCityComponent } from './components/search/input/i
     BottomNavBarComponent,
     InputSearchFlightIranCityComponent,
     InputSearchFlightWorldCityComponent,
+    FilterHeaderComponent,
   ],
   imports: [
     HttpClientModule,
@@ -184,8 +186,12 @@ import { InputSearchFlightWorldCityComponent } from './components/search/input/i
         },
         {
           name: 'dc-footer',
-          component: DcFooterComponent
-        }
+          component: DcFooterComponent,
+        },
+        {
+          name: 'dc-filter-header',
+          component: FilterHeaderComponent,
+        },
       ],
     }),
     MaterialModule,

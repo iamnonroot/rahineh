@@ -1,7 +1,8 @@
-import { SearchDefaultWay } from './search.default';
+import { SearchDeafultRoom, SearchDefaultWay } from './search.default';
 import { SEARCH_PASSENGERS, SEARCH_WAYS, SEARCH_WAY_TYPE } from './search.enum';
 import {
   ILiveSearchPassenger,
+  ILiveSearchRoom,
   ILiveSearchWay,
   ILiveSearchWayDate,
   ILiveSearchWayLocation,
@@ -57,7 +58,7 @@ export class SearchVehacel<T> {
       second.destination = first.origin;
       second.origin = first.destination;
     }
-    
+
     this.setSelf(SEARCH_WAYS, ways);
   }
 
@@ -226,5 +227,73 @@ export class SearchHotel<T> {
 
   public Value(): T {
     return this.self();
+  }
+
+  // ======= room =======
+  public AddRoom() {
+    let rooms = this.GetRooms();
+    rooms.push({ ...SearchDeafultRoom });
+    this.setSelf('room', rooms);
+  }
+
+  public RemoveRoomByIndex(index: number = 0) {
+    let rooms = this.GetRooms();
+    if (rooms.length > 1) rooms.splice(index, 1);
+    this.setSelf('room', rooms);
+  }
+
+  public GetRooms(): ILiveSearchRoom[] {
+    return this.getSelf('room') ? [...this.getSelf('room')] : [];
+  }
+
+  public CountAdultInRoomByIndex(index: number): number {
+    let rooms = this.GetRooms();
+    return rooms[index].adult;
+  }
+
+  public AddAdultToRoomByIndex(index: number = 0) {
+    let rooms = this.GetRooms();
+    rooms[index].adult = rooms[index].adult + 1;
+    this.setSelf('room', rooms);
+  }
+
+  public LessAdultInRoomByIndex(index: number = 0) {
+    let rooms = this.GetRooms();
+    if (rooms[index].adult > 1) {
+      rooms[index].adult = rooms[index].adult - 1;
+      this.setSelf('room', rooms);
+    }
+  }
+
+  public CountChildInRoomByIndex(index: number): number {
+    let rooms = this.GetRooms();
+    return rooms[index].child.length;
+  }
+
+  public AddChildToRoomByIndex(index: number = 0) {
+    let rooms = this.GetRooms();
+    rooms[index].child.push(0);
+    this.setSelf('room', rooms);
+  }
+
+  public LessChildInRoomByIndex(index: number = 0) {
+    let rooms = this.GetRooms();
+    rooms[index].child.pop();
+    this.setSelf('room', rooms);
+  }
+
+  public SetChildInRoomByIndexes(
+    roomIndex: number = 0,
+    childIndex: number = 0,
+    value: number = 0
+  ) {
+    let rooms = this.GetRooms();
+    rooms[roomIndex].child[childIndex] = value;
+    this.setSelf('room', rooms);
+  }
+
+  public GetChildrenInRoomByIndex(index: number): number[] {
+    let rooms = this.GetRooms();
+    return rooms[index].child;
   }
 }

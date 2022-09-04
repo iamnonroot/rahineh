@@ -1,10 +1,14 @@
 import {
   ILiveSearchPassenger,
+  ILiveSearchRoom,
   ILiveSearchWay,
   TLiveSearchType,
 } from './search.interface';
 
-import { DcFilterRadioInjected, Option } from 'src/app/components/result/dc-filter-radio/dc-filter-radio.component';
+import {
+  DcFilterRadioInjected,
+  Option,
+} from 'src/app/components/result/dc-filter-radio/dc-filter-radio.component';
 
 export const SearchDefaultTypes: TLiveSearchType[] = [
   'flight-iran',
@@ -19,6 +23,11 @@ export const SearchDefaultPassenger: ILiveSearchPassenger = {
   adult: 1,
   child: 0,
   infant: 0,
+};
+
+export const SearchDeafultRoom: ILiveSearchRoom = {
+  adult: 1,
+  child: [],
 };
 
 export const SearchDefaultWay: ILiveSearchWay = {};

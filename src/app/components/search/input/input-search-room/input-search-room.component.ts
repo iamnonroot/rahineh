@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Option } from 'src/app/components/result/dc-filter-radio/dc-filter-radio.component';
+import { SearchHotelService } from 'src/app/services/search/hotel/hotel.service';
 
 @Component({
   selector: 'app-input-search-room',
@@ -9,7 +11,13 @@ import { MatMenuTrigger } from '@angular/material/menu';
 export class InputSearchRoomComponent implements OnInit {
   @ViewChild(MatMenuTrigger) menu!: MatMenuTrigger;
 
-  constructor() {}
+  public Numbers: string[] = ['اول', 'دوم', 'سوم', 'چهارم'];
+  public Ages: Option[] = Array.from({ length: 12 }, (_, i) => ({
+    value: i.toString(),
+    text: [i, 'تا', i + 1, 'سال'].join(' '),
+  }));
+
+  constructor(public Search: SearchHotelService) {}
 
   ngOnInit(): void {}
 
@@ -17,7 +25,7 @@ export class InputSearchRoomComponent implements OnInit {
     setTimeout(() => {
       const close = () => {
         this.menu.closeMenu();
-        document.querySelector('app-root')?.removeEventListener('click', close);
+        document.querySelector('app-root')?.removeAllListeners!('click');
       };
 
       document.querySelector('app-root')?.addEventListener('click', close);

@@ -18,10 +18,10 @@
         height="36px"
         class="w-[36px] h-[36px] my-2"
       />
-      <span class="text-base">{{ item.title }}</span>
-      <span *ngIf="item.subtitle" class="text-xs opacity-70">{{
-        item.subtitle
-      }}</span>
+      <span class="text-sm text-center">{{ item.title }}</span>
+      <span *ngIf="item.subtitle" class="text-xs opacity-70">
+        {{ item.subtitle }}
+      </span>
     </div>
   </div>
 </app-filter-section-result>
