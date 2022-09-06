@@ -1,9 +1,160 @@
-<app-card-result
-  [ways]="Injected!.ways"
-  icon="flight_takeoff"
-  [price]="Injected!.price"
-  [remaining]="Injected!.remaining"
-  [tags]="Injected!.tags"
-  (more)="OpenMoreDialog()"
-  (Select)="Select()"
-></app-card-result>
+<mat-card
+  class="flex flex-col !shadow-none border !rounded-2xl hover:!shadow-lg"
+  *ngIf="Data"
+>
+  <div class="flex -lg:flex-col lg:flex-nowrap gap-2">
+    <div class="flex flex-col gap-8 w-full">
+      <div
+        *ngFor="let way of Data!.ways"
+        class="flex flex-nowrap items-center"
+      >
+        <div class="flex flex-nowrap gap-2">
+          <div
+            class="flex flex-nowrap items-center w-fit"
+          >
+            <img
+              *ngFor="let item of way.airline.image"
+              [src]="item"
+              [alt]="way.airline.title"
+              class="-md:min-w-[28px] md:min-w-[50px] -md:h-[28px] md:h-[50px] -ml-6 last:!ml-0"
+            />
+          </div>
+
+          <div class="flex flex-col md:mt-2 gap-1 min-w-fit">
+            <strong>{{ way.airline.title }}</strong>
+            <span class="text-xs">{{ way.airline.subtitle }}</span>
+          </div>
+        </div>
+        <div class="flex -lg:flex-col lg:flex-nowrap gap-2 w-full">
+          <div
+            class="flex flex-nowrap items-center gap-4 w-full max-w-[600px] md:px-6 mx-auto"
+          >
+            <div class="flex flex-col gap-1 -lg:!hidden">
+              <span class="text-lg font-bold">{{ way.fromText }}</span>
+              <span class="opacity-70">{{ way.fromText }}</span>
+            </div>
+
+            <div class="w-[1px] h-1/2 bg-slate-200 -lg:!hidden"></div>
+
+            <span class="text-lg text-accent -lg:!hidden">
+              {{ way.start }}
+            </span>
+
+            <div class="flex flex-col gap-1 lg:!hidden">
+              <span class="text-xl font-bold">{{ way.start }}</span>
+              <div class="flex flex-nowrap items-center gap-2 text-xs">
+                <span>{{ way.fromText }}</span>
+                <span class="opacity-70">{{ way.fromValue }}</span>
+              </div>
+            </div>
+
+            <div
+              class="flex flex-nowrap items-center justify-center relative mx-2 w-full"
+            >
+              <div class="h-[2px] w-full bordered absolute"></div>
+
+              <div
+                class="flex flex-col items-center text-slate-400 w-full z-[1]"
+              >
+                <div
+                  *ngIf="way.stops.length != 0"
+                  class="flex flex-nowrap mb-2 mt-3 z-[1] w-full"
+                >
+                  <div
+                    *ngFor="let stop of way.stops"
+                    class="flex flex-col items-center mx-auto"
+                  >
+                    <span class="text-xs uppercase opacity-70">{{
+                      stop.code
+                    }}</span>
+                    <span
+                      class="block w-[12px] h-[12px] bg-white border-2 border-slate-200 rounded-full -mb-1"
+                    ></span>
+                  </div>
+                </div>
+                <span class="text-xs bg-white p-1">{{ way.duration }}</span>
+              </div>
+            </div>
+
+            <span class="text-lg text-accent -lg:!hidden">{{ way.end }}</span>
+
+            <div class="w-[1px] h-1/2 bg-slate-200 -lg:!hidden"></div>
+
+            <div class="flex flex-col gap-1 text-left -lg:!hidden">
+              <span class="text-lg font-bold">{{ way.toText }}</span>
+              <span class="opacity-70">{{ way.toValue }}</span>
+            </div>
+
+            <div class="flex flex-col items-end gap-1 lg:!hidden">
+              <span class="text-xl font-bold">{{ way.end }}</span>
+              <div class="flex flex-nowrap items-center gap-2 text-xs">
+                <span>{{ way.toText }}</span>
+                <span class="opacity-70">{{ way.toValue }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-nowrap gap-2 -lg:hidden">
+      <div
+        class="flex flex-col items-center justify-center min-w-[150px] gap-1"
+      >
+        <span class="text-xs">قیمت برای هر مسافر</span>
+        <span class="text-lg font-bold">
+          {{ Data.price.adult | format: "price" }} تومان
+        </span>
+
+        <div
+          class="px-4 py-2 mt-1 bg-slate-200 text-xs rounded-lg"
+          [ngClass]="{
+            '!bg-emerald-500 ': 4 < Data.remaining && Data.remaining <= 8,
+            '!bg-red-500': Data.remaining <= 4,
+            'text-white': Data.remaining <= 8
+          }"
+        >
+          {{ Data.remaining }} صندلی مانده
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-nowrap items-center mt-4 gap-2 -lg:hidden">
+    <div
+      *ngFor="let item of Data.tags"
+      [ngClass]="item.class"
+      class="px-4 py-3 rounded-xl"
+    >
+      {{ item.text }}
+    </div>
+    <div class="flex-1"></div>
+    <button mat-ripple class="px-4 py-3 rounded-xl bg-slate-200">
+      اطلاعات بیشتر
+    </button>
+    <button mat-ripple class="px-4 py-3 rounded-xl bg-primary text-white">
+      انتخاب بلیط
+    </button>
+  </div>
+
+  <div
+    class="flex flex-nowrap items-center justify-between mt-4 gap-2 lg:hidden"
+  >
+    <div
+      class="px-4 py-2 mt-1 bg-slate-200 text-xs rounded-lg"
+      [ngClass]="{
+        '!bg-emerald-500 ': 4 < Data.remaining && Data.remaining <= 8,
+        '!bg-red-500': Data.remaining <= 4,
+        'text-white': Data.remaining <= 8
+      }"
+    >
+      {{ Data.remaining }} صندلی مانده
+    </div>
+
+    <div class="flex flex-col items-end">
+      <span class="text-xs">قیمت برای هر مسافر</span>
+      <span class="text-lg font-bold">
+        {{ Data.price.adult | format: "price" }} تومان
+      </span>
+    </div>
+  </div>
+</mat-card>

@@ -15,6 +15,9 @@ export class CardSearchFlightIranComponent implements OnInit {
   @Input()
   public expansionable: boolean = false;
 
+  @Input()
+  public disabled: boolean = false;
+
   public opened: boolean = false;
 
   public Errors: string[] = [];

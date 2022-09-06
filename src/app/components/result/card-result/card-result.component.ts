@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
+  IResultItineraryItemOriginDestination,
   IResultItineraryItemPrice,
-  IResultItineraryItemWay,
 } from 'src/app/services/result/result.interface';
 
 @Component({
@@ -11,7 +11,7 @@ import {
 })
 export class CardResultComponent implements OnInit {
   @Input()
-  public ways: IResultItineraryItemWay[] = [];
+  public ways: IResultItineraryItemOriginDestination[] = [];
 
   @Input()
   public icon: string = '';
@@ -21,6 +21,8 @@ export class CardResultComponent implements OnInit {
     adult: 0,
     child: 0,
     infant: 0,
+    currencyName: '',
+    currencyCode: '',
   };
 
   @Input()

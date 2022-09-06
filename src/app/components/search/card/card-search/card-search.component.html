@@ -9,7 +9,7 @@
     *ngFor="let tab of Tabs"
     [routerLink]="tab.link"
     [active]="type == tab.type"
-    [disabled]="tab.disable"
+    [disabled]="tab.disable || disabled"
   >
     <div class="flex flex-nowrap items-center gap-4 text-slate-500 relative">
       <mat-icon>{{ tab.icon }}</mat-icon>
@@ -27,6 +27,7 @@
   <ng-container [ngSwitch]="type">
     <app-card-search-flight-iran
       [expansionable]="expansionable"
+      [disabled]="disabled"
       *ngSwitchCase="'flight-iran'"
     ></app-card-search-flight-iran>
     <app-card-search-flight-world

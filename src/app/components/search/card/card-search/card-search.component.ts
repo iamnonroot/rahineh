@@ -19,6 +19,8 @@ export class CardSearchComponent implements OnInit {
 
   @Input() type: TLiveSearchType = 'flight-iran';
 
+  @Input() disabled: boolean = false;
+
   public Tabs: ISearchTab[] = SearchTabs;
 
   constructor() {}
