@@ -43,6 +43,7 @@ export class DcCardFlightIranResultComponent implements OnInit {
 
     this.Data = {
       refrenceId: this.Injected!.refrenceId,
+      provider: this.Injected!._provider,
       price: this.Injected!.price,
       remaining: this.Injected!.remaining,
       tags: tags,
@@ -179,6 +180,7 @@ export interface DcCardFlightIranResultInjected extends IResultItineraryItem {}
 
 export interface DcCardFilterIranResultData {
   refrenceId: string;
+  provider: number;
   price: IResultItineraryItemPrice;
   remaining: number;
   tags: Tag[];

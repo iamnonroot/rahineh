@@ -21,7 +21,9 @@
 
             <div class="flex flex-col md:mt-2 gap-1 min-w-fit">
               <strong>{{ way.airline.title }}</strong>
-              <span class="text-xs">{{ way.airline.subtitle }}</span>
+              <span class="text-xs"
+                >{{ way.airline.subtitle }}/{{ Data.provider }}</span
+              >
             </div>
           </div>
           <div class="flex -lg:flex-col lg:flex-nowrap gap-2 w-full">
@@ -216,7 +218,9 @@
       <mat-tab label="شرایط حمل بار"></mat-tab>
     </mat-tab-group>
 
-    <div class="flex flex-col gap-2 border rounded-xl p-2 m-4 h-fit min-w-[300px]">
+    <div
+      class="flex flex-col gap-2 border rounded-xl p-2 m-4 h-fit min-w-[300px]"
+    >
       <span class="font-bold">تعداد بلیط</span>
       <ng-container *ngFor="let item of GetPricesList()">
         <div
@@ -224,7 +228,9 @@
           class="flex flex-nowrap items-center gap-2 m-2"
         >
           <span class="ml-auto">{{ item.text }}</span>
-          <span class="w-[20px] opacity-70 whitespace-pre">{{ item.count }} ×</span>
+          <span class="w-[20px] opacity-70 whitespace-pre"
+            >{{ item.count }} ×</span
+          >
           <span class="opacity-70"
             >{{ item.price | format: "price" }} تومان</span
           >
