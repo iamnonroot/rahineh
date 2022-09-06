@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       })
     );
     this.subscription.add(
-      this.filter.Change.subscribe(() => {        
+      this.filter.Change.subscribe(() => {
         this.makeSearchResult();
       })
     );

@@ -31,7 +31,6 @@ export class DcCardFlightIranResultComponent implements OnInit {
 
   ngOnInit(): void {
     let tags: Tag[] = [];
-
     if (['SYSTEM', 'CHARTER'].includes(this.Injected!.sellType)) {
       tags.push({
         text: this.Injected!.sellType == 'SYSTEM' ? 'سیستمی' : 'چارتری',

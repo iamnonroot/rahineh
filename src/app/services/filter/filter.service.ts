@@ -15,6 +15,7 @@ export class FilterService {
   public Value: any = {};
   public Change: EventEmitter<any> = new EventEmitter();
   private defaultValue: any = {};
+  private timeout: any;
 
   constructor(private dc: TikDynamicComponentService) {}
 
@@ -24,7 +25,10 @@ export class FilterService {
 
   public SetValueOf<T = any>(key: string, value: T) {
     this.Value[key] = value;
-    this.Change.emit(this.Value);
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      this.Change.emit(this.Value);
+    }, 500);
   }
 
   public Save() {
