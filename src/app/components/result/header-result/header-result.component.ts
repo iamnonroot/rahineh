@@ -16,11 +16,14 @@ export class HeaderResultComponent implements OnInit {
   set prices(value: ISearchPrice[]) {
     this.Prices = value.map((item) => ({
       date: this.functions.FormatJalali(item.date, 'dddd jDD/jMM'),
-      price: item.totalFare
-        ? this.functions.FormatPrice(item.totalFare) +
-          ' ' +
-          item.fareCurrencyName
-        : 'تکمیل ظرفیت',
+      price:
+        item.totalFare && Number(item.totalFare) > 0
+          ? this.functions.FormatPrice(item.totalFare) +
+            ' ' +
+            item.fareCurrencyName
+          : Number(item.totalFare) == 0
+          ? 'نامشخص'
+          : 'تکمیل ظرفیت',
     }));
   }
 
