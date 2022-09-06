@@ -3,7 +3,10 @@
   [opened]="Injected!.opened != false"
 >
   <div class="flex flex-col gap-2">
-    <mat-checkbox *ngFor="let item of Injected!.options">
+    <mat-checkbox
+      *ngFor="let item of Injected!.options"
+      (click)="ToggleValue(item.value)"
+    >
       {{ item.text }}
     </mat-checkbox>
   </div>

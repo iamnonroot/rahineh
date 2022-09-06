@@ -35,11 +35,20 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.app.SetBottomNavBarHidden(true);
-    this.subscription = this.router.events.subscribe(() => {
-      setTimeout(() => {
-        if (this.router.url.startsWith('/search')) this.makeResultFromSearch();
-      }, 20);
-    });
+    this.subscription = new Subscription();
+    this.subscription.add(
+      this.router.events.subscribe(() => {
+        setTimeout(() => {
+          if (this.router.url.startsWith('/search'))
+            this.makeResultFromSearch();
+        }, 20);
+      })
+    );
+    this.subscription.add(
+      this.filter.Change.subscribe(() => {        
+        this.makeSearchResult();
+      })
+    );
     setTimeout(() => {
       this.makeResultFromSearch(true);
     }, 0);
@@ -70,25 +79,28 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchFlightIran.Search(param).subscribe({
       next: (res) => {
         this.Result.EndTimer();
-        if (res.status) {
-          this.Result.SetResults(res.flights);
-          if (this.Result.Results.length != 0) {
-            // render filter
-            this.searchFlightIran.Filter({
-              airlines: res.airlines_details,
-              flights: res.flights,
-            });
-          }
+        this.Result.SetResults(res.status ? res.flights : []);
+        if (this.Result.Results.length != 0) {
+          // render filter
+          this.searchFlightIran.Filter({
+            airlines: res.airlines_details,
+            flights: res.flights,
+          });
         }
-        // render results
-        this.dcSearch.layouts =
-          this.searchFlightIran.ConvertSearchResultToDynamicComponent(
-            res.status ? this.Result.Results : []
-          );
 
-        this.dcSearch.make();
+        this.makeSearchFlightIranResult();
       },
     });
+  }
+
+  private makeSearchFlightIranResult() {
+    // render results
+    this.dcSearch.layouts =
+      this.searchFlightIran.ConvertSearchResultToDynamicComponent(
+        this.Result.Results
+      );
+
+    this.dcSearch.make();
   }
 
   private makeResultFromSearch(force: boolean = false) {
@@ -99,6 +111,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     switch (this.Result.Type) {
       case 'flight-iran':
         this.searchForFlightIran();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  private makeSearchResult() {
+    switch (this.Result.Type) {
+      case 'flight-iran':
+        this.makeSearchFlightIranResult();
         break;
 
       default:

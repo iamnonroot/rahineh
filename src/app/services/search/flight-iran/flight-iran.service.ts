@@ -97,6 +97,8 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
   ): IDynamicComponentItem[] {
     let output: IDynamicComponentItem[] = [];
 
+    result = this.filterResult(result);    
+
     if (result.length == 0) {
       return [
         {
@@ -162,27 +164,46 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     let price_min = param.flights[0].price.adult,
       price_max = 0;
 
+    let airlies = param.airlines.map((item) => ({
+      image: `https://tikban.com/Flight/GetLogo/${item.code}`,
+      title:
+        item.persian_name.length == 0
+          ? item.english_name.charAt(0).toUpperCase() +
+            item.english_name.slice(1)
+          : item.persian_name,
+      value: item.code,
+    }));
+
     for (let item of param.flights) {
       const price = item.price.adult;
       if (price < price_min) price_min = price;
       if (price_max < price) price_max = price;
     }
 
-    this.filter.AddPrice(price_min, price_max);
+    if (price_min < price_max) this.filter.AddPrice(price_min, price_max);
 
-    this.filter.AddCard({
-      key: 'airlies',
-      title: 'فیلتر بر اساس ایرلاین ها',
+    if (airlies.length > 0)
+      this.filter.AddCard({
+        key: 'airlies',
+        title: 'فیلتر بر اساس ایرلاین ها',
+        opened: true,
+        options: airlies,
+      });
+
+    this.filter.AddCheckbox({
+      key: 'type',
+      title: 'فیلتر بر اساس نوع بلیط',
       opened: true,
-      options: param.airlines.map((item) => ({
-        image: `https://tikban.com/Flight/GetLogo/${item.code}`,
-        title:
-          item.persian_name.length == 0
-            ? item.english_name.charAt(0).toUpperCase() +
-              item.english_name.slice(1)
-            : item.persian_name,
-        value: item.code,
-      })),
+      options: [
+        {
+          value: 'SYSTEM',
+          text: 'سیستمی',
+        },
+        {
+          value: 'CHARTER',
+          text: 'چارتری',
+        },
+      ],
     });
 
     this.filter.AddCheckbox({
@@ -198,5 +219,14 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     });
 
     this.filter.Save();
+  }
+
+  private filterResult(result: any[]) {
+    const filter = this.filter.Value;
+    let output = result;
+    if (filter['type'] && filter['type'].length != 0) {
+      output = output.filter((item) => filter['type'].includes(item.sellType));
+    }
+    return output;
   }
 }

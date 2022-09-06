@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import {
   IDynamicComponentItem,
   TikDynamicComponentService,
@@ -13,6 +13,7 @@ import { DcFilterRadioInjected } from 'src/app/components/result/dc-filter-radio
 export class FilterService {
   public Components: IDynamicComponentItem[] = [];
   public Value: any = {};
+  public Change: EventEmitter<any> = new EventEmitter();
   private defaultValue: any = {};
 
   constructor(private dc: TikDynamicComponentService) {}
@@ -23,6 +24,7 @@ export class FilterService {
 
   public SetValueOf<T = any>(key: string, value: T) {
     this.Value[key] = value;
+    this.Change.emit(this.Value);
   }
 
   public Save() {
@@ -34,7 +36,7 @@ export class FilterService {
     this.Components = [];
     this.Value = {};
     this.defaultValue = {};
-    this.AddHeader()
+    this.AddHeader();
   }
 
   public Reset() {
