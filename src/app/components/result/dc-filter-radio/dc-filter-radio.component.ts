@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FilterService } from 'src/app/services/filter/filter.service';
 
 @Component({
   selector: 'app-dc-filter-radio',
@@ -8,10 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 export class DcFilterRadioComponent implements OnInit {
   @Input('injected')
   public Injected!: DcFilterRadioInjected;
-
-  constructor() {}
+  public get Value(): string {
+    return this.filter.Value[this.Injected!.key];
+  }
+  constructor(private filter: FilterService) {}
 
   ngOnInit(): void {}
+
+  public HasValue(value: string): boolean {
+    return this.Value.includes(value);
+  }
+
+  public ToggleValue(value: string) {
+    this.filter.SetValueOf(this.Injected!.key, value);
+  }
 }
 
 export interface DcFilterRadioInjected {

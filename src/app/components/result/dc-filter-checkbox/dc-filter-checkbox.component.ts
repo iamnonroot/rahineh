@@ -10,13 +10,12 @@ export class DcFilterCheckboxComponent implements OnInit {
   @Input('injected')
   public Injected!: DcFilterCheckboxInjected;
 
-  public Value: string[] = [];
-
+  public get Value(): string[] {
+    return this.filter.Value[this.Injected!.key];
+  }
   constructor(private filter: FilterService) {}
 
-  ngOnInit(): void {
-    this.Value = this.filter.Value[this.Injected!.key];    
-  }
+  ngOnInit(): void {}
 
   public HasValue(value: string): boolean {
     return this.Value.includes(value);

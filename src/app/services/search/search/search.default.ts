@@ -38,6 +38,10 @@ export const SearchDeafultFilterSortVehacel: DcFilterRadioInjected = {
   key: 'sort',
   options: [
     {
+      value: 'default',
+      text: 'پیشفرض راهینه',
+    },
+    {
       value: 'sooner',
       text: 'نمایش زودترین ها',
     },
@@ -47,11 +51,11 @@ export const SearchDeafultFilterSortVehacel: DcFilterRadioInjected = {
     },
     {
       value: 'cheaper',
-      text: 'نمایش گرانترین ها',
+      text: 'نمایش ارزانترین',
     },
     {
       value: 'most-expensive',
-      text: 'نمایش ارزانترین',
+      text: 'نمایش گرانترین ها',
     },
   ],
 };

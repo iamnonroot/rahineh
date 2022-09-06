@@ -97,7 +97,7 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
   ): IDynamicComponentItem[] {
     let output: IDynamicComponentItem[] = [];
 
-    result = this.filterResult(result);    
+    result = this.filterResult(result);
 
     if (result.length == 0) {
       return [
@@ -159,12 +159,12 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
   public Filter(param: ISearchFlightIranFilterParam) {
     this.filter.Clear();
 
-    this.filter.AddRadio(SearchDeafultFilterSortVehacel);
+    this.filter.AddRadio(SearchDeafultFilterSortVehacel, 'default');
 
     let price_min = param.flights[0].price.adult,
       price_max = 0;
 
-    let airlies = param.airlines.map((item) => ({
+    let airlines = param.airlines.map((item) => ({
       image: `https://tikban.com/Flight/GetLogo/${item.code}`,
       title:
         item.persian_name.length == 0
@@ -182,12 +182,12 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
 
     if (price_min < price_max) this.filter.AddPrice(price_min, price_max);
 
-    if (airlies.length > 0)
+    if (airlines.length > 0)
       this.filter.AddCard({
-        key: 'airlies',
+        key: 'airlines',
         title: 'فیلتر بر اساس ایرلاین ها',
         opened: true,
-        options: airlies,
+        options: airlines,
       });
 
     this.filter.AddCheckbox({
@@ -223,10 +223,96 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
 
   private filterResult(result: any[]) {
     const filter = this.filter.Value;
-    let output = result;
+    let output = [...result];
+    if (filter['price'] && filter['price'].length == 2) {
+      const [min, max] = filter['price'];
+      output = output.filter(
+        (item) => min <= item.price.adult && item.price.adult <= max
+      );
+    }
     if (filter['type'] && filter['type'].length != 0) {
       output = output.filter((item) => filter['type'].includes(item.sellType));
     }
+    if (filter['airlines'] && filter['airlines'].length != 0) {
+      output = output.filter(
+        (item) =>
+          item.originDestinations.findIndex(
+            (item: any) =>
+              item.legs.findIndex((item: any) =>
+                filter['airlines'].includes(item.airlineCode)
+              ) != -1
+          ) != -1
+      );
+    }
+
+    // remove duplicated flight number
+    if (filter['more'].includes('duplicate') == false) {
+      let numbers: string[] = [];
+      output = output.filter((item) => {
+        const id = item.originDestinations
+          .map((item: any) =>
+            item.legs.map((item: any) => [
+              item.airlineFlightNumber,
+              item.airlineCode,
+            ])
+          )
+          .flat()
+          .flat();
+        id.push(item.price.adult.toString());
+        if (numbers.includes(id.join('-')) == false) {
+          numbers.push(id.join('-'));
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+
+    if (filter['sort'] != 'default') {
+      switch (filter['sort']) {
+        case 'sooner':
+          output = output.sort((a, b) => {
+            return (
+              new Date(
+                a.originDestinations[0].legs[0].departureDateTime
+              ).getTime() -
+              new Date(
+                b.originDestinations[0].legs[0].departureDateTime
+              ).getTime()
+            );
+          });
+          break;
+
+        case 'later':
+          output = output.sort((a, b) => {
+            return (
+              new Date(
+                b.originDestinations[0].legs[0].departureDateTime
+              ).getTime() -
+              new Date(
+                a.originDestinations[0].legs[0].departureDateTime
+              ).getTime()
+            );
+          });
+          break;
+
+        case 'cheaper':
+          output = output.sort((a, b) => {
+            return a.price.adult - b.price.adult;
+          });
+          break;
+
+        case 'most-expensive':
+          output = output.sort((a, b) => {
+            return b.price.adult - a.price.adult;
+          });
+          break;
+
+        default:
+          break;
+      }
+    }
+
     return output;
   }
 }

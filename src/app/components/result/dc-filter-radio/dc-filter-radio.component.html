@@ -2,10 +2,12 @@
   [title]="Injected!.title"
   [opened]="Injected!.opened != false"
 >
-  <mat-radio-group class="flex flex-col gap-4">
+  <mat-radio-group [ngModel]="Value" class="flex flex-col gap-4">
     <mat-radio-button
       *ngFor="let item of Injected!.options"
       [value]="item.value"
+      (click)="ToggleValue(item.value)"
+      [checked]="HasValue(item.value)"
     >
       {{ item.text }}
     </mat-radio-button>

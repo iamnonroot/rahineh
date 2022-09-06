@@ -28,7 +28,7 @@ export class FilterService {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.Change.emit(this.Value);
-    }, 500);
+    }, 100);
   }
 
   public Save() {
@@ -102,8 +102,9 @@ export class FilterService {
     });
   }
 
-  public AddRadio(value: DcFilterRadioInjected) {
-    this.Value[value.key] = '';
+  public AddRadio(value: DcFilterRadioInjected, defaultValue: string = '') {
+    this.Value[value.key] = defaultValue;
+    
     this.Components.push({
       actor: '',
       type: 'component',

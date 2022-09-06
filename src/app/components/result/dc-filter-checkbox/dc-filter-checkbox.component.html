@@ -6,6 +6,7 @@
     <mat-checkbox
       *ngFor="let item of Injected!.options"
       (click)="ToggleValue(item.value)"
+      [checked]="HasValue(item.value)"
     >
       {{ item.text }}
     </mat-checkbox>
