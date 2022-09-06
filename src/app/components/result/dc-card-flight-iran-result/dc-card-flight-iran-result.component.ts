@@ -7,6 +7,7 @@ import {
   IResultItineraryItemPrice,
 } from 'src/app/services/result/result.interface';
 import { ResultService } from 'src/app/services/result/result.service';
+import { SearchFlightIranService } from 'src/app/services/search/flight-iran/flight-iran.service';
 
 @Component({
   selector: 'app-dc-card-flight-iran-result',
@@ -18,8 +19,15 @@ export class DcCardFlightIranResultComponent implements OnInit {
   private Injected!: DcCardFlightIranResultInjected;
 
   public Data!: DcCardFilterIranResultData;
+  public Details: DcCardFilterIranResultDetailsRow[][] = [];
 
-  constructor(private dialog: MatDialog, private result: ResultService) {}
+  public Detailed: boolean = false;
+
+  constructor(
+    private dialog: MatDialog,
+    private result: ResultService,
+    private search: SearchFlightIranService
+  ) {}
 
   ngOnInit(): void {
     let tags: Tag[] = [];
@@ -75,6 +83,47 @@ export class DcCardFlightIranResultComponent implements OnInit {
         };
       }),
     };
+
+    for (let item of this.Injected.originDestinations) {
+      let ways: DcCardFilterIranResultDetailsRow[] = [];
+
+      for (let leg of item.legs) {
+        const start = moment(leg.departureDateTime),
+          end = moment(leg.arrivalDateTime),
+          duration = end.diff(start);
+
+        ways.push({
+          type: 'way',
+          data: {
+            time: start.format('HH:mm'),
+            city: leg.departureCityName,
+            airport: leg.departureAirportName! ?? leg.departureAirportCode!,
+            stop: false,
+          },
+        });
+
+        ways.push({
+          type: 'airline',
+          data: {
+            image: leg.airlineImage,
+            name: leg.airlineName,
+            number: leg.airlineFlightNumber,
+            time: moment.utc(duration).format('HH:mm'),
+          },
+        });
+
+        ways.push({
+          type: 'way',
+          data: {
+            time: end.format('HH:mm'),
+            city: leg.arrivalCityName,
+            airport: leg.arrivalAirportName! ?? leg.arrivalAirportCode!,
+          },
+        });
+      }
+
+      this.Details.push(ways);
+    }
   }
 
   private generateAirlines(
@@ -94,6 +143,36 @@ export class DcCardFlightIranResultComponent implements OnInit {
 
   public Select() {
     this.result.Select(this.Injected!);
+  }
+
+  public GetPrices(): PricePassenger {
+    const count = this.search.CountPassengers();
+    return {
+      adult: {
+        text: 'بزرگسال',
+        count: count.adult,
+        price: this.Injected!.price.adult * count.adult,
+      },
+      child: {
+        text: 'کودک',
+        count: count.child,
+        price: this.Injected!.price.child * count.child,
+      },
+      infant: {
+        text: 'نوزاد',
+        count: count.infant,
+        price: this.Injected!.price.infant * count.infant,
+      },
+    };
+  }
+
+  public GetPricesList(): PricePassengerItem[] {
+    return Object.values(this.GetPrices());
+  }
+
+  public GetTotalPrice(): number {
+    const prices = this.GetPrices();
+    return prices.adult.price + prices.child.price + prices.infant.price;
   }
 }
 
@@ -134,4 +213,27 @@ export interface Stop {
   code: string;
   name: string;
   time: string;
+}
+
+export interface DcCardFilterIranResultDetailsRow {
+  type: 'way' | 'airline';
+  data: any;
+}
+
+export interface DcCardFilterIranResultDetailsWay {
+  time: string;
+  city: string;
+  airport: string;
+}
+
+interface PricePassenger {
+  adult: PricePassengerItem;
+  child: PricePassengerItem;
+  infant: PricePassengerItem;
+}
+
+interface PricePassengerItem {
+  text: string;
+  count: number;
+  price: number;
 }
