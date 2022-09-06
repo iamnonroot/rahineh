@@ -7,6 +7,7 @@ import { DynamicComponentComponent } from 'projects/dynamic-component/src/lib/dy
 import { ResultService } from 'src/app/services/result/result.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FilterService } from 'src/app/services/filter/filter.service';
 
 @Component({
   selector: 'app-search',
@@ -26,6 +27,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private app: AppService,
     private bottomSheet: MatBottomSheet,
     private router: Router,
+    private filter: FilterService,
     private searchFlightIran: SearchFlightIranService
   ) {}
 
@@ -85,6 +87,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (this.Result.Loading == true && force == false) return;
     this.Result.StartTimer();
     this.Result.Loading = true;
+    this.filter.Clear();
     switch (this.Result.Type) {
       case 'flight-iran':
         this.searchForFlightIran();

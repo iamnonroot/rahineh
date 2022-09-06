@@ -74,6 +74,7 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
   public ConvertLiveSearchToParamSearch(): ISearchFlightIranParam {
     const passengers = this.CountPassengers();
     const ways = this.GetWays();
+    const type = this.GetWayType();
     return {
       flightSteps: ways.map((item) => ({
         departureDate: moment(
@@ -85,7 +86,7 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
       })),
       flightPreferences: {
         cabinClass: 1,
-        tripType: 1,
+        tripType: type == 'go' ? 1 : 2,
       },
       searchedPassenger: passengers,
     };
