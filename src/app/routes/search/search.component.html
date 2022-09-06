@@ -18,7 +18,7 @@
 ></mat-progress-bar>
 
 <div class="flex flex-col" [ngClass]="{ '!hidden': Result.Loading }">
-  <app-header-result></app-header-result>
+  <app-header-result [prices]="Prices"></app-header-result>
 
   <div class="lg:container -lg:mx-4 lg:mx-auto my-6 grid grid-cols-12 gap-4">
     <div

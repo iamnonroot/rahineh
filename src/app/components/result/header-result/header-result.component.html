@@ -13,23 +13,14 @@
 
     <nav mat-tab-nav-bar>
       <a
+        *ngFor="let item of Prices; let i = index"
         mat-tab-link
-        (click)="ActiveCalendar = 0"
-        [active]="ActiveCalendar == 0"
+        (click)="ActiveCalendar = i"
+        [active]="ActiveCalendar == i"
       >
         <div class="flex flex-col py-2">
-          <span class="text-xs opacity-70">دو شنبه 06/05</span>
-          <span class="text-base">{{ 100000 | format: "price" }} تومان</span>
-        </div>
-      </a>
-      <a
-        mat-tab-link
-        (click)="ActiveCalendar = 1"
-        [active]="ActiveCalendar == 1"
-      >
-        <div class="flex flex-col py-2">
-          <span class="text-xs opacity-70">سه شنبه 06/06</span>
-          <span class="text-base">{{ 200000 | format: "price" }} تومان</span>
+          <span class="text-xs opacity-70">{{ item.date }}</span>
+          <span class="text-base">{{ item.price }}</span>
         </div>
       </a>
     </nav>

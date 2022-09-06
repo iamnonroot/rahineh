@@ -8,6 +8,7 @@ import { ResultService } from 'src/app/services/result/result.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FilterService } from 'src/app/services/filter/filter.service';
+import { ISearchPrice } from 'src/app/services/search/search/search.interface';
 
 @Component({
   selector: 'app-search',
@@ -21,6 +22,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   private subscription!: Subscription;
 
   public OpenedFilter: boolean = false;
+  public Prices: ISearchPrice[] = [];
 
   constructor(
     public Result: ResultService,
@@ -58,6 +60,12 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private searchForFlightIran() {
     const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
+
+    this.searchFlightIran.Prices(param).subscribe({
+      next: (res) => {
+        this.Prices = res.status ? res.prices : [];
+      },
+    });
 
     this.searchFlightIran.Search(param).subscribe({
       next: (res) => {

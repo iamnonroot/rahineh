@@ -142,6 +142,18 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
       );
   }
 
+  public Prices(param: ISearchFlightIranParam) {
+    return this.http
+      .post('https://api.rahineh.com/api/v1/flight/min-prices', param)
+      .pipe(
+        map<any, any>((res) => {
+          if ('type' in res && res.type == 0) return undefined;
+          else return res;
+        }),
+        filter((res) => res != undefined)
+      );
+  }
+
   public Filter(param: ISearchFlightIranFilterParam) {
     this.filter.Clear();
 

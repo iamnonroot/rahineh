@@ -47,3 +47,13 @@ export interface ILiveSearch {
   filter: any; // search result filter
   flightIran: ILiveSearchFlightIran;
 }
+
+export interface ISearchPrice {
+  airlineCode: string | null;
+  date: string;
+  specialDiscountAllowed: string | null;
+  totalFare: string | null;
+  fareCurrencySymbol: string;
+  fareCurrencyName: string;
+  fareCurrencyCode: string;
+}
