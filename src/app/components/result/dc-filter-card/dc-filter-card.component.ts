@@ -19,7 +19,7 @@ export class DcFilterCardComponent implements OnInit {
   ngOnInit(): void {}
 
   public HasValue(value: string): boolean {
-    return this.Value.includes(value);
+    return this.Value ? this.Value.includes(value) : false;
   }
 
   public ToggleValue(value: string) {

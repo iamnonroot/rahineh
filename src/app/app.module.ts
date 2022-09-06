@@ -275,12 +275,17 @@ import { FilterHeaderComponent } from './components/result/filter-header/filter-
         component: SearchComponent,
       },
       {
-        path: 'reserve/details',
-        component: ReserveDetailsComponent,
-      },
-      {
-        path: 'reserve/info',
-        component: ReserveInfoComponent,
+        path: 'reserve',
+        children: [
+          {
+            path: 'details',
+            component: ReserveDetailsComponent,
+          },
+          {
+            path: 'info',
+            component: ReserveInfoComponent,
+          },
+        ],
       },
       {
         path: 'help-center',

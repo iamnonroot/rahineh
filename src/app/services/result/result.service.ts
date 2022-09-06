@@ -27,7 +27,7 @@ export class ResultService {
   }
 
   public get IsEmpty(): boolean {
-    return this.Selected != undefined;
+    return this.Selected == undefined;
   }
 
   public SetResults(value: any[]) {
