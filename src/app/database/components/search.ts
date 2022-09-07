@@ -18,6 +18,7 @@ export const SearchTabs: ISearchTab[] = [
     text: 'پرواز خارجی',
     link: '/flight-world',
     type: 'flight-world',
+    disable: true,
   },
   {
     icon: 'directions_transit_filled',
@@ -31,12 +32,14 @@ export const SearchTabs: ISearchTab[] = [
     text: 'اتوبوس',
     link: '/bus',
     type: 'bus',
+    disable: true,
   },
   {
     icon: 'hotel',
     text: 'هتل',
     link: '/hotel',
     type: 'hotel',
+    disable: true,
   },
   // {
   //   icon: 'local_hospital',
