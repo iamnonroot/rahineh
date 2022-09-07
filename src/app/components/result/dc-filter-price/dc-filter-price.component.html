@@ -1,10 +1,11 @@
 <app-filter-section-result title="فیلتر بر اساس قیمت">
-  <ngx-slider
+  <div class="flex flex-nowrap items-center justify-between text-xs -mx-4">
+    <span>{{ Value[0] | format: "price" }} تومان</span>
+    <span>{{ Value[1] | format: "price" }} تومان</span>
+  </div>
+  <nouislider
     *ngIf="Options && Value"
-    [value]="Value[0]"
-    [highValue]="Value[1]"
-    [options]="Options"
-    (valueChange)="Change($event, Value[1])"
-    (highValueChange)="Change(Value[0], $event)"
-  ></ngx-slider>
+    [config]="Options"
+    (change)="Change($event)"
+  ></nouislider>
 </app-filter-section-result>

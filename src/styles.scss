@@ -4,6 +4,8 @@
 @import "./styles/tailwind.scss";
 @import "./styles/font.scss";
 
+@import "../node_modules/nouislider/dist/nouislider.min.css";
+
 * {
   -webkit-tap-highlight-color: transparent;
 }
@@ -23,7 +25,6 @@ html {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
   overflow: hidden;
 }
 

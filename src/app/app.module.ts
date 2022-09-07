@@ -9,7 +9,7 @@ import { TikSdkModule } from 'projects/sdk/src/public-api';
 import { TikUtilsModule } from 'projects/utils/src/public-api';
 import { TikDynamicComponentModule } from 'projects/dynamic-component/src/public-api';
 
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NouisliderModule } from 'ng2-nouislider';
 import { MaterialModule } from './material';
 import { environment } from '../environments/environment';
 
@@ -155,7 +155,7 @@ import { FilterHeaderComponent } from './components/result/filter-header/filter-
   ],
   imports: [
     HttpClientModule,
-    NgxSliderModule,
+    NouisliderModule,
     TikSdkModule,
     TikUtilsModule,
     TikDynamicComponentModule.forRoot({

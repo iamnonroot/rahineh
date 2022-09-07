@@ -1,4 +1,3 @@
-import { Options } from '@angular-slider/ngx-slider';
 import { Component, Input, OnInit } from '@angular/core';
 import { TikFunctionsService } from 'projects/utils/src/lib/services/functions/functions.service';
 import { FilterService } from 'src/app/services/filter/filter.service';
@@ -12,10 +11,10 @@ export class DcFilterPriceComponent implements OnInit {
   @Input('injected')
   public Injected!: FilterPriceInjected;
 
-  public Options: Options | undefined = undefined;
+  public Options: any = undefined;
 
-  public get Value(): [number, number] | undefined {
-    return this.filter.Value[this.Injected!.key];
+  public get Value(): number[] {
+    return this.filter.Value[this.Injected!.key] ?? [];
   }
 
   constructor(
@@ -25,18 +24,23 @@ export class DcFilterPriceComponent implements OnInit {
 
   ngOnInit(): void {
     this.Options = {
-      floor: this.Injected.min,
-      ceil: this.Injected.max,
-      rightToLeft: true,
+      connect: true,
+      direction: 'rtl',
+      start: [this.Injected.min, this.Injected.max],
+      range: {
+        min: this.Injected.min,
+        max: this.Injected.max,
+      },
       step: this.Injected.step ?? 10,
+      behaviour: 'drag',
       translate: (value: number): string => {
         return this.functions.FormatPrice(value) + ' تومان';
       },
     };
   }
 
-  public Change(right: number, left: number) {
-    this.filter.SetValueOf(this.Injected!.key, [right, left]);
+  public Change(event: any) {
+    this.filter.SetValueOf(this.Injected!.key, event);
   }
 }
 

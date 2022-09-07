@@ -1,0 +1,27 @@
+nouislider {
+  .noUi-target {
+    height: 4px !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #00000042 !important;
+  }
+
+  .noUi-connect {
+    background: var(--rahineh-theme-accent) !important;
+    cursor: default !important;
+  }
+
+  .noUi-handle {
+    height: 20px !important;
+    width: 20px !important;
+    margin-top: -2px !important;
+    margin-left: 6px !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    cursor: grab !important;
+  }
+
+  .noUi-handle:after, .noUi-handle:before {
+    display: none !important;
+  }
+}
