@@ -19,12 +19,11 @@ export class DcCardFlightIranResultComponent implements OnInit {
   private Injected!: DcCardFlightIranResultInjected;
 
   public Data!: DcCardFilterIranResultData;
-  public Details: DcCardFilterIranResultDetailsRow[][] = [];
+  public Details: DcCardFilterIranResultDetails[] = [];
 
   public Detailed: boolean = false;
 
   constructor(
-    private dialog: MatDialog,
     private result: ResultService,
     private search: SearchFlightIranService
   ) {}
@@ -84,6 +83,7 @@ export class DcCardFlightIranResultComponent implements OnInit {
       }),
     };
 
+
     for (let item of this.Injected.originDestinations) {
       let ways: DcCardFilterIranResultDetailsRow[] = [];
 
@@ -122,7 +122,10 @@ export class DcCardFlightIranResultComponent implements OnInit {
         });
       }
 
-      this.Details.push(ways);
+      this.Details.push({
+        date: moment(item.legs[0].departureDateTime).locale('fa').format('dddd DD MMMM YYYY'),
+        rows: ways,
+      });
     }
   }
 
@@ -214,6 +217,11 @@ export interface Stop {
   code: string;
   name: string;
   time: string;
+}
+
+export interface DcCardFilterIranResultDetails {
+  date: string;
+  rows: DcCardFilterIranResultDetailsRow[];
 }
 
 export interface DcCardFilterIranResultDetailsRow {
