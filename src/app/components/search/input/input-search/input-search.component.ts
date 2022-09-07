@@ -18,6 +18,9 @@ export class InputSearchComponent implements OnInit {
   public error: boolean = false;
 
   @Input()
+  public disabled: boolean = false;
+
+  @Input()
   public icon: string = '';
 
   @Input()

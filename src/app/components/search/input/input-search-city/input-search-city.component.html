@@ -5,6 +5,7 @@
   [title]="type == 'origin' ? 'مبدا از کجا ؟' : 'مقصد به کجا ؟'"
   [subtitle]="value ? value.text : type == 'origin' ? 'از کجا' : 'به کجا'"
   [(value)]="Search"
+  [disabled]="disabled"
   [error]="error"
 ></app-input-search>
 

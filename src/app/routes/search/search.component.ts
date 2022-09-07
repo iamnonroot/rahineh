@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { ISearchPrice } from 'src/app/services/search/search/search.interface';
+import { TCalendaringFormatter } from 'calendaring/dist/interface';
 
 @Component({
   selector: 'app-search',
@@ -23,6 +24,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   public OpenedFilter: boolean = false;
   public Prices: ISearchPrice[] = [];
+  public Format: TCalendaringFormatter = 'jalali';
 
   constructor(
     public Result: ResultService,
@@ -63,28 +65,32 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.bottomSheet.open(FilterResultComponent);
   }
 
+  public CalendarChange(event: any) {
+    switch (this.Result.Type) {
+      case 'flight-iran':
+        this.searchFlightIran.PushWayDate(event, this.Format);
+        break;
+
+      default:
+        break;
+    }
+  }
+
   public MakeDone() {
     console.timeEnd('render');
     this.Result.Loading = false;
   }
 
   private searchForFlightIran() {
-    console.time('fetch/search')
-    console.time('fetch/prices')
+    console.time('fetch/search');
     const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
-
-    let sub_price = this.searchFlightIran.Prices(param).subscribe({
-      next: (res) => {
-        sub_price.unsubscribe();
-        console.timeEnd('fetch/prices');
-        this.Prices = res.status ? res.prices : [];
-      },
-    });
+    this.Format = this.searchFlightIran.GetWayDateByStep(0)?.format!;
 
     let sub_search = this.searchFlightIran.Search(param).subscribe({
       next: (res) => {
         sub_search.unsubscribe();
         console.timeEnd('fetch/search');
+        console.time('fetch/prices');
         console.time('render');
         this.Result.EndTimer();
         this.Result.SetResults(res.status ? res.flights : []);
@@ -95,6 +101,14 @@ export class SearchComponent implements OnInit, OnDestroy {
             flights: res.flights,
           });
         }
+
+        let sub_price = this.searchFlightIran.Prices(param).subscribe({
+          next: (res) => {
+            sub_price.unsubscribe();
+            console.timeEnd('fetch/prices');
+            this.Prices = res.status ? res.prices : [];
+          },
+        });
 
         this.makeSearchFlightIranResult();
       },

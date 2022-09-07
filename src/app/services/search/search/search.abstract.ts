@@ -1,3 +1,4 @@
+import { TCalendaringFormatter } from 'calendaring/dist/interface';
 import { SearchDeafultRoom, SearchDefaultWay } from './search.default';
 import { SEARCH_PASSENGERS, SEARCH_WAYS, SEARCH_WAY_TYPE } from './search.enum';
 import {
@@ -181,6 +182,29 @@ export class SearchVehacel<T> {
   public GetWayDateByStep(step: number = 0): ILiveSearchWayDate | undefined {
     let ways = this.getSelf<ILiveSearchWay[]>(SEARCH_WAYS);
     return ways[step] ? ways[step].date : undefined;
+  }
+
+  // push way date from step 0
+  public PushWayDate(date: ILiveSearchWayDate, format: TCalendaringFormatter) {
+    const first = this.GetWayDateByStep();
+    if (first) {
+      let count_year = date.year - first.year,
+        count_month = date.month - first.month,
+        count_day = date.day - first.day;
+
+      const ways = this.GetWays();
+
+      for (let way of ways) {
+        way.date = {
+          format: format,
+          year: way.date!.year + count_year,
+          month: way.date!.month + count_month,
+          day: way.date!.day + count_day,
+        };
+      }
+
+      this.setSelf(SEARCH_WAYS, ways);
+    }
   }
 
   // ====== Validator =======

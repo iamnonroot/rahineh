@@ -2,6 +2,72 @@
 
 @include mat.core();
 
+$rahineh-green-palette: (
+  50: #e0eee7,
+  100: #b3d4c3,
+  200: #80b89c,
+  300: #4d9b74,
+  400: #268556,
+  500: #007038,
+  600: #006832,
+  700: #005d2b,
+  800: #005324,
+  900: #004117,
+  A100: #76ff98,
+  A200: #43ff71,
+  A400: #10ff4b,
+  A700: #00f63c,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$rahineh-yellow-palette: (
+  50: #fef9e4,
+  100: #fdf0bb,
+  200: #fce78e,
+  300: #fbdd61,
+  400: #fad53f,
+  500: #f9ce1d,
+  600: #f8c91a,
+  700: #f7c215,
+  800: #f6bc11,
+  900: #f5b00a,
+  A100: #ffffff,
+  A200: #fff8eb,
+  A400: #ffe8b8,
+  A700: #ffe09e,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
 @function GetRGBColor($color) {
   @return red($color) + ", " + green($color) + ", " + blue($color);
 }
@@ -55,8 +121,8 @@
 
 .rahineh-theme-green_yellow {
   @include GenerateTheme(
-    mat.define-palette(mat.$green-palette, A700),
-    mat.define-palette(mat.$orange-palette, A400),
+    mat.define-palette($rahineh-green-palette),
+    mat.define-palette($rahineh-yellow-palette),
     mat.define-palette(mat.$red-palette)
   );
 }

@@ -25,6 +25,9 @@ export class InputSearchFlightIranCityComponent implements OnInit {
   @Input()
   public error: boolean = false;
 
+  @Input()
+  public disabled: boolean = false;
+
   @Output()
   public valueChange: EventEmitter<ILiveSearchWayLocation> = new EventEmitter();
 

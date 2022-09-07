@@ -23,7 +23,7 @@
         (click)="Search.SetWayType('go')"
         class="!cursor-pointer"
         [ngClass]="{
-          '!bg-accent !text-white': Search.GetWayType() == 'go' ? 'accent' : ''
+          '!bg-accent': Search.GetWayType() == 'go' ? 'accent' : ''
         }"
       >
         یک طرفه
@@ -32,8 +32,7 @@
         (click)="Search.SetWayType('go-back')"
         class="!cursor-pointer"
         [ngClass]="{
-          '!bg-accent !text-white':
-            Search.GetWayType() == 'go-back' ? 'accent' : ''
+          '!bg-accent': Search.GetWayType() == 'go-back' ? 'accent' : ''
         }"
       >
         رفت و برگشت
@@ -42,8 +41,7 @@
         (click)="Search.SetWayType('multi')"
         class="!cursor-pointer"
         [ngClass]="{
-          '!bg-accent !text-white':
-            Search.GetWayType() == 'multi' ? 'accent' : ''
+          '!bg-accent': Search.GetWayType() == 'multi' ? 'accent' : ''
         }"
       >
         چند مسیره

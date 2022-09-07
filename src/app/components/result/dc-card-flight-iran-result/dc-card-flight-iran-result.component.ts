@@ -33,10 +33,7 @@ export class DcCardFlightIranResultComponent implements OnInit {
     if (['SYSTEM', 'CHARTER'].includes(this.Injected!.sellType)) {
       tags.push({
         text: this.Injected!.sellType == 'SYSTEM' ? 'سیستمی' : 'چارتری',
-        class:
-          this.Injected.sellType == 'SYSTEM'
-            ? 'bg-sky-500 text-white'
-            : 'bg-violet-500 text-white',
+        class: 'border'
       });
     }
 

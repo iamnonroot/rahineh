@@ -18,12 +18,12 @@
   [ngClass]="{ '-lg:h-0 -lg:opacity-0 -lg:pointer-events-none': !opened }"
 >
   <div class="flex flex-nowrap items-center gap-2">
-    <mat-chip-list>
+    <mat-chip-list [disabled]="disabled">
       <mat-chip
         (click)="Search.SetWayType('go')"
         class="!cursor-pointer"
         [ngClass]="{
-          '!bg-accent !text-white': Search.GetWayType() == 'go' ? 'accent' : ''
+          '!bg-accent': Search.GetWayType() == 'go' ? 'accent' : ''
         }"
       >
         یک طرفه
@@ -32,8 +32,7 @@
         (click)="Search.SetWayType('go-back')"
         class="!cursor-pointer"
         [ngClass]="{
-          '!bg-accent !text-white':
-            Search.GetWayType() == 'go-back' ? 'accent' : ''
+          '!bg-accent': Search.GetWayType() == 'go-back' ? 'accent' : ''
         }"
       >
         رفت و برگشت
@@ -47,6 +46,7 @@
       [value]="Search.GetWayOriginByStep(0)"
       (valueChange)="Search.SetWayOriginByStep($event, 0)"
       [error]="Errors.includes('origin/0')"
+      [disabled]="disabled"
       class="col-span-2"
     ></app-input-search-flight-iran-city>
     <app-input-search-flight-iran-city
@@ -54,6 +54,7 @@
       [value]="Search.GetWayDestinationByStep(0)"
       (valueChange)="Search.SetWayDestinationByStep($event, 0)"
       [error]="Errors.includes('destination/0')"
+      [disabled]="disabled"
       class="col-span-2"
     ></app-input-search-flight-iran-city>
 
@@ -62,6 +63,7 @@
       [value]="Search.GetWayDateByStep(0)"
       (valueChange)="Search.SetWayDateByStep($event, 0)"
       [error]="Errors.includes('date/0')"
+      [disabled]="disabled"
       class="col-span-2"
     ></app-input-search-calendar>
     <app-input-search-calendar
@@ -69,6 +71,7 @@
       [value]="Search.GetWayDateByStep(1)"
       (valueChange)="Search.SetWayDateByStep($event, 1)"
       [error]="Errors.includes('date/1')"
+      [disabled]="disabled"
       class="col-span-2 transition-all"
       [ngClass]="{
         'pointer-events-none opacity-30': Search.GetWayType() != 'go-back'
@@ -79,6 +82,7 @@
       [value]="Search.CountPassengers()"
       (add)="Search.AddPassengerByType($event)"
       (remove)="Search.RemovePassengerByType($event)"
+      [disabled]="disabled"
       class="-lg:col-span-4 lg:col-span-2"
     ></app-input-search-passenger>
 
@@ -87,6 +91,7 @@
       color="primary"
       class="-lg:col-span-4 -md:!mr-0 -lg:!mr-auto"
       (click)="Submit()"
+      [disabled]="disabled"
     >
       <mat-icon class="ml-2 min-w-[24px]">search</mat-icon>
       <span>بگرد</span>

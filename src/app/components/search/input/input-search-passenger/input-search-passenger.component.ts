@@ -21,6 +21,9 @@ export class InputSearchPassengerComponent implements OnInit {
   @Input()
   public value!: ILiveSearchPassenger;
 
+  @Input()
+  public disabled: boolean = false;
+
   @Output()
   public remove: EventEmitter<TLiveSearchPasenger> = new EventEmitter();
 

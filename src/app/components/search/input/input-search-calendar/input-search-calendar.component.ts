@@ -31,6 +31,9 @@ export class InputSearchCalendarComponent implements OnInit {
   @Input()
   public error: boolean = false;
 
+  @Input()
+  public disabled: boolean = false;
+
   @Output()
   public valueChange: EventEmitter<ILiveSearchWayDate> = new EventEmitter();
 

@@ -15,11 +15,11 @@
       <a
         *ngFor="let item of Prices; let i = index"
         mat-tab-link
-        (click)="ActiveCalendar = i"
-        [active]="ActiveCalendar == i"
+        (click)="active = i"
+        [active]="active == i"
       >
         <div class="flex flex-col py-2">
-          <span class="text-xs opacity-70">{{ item.date }}</span>
+          <span class="text-xs opacity-70">{{ item.text }}</span>
           <span class="text-base">{{ item.price }}</span>
         </div>
       </a>
