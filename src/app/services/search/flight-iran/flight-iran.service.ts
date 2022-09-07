@@ -99,6 +99,8 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
 
     result = this.filterResult(result);
 
+    console.log(result.length);
+
     if (result.length == 0) {
       return [
         {
@@ -246,7 +248,7 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     }
 
     // remove duplicated flight number
-    if (filter['more'].includes('duplicate') == false) {
+    if (filter['more'] == undefined || filter['more'].includes('duplicate') == false) {
       let numbers: string[] = [];
       output = output.filter((item) => {
         const id = item.originDestinations
