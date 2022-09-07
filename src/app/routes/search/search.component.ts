@@ -64,20 +64,28 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public MakeDone() {
+    console.timeEnd('render');
     this.Result.Loading = false;
   }
 
   private searchForFlightIran() {
+    console.time('fetch/search')
+    console.time('fetch/prices')
     const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
 
-    this.searchFlightIran.Prices(param).subscribe({
+    let sub_price = this.searchFlightIran.Prices(param).subscribe({
       next: (res) => {
+        sub_price.unsubscribe();
+        console.timeEnd('fetch/prices');
         this.Prices = res.status ? res.prices : [];
       },
     });
 
-    this.searchFlightIran.Search(param).subscribe({
+    let sub_search = this.searchFlightIran.Search(param).subscribe({
       next: (res) => {
+        sub_search.unsubscribe();
+        console.timeEnd('fetch/search');
+        console.time('render');
         this.Result.EndTimer();
         this.Result.SetResults(res.status ? res.flights : []);
         if (this.Result.Results.length != 0) {

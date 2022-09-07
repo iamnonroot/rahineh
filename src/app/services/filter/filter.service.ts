@@ -28,7 +28,7 @@ export class FilterService {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.Change.emit(this.Value);
-    }, 100);
+    }, 300);
   }
 
   public Save() {
