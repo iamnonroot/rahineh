@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  ILiveSearchPassenger,
   TLiveSearchType,
   TLiveSearchWayType,
 } from '../search/search/search.interface';
@@ -21,9 +22,11 @@ export class ResultService {
 
   constructor(private router: Router) {}
 
-  public Select(item: IResultItineraryItem) {
+  public Select(item: IResultItineraryItem, passengers: ILiveSearchPassenger) {
     this.Selected = item;
-    this.router.navigate(['/reserve/details']);
+    this.router.navigate(['/reserve/details'], {
+      queryParams: { id: item.refrenceId, type: this.Type, ...passengers },
+    });
   }
 
   public get IsEmpty(): boolean {

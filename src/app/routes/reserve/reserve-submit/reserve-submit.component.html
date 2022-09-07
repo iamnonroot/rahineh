@@ -1,0 +1,22 @@
+<div class="container mx-auto my-6 relative">
+  <app-header-reserve [step]="3"></app-header-reserve>
+  <br />
+
+  <div class="grid grid-cols-12 gap-4 relative">
+    <div class="flex flex-col gap-4 col-span-9">
+      <app-reserve-information></app-reserve-information>
+
+      <app-reserve-description></app-reserve-description>
+    </div>
+
+    <app-card-reserve
+      [type]="Result.Type"
+      [selected]="Result.Selected"
+      [submitText]="'تایید و پرداخت'"
+      (change)="Back()"
+      (submit)="Submit()"
+      [disabled]="Loading"
+      class="col-span-3 sticky top-8 h-fit"
+    ></app-card-reserve>
+  </div>
+</div>

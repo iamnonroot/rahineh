@@ -1,13 +1,30 @@
 <div class="container mx-auto my-6 relative flex flex-col gap-4">
   <app-header-reserve [step]="1"></app-header-reserve>
 
-  <app-reserve-factor></app-reserve-factor>
+  <ng-container *ngIf="Injected">
+    <app-dc-card-flight-iran-result
+      [injected]="Injected"
+    ></app-dc-card-flight-iran-result>
 
-  <div class="flex flex-nowrap items-center justify-end gap-2">
-    <button (click)="Back()" mat-button color="warn">بازگشت</button>
+    <app-reserve-factor></app-reserve-factor>
 
-    <a mat-flat-button color="primary" routerLink="/reserve/info">
-      تایید و ادامه
-    </a>
-  </div>
+    <div class="flex flex-nowrap items-center justify-end gap-2">
+      <button (click)="Back()" mat-button color="warn">بازگشت</button>
+
+      <a
+        mat-flat-button
+        color="primary"
+        routerLink="/reserve/info"
+        [queryParams]="{
+          id: Result.Selected!.refrenceId,
+          type: Result.Type,
+          adult: Reserve.CountPassengerByType('adult'),
+          child: Reserve.CountPassengerByType('child'),
+          infant: Reserve.CountPassengerByType('infant')
+        }"
+      >
+        تایید و ادامه
+      </a>
+    </div>
+  </ng-container>
 </div>

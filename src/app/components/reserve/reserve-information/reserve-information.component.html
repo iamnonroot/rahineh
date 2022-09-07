@@ -1,10 +1,17 @@
 <mat-card class="border">
+  <h3 class="!font-bold">اطلاعات خریدار</h3>
   <p>بلیط و اطلاع‌ رسانی‌ های سفر به شماره موبایل و ایمیل زیر ارسال می‌شود.</p>
 
   <div class="grid grid-cols-3 gap-4">
     <mat-form-field appearance="outline">
       <mat-label>نام و نام خانوادگی</mat-label>
-      <input matInput autocomplete="off" type="text" />
+      <input
+        matInput
+        autocomplete="off"
+        type="text"
+        required
+        [(ngModel)]="Reserve.Information.fullname"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -13,8 +20,10 @@
         matInput
         autocomplete="off"
         type="tel"
+        required
         dir="ltr"
         class="!text-left"
+        [(ngModel)]="Reserve.Information.phone"
       />
     </mat-form-field>
 
@@ -24,8 +33,10 @@
         matInput
         autocomplete="off"
         type="email"
+        required
         dir="ltr"
         class="!text-left"
+        [(ngModel)]="Reserve.Information.email"
       />
     </mat-form-field>
   </div>

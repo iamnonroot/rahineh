@@ -1,5 +1,6 @@
 <mat-card
-  class="flex flex-col !shadow-none border !rounded-2xl !overflow-hidden !p-0 hover:!shadow-lg"
+  class="flex flex-col !shadow-none border !rounded-2xl !overflow-hidden !p-0"
+  [ngClass]="{ 'hover:!shadow-lg': Injected.detailed != true }"
   *ngIf="Data"
 >
   <div class="flex flex-col p-4">
@@ -121,7 +122,10 @@
       </div>
     </div>
 
-    <div class="flex flex-nowrap items-center mt-4 gap-2 -lg:hidden">
+    <div
+      *ngIf="Injected.detailed != true"
+      class="flex flex-nowrap items-center mt-4 gap-2 -lg:hidden"
+    >
       <div
         *ngFor="let item of Data.tags"
         [ngClass]="item.class"
@@ -172,55 +176,10 @@
   <div class="flex flex-nowrap w-full" [ngClass]="{ '!h-0': !Detailed }">
     <mat-tab-group class="w-full">
       <mat-tab label="اطلاعات پرواز">
-        <div class="flex flex-col py-3">
-          <div *ngFor="let details of Details" class="flex flex-col mb-4">
-            <div class="bg-accent px-4 py-2 rounded-xl mx-4 my-2">
-              {{ details.date }}
-            </div>
-            <div
-              *ngFor="let way of details.rows"
-              class="flex flex-nowrap items-center gap-4 px-4 py-1"
-            >
-              <ng-container *ngIf="way.type == 'airline'">
-                <div
-                  class="w-[60px] flex flex-nowrap items-center justify-center gap-2"
-                >
-                  <span class="opacity-70">
-                    {{ way.data.time }}
-                  </span>
-                  <mat-icon
-                    class="text-[16px] h-[16px] w-[16px] text-slate-400 mt-1"
-                  >
-                    hourglass_full
-                  </mat-icon>
-                </div>
-
-                <div class="w-[2px] h-[50px] mr-[5px] bg-slate-100"></div>
-
-                <img
-                  [src]="way.data.image"
-                  [alt]="way.data.name"
-                  class="w-[36px] h-[36px]"
-                />
-
-                <div class="flex flex-col opacity-70">
-                  <span>{{ way.data.name }}</span>
-                  <span class="text-xs">
-                    شماره پرواز : {{ way.data.number }}
-                  </span>
-                </div>
-              </ng-container>
-
-              <ng-container *ngIf="way.type == 'way'">
-                <span class="w-[60px] text-center">{{ way.data.time }}</span>
-
-                <div class="w-[10px] h-[10px] rounded-full bg-slate-300"></div>
-
-                <span>{{ way.data.city }} ، {{ way.data.airport }}</span>
-              </ng-container>
-            </div>
-          </div>
-        </div>
+        <app-card-flight-iran-details-result
+          class="py-3"
+          [item]="Injected"
+        ></app-card-flight-iran-details-result>
       </mat-tab>
       <mat-tab label="قوانین و استرداد"></mat-tab>
       <mat-tab label="شرایط حمل بار"></mat-tab>

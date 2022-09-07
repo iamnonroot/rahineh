@@ -1,14 +1,35 @@
 import { Injectable } from '@angular/core';
 import { ILiveSearchPassenger } from '../search/search/search.interface';
 import { ReverseDefaultPassenger } from './reverse.default';
-import { IReservePassenger, TReservePassengerType } from './reverse.interface';
+import {
+  IReserveInformation,
+  IReservePassenger,
+  TReservePassengerType,
+} from './reverse.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReserveService {
   public Passengers: IReservePassenger[] = [];
+  public Description: string = '';
+  public Information: IReserveInformation = {
+    fullname: '',
+    phone: '',
+    email: '',
+  };
+
   constructor() {}
+
+  public Clear() {
+    this.Passengers = [];
+    this.Description = '';
+    this.Information = {
+      fullname: '',
+      phone: '',
+      email: '',
+    };
+  }
 
   public SetPassengersByCount(count: ILiveSearchPassenger) {
     const types = [].concat(
@@ -30,11 +51,54 @@ export class ReserveService {
     this.Passengers.splice(index, 1);
   }
 
+  public CountPassengerByType(type: TReservePassengerType) {
+    return this.CountPassengers()[type];
+  }
+
   public CountPassengers(): ILiveSearchPassenger {
     return {
       adult: this.Passengers.filter((item) => item.type == 'adult').length,
       child: this.Passengers.filter((item) => item.type == 'child').length,
       infant: this.Passengers.filter((item) => item.type == 'infant').length,
     };
+  }
+
+
+
+  public ValidatePassengers(): boolean {
+    for (let item of this.Passengers) {
+      if (item.firstname_en.length == 0) return false;
+      if (item.lastname_en.length == 0) return false;
+      if (!item.gender || item.gender.length == 0) return false;
+      if (
+        item.nationality == 'IR' &&
+        (!item.national_code || item.national_code.length != 10)
+      )
+        return false;
+      if (
+        item.nationality == 'non-IR' &&
+        (!item.passport_country || item.passport_country.length == 0)
+      )
+        return false;
+      if (
+        item.nationality == 'non-IR' &&
+        (!item.passport_id || item.passport_id.length == 0)
+      )
+        return false;
+    }
+
+    return true;
+  }
+
+  public ValidateInformation(): boolean {
+    const validateEmail = (email: string) => {
+      return /\S+@\S+\.\S+/.test(email);
+    };
+
+    if (this.Information.fullname.length == 0) return false;
+    if (this.Information.phone.length != 11) return false;
+    if (this.Information.email.length == 0) return false;
+    if (validateEmail(this.Information.email) != true) return false;
+    return true;
   }
 }

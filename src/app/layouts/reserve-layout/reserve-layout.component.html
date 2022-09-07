@@ -1,0 +1,24 @@
+<ng-container *ngIf="Validated == true">
+  <router-outlet></router-outlet>
+</ng-container>
+<ng-container *ngIf="Validated == false">
+  <div
+    class="w-full h-[400px] flex flex-col items-center justify-center gap-2"
+  >
+    <h2>نتیجه منقضی شده است</h2>
+    <p>متاسفانه قیمت بلیطی که انتخاب کرده بودید منقضی شده است ، دوباره تلاش کنید.</p>
+
+    <br>
+    <button (click)="Back()" mat-flat-button color="accent">
+        <mat-icon class="ml-2">redo</mat-icon>
+        <span>بازگشت برای جستجو</span>
+    </button>
+</div>
+</ng-container>
+
+<ng-container *ngIf="Validated == undefined">
+  <div class="w-full h-[400px] flex flex-col items-center justify-center gap-8">
+    <mat-spinner diameter="46" strokeWidth="6"></mat-spinner>
+    <h3>در حال دریافت و تایید اطلاعات</h3>
+  </div>
+</ng-container>

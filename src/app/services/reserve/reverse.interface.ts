@@ -4,7 +4,7 @@ export type TReservePassengerType = 'adult' | 'child' | 'infant';
 
 export type TReservePassengerGender = 'male' | 'female';
 
-export type TReservePassengerNationality = 'iranian' | 'non-iranian';
+export type TReservePassengerNationality = 'IR' | 'non-IR';
 
 export interface IReservePassenger {
   id?: string;
@@ -21,4 +21,10 @@ export interface IReservePassenger {
   passport_id?: string; // undefined == nationality be iraninan
   passport_country?: string; // undefined == nationality be iraninan
   passport_expire?: ILiveSearchWayDate; // undefined == nationality be iraninan
+}
+
+export interface IReserveInformation {
+  fullname: string;
+  phone: string;
+  email: string;
 }

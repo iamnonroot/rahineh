@@ -10,7 +10,7 @@ export const ReverseDefaultPassenger = (
     type: type,
     firstname_en: '',
     lastname_en: '',
-    nationality: 'iranian',
+    nationality: 'IR',
     birth_date: {
       format: 'jalali',
       year: today.jYear(),

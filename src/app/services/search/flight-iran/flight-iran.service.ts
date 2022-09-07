@@ -18,6 +18,7 @@ import {
 import { SearchService } from '../search/search.service';
 import {
   ILiveSearchFlightIran,
+  IReserveFlightIranParam,
   ISearchFlightIranFilterParam,
   ISearchFlightIranParam,
 } from './flight-iran.interface';
@@ -223,6 +224,38 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     this.filter.Save();
   }
 
+  public Issue(param: IReserveFlightIranParam) {
+    return this.http
+      .post('https://api.rahineh.com/api/v1/flight/reserve', {
+        passengers: param.passengers,
+        ...param.information,
+        description: param.description,
+        refrenceId: param.refrenceId,
+        callbackUrl: 'https://rahineh.com/bank/result',
+      })
+      .pipe(
+        map<any, any>((res) => {
+          if ('type' in res && res.type == 0) return undefined;
+          else return res;
+        }),
+        filter((res) => res != undefined)
+      );
+  }
+
+  public Revalidate(refrenceId: string) {
+    return this.http
+      .get(
+        `https://api.rahineh.com/api/v1/flight/revalidate?refrenceId=${refrenceId}`
+      )
+      .pipe(
+        map<any, any>((res) => {
+          if ('type' in res && res.type == 0) return undefined;
+          else return res;
+        }),
+        filter((res) => res != undefined)
+      );
+  }
+
   private filterResult(result: any[]) {
     const filter = this.filter.Value;
     let output = [...result];
@@ -248,7 +281,10 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     }
 
     // remove duplicated flight number
-    if (filter['more'] == undefined || filter['more'].includes('duplicate') == false) {
+    if (
+      filter['more'] == undefined ||
+      filter['more'].includes('duplicate') == false
+    ) {
       let numbers: string[] = [];
       output = output.filter((item) => {
         const id = item.originDestinations

@@ -21,10 +21,13 @@ export class CardReserveComponent implements OnInit {
   @Input()
   public submitText: string = 'تایید و ادامه';
 
+  @Input()
+  public disabled: boolean = false;
+
   @Output()
   public change: EventEmitter<void> = new EventEmitter();
 
-  @Input()
+  @Output()
   public submit: EventEmitter<void> = new EventEmitter();
 
   constructor(private reserve: ReserveService) {}

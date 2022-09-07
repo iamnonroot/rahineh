@@ -44,7 +44,6 @@ import {
 import { AuthPhoneComponent } from './routes/auth/auth-phone/auth-phone.component';
 import { AuthLoginComponent } from './routes/auth/auth-login/auth-login.component';
 import { AuthForgetComponent } from './routes/auth/auth-forget/auth-forget.component';
-import { DialogFlightIranComponent } from './dialog/result/dialog-flight-iran/dialog-flight-iran.component';
 import { DcCardFlightIranResultComponent } from './components/result/dc-card-flight-iran-result/dc-card-flight-iran-result.component';
 import { ReserveInfoComponent } from './routes/reserve/reserve-info/reserve-info.component';
 import { HeaderBreadcrumbResultComponent } from './components/result/header-breadcrumb-result/header-breadcrumb-result.component';
@@ -84,6 +83,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputSearchFlightIranCityComponent } from './components/search/input/input-search-flight-iran-city/input-search-flight-iran-city.component';
 import { InputSearchFlightWorldCityComponent } from './components/search/input/input-search-flight-world-city/input-search-flight-world-city.component';
 import { FilterHeaderComponent } from './components/result/filter-header/filter-header.component';
+import { ReserveSubmitComponent } from './routes/reserve/reserve-submit/reserve-submit.component';
+import { CardFlightIranDetailsResultComponent } from './components/result/card-flight-iran-details-result/card-flight-iran-details-result.component';
+import { ReserveLayoutComponent } from './layouts/reserve-layout/reserve-layout.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +115,6 @@ import { FilterHeaderComponent } from './components/result/filter-header/filter-
     AuthPhoneComponent,
     AuthLoginComponent,
     AuthForgetComponent,
-    DialogFlightIranComponent,
     DcCardFlightIranResultComponent,
     ReserveInfoComponent,
     HeaderBreadcrumbResultComponent,
@@ -152,6 +153,9 @@ import { FilterHeaderComponent } from './components/result/filter-header/filter-
     InputSearchFlightIranCityComponent,
     InputSearchFlightWorldCityComponent,
     FilterHeaderComponent,
+    ReserveSubmitComponent,
+    CardFlightIranDetailsResultComponent,
+    ReserveLayoutComponent,
   ],
   imports: [
     HttpClientModule,
@@ -276,6 +280,7 @@ import { FilterHeaderComponent } from './components/result/filter-header/filter-
       },
       {
         path: 'reserve',
+        component: ReserveLayoutComponent,
         children: [
           {
             path: 'details',
@@ -284,6 +289,10 @@ import { FilterHeaderComponent } from './components/result/filter-header/filter-
           {
             path: 'info',
             component: ReserveInfoComponent,
+          },
+          {
+            path: 'submit',
+            component: ReserveSubmitComponent,
           },
         ],
       },

@@ -9,22 +9,20 @@
       ></app-passenger-header>
 
       <app-passenger-card
-        *ngFor="let item of Reverse.Passengers; let i = index"
+        *ngFor="let item of Reserve.Passengers; let i = index"
         [value]="item"
         [title]="TitleByType(item.type, i)"
+        [selectable]="false"
         [removeable]="i != 0"
-        (remove)="Reverse.RemovePassengerByIndex(i)"
+        (remove)="Reserve.RemovePassengerByIndex(i)"
       ></app-passenger-card>
-
-      <app-reserve-information></app-reserve-information>
-
-      <app-reserve-description></app-reserve-description>
     </div>
 
     <app-card-reserve
       [type]="Result.Type"
       [selected]="Result.Selected"
       (change)="Back()"
+      (submit)="Submit()"
       class="col-span-3 sticky top-8 h-fit"
     ></app-card-reserve>
   </div>

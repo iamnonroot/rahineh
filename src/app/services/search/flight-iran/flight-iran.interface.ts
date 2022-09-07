@@ -1,4 +1,8 @@
 import {
+  IReserveInformation,
+  IReservePassenger,
+} from '../../reserve/reverse.interface';
+import {
   ILiveSearchPassenger,
   ILiveSearchWay,
   TLiveSearchWayType,
@@ -32,4 +36,11 @@ export interface ISearchFlightIranParamStep {
 export interface ISearchFlightIranFilterParam {
   airlines: any[];
   flights: any[];
+}
+
+export interface IReserveFlightIranParam {
+  passengers: IReservePassenger[];
+  information: IReserveInformation;
+  description: string;
+  refrenceId: string;
 }
