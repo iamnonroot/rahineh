@@ -26,7 +26,9 @@ export class InputSearchCalendarComponent implements OnInit {
   public type: 'departure' | 'return' = 'departure';
 
   @Input()
-  public value: ILiveSearchWayDate | undefined;
+  public set value(value: ILiveSearchWayDate | undefined) {
+    this.setValue(value);
+  }
 
   @Input()
   public error: boolean = false;
@@ -115,18 +117,7 @@ export class InputSearchCalendarComponent implements OnInit {
 
   constructor(private functions: TikFunctionsService) {}
 
-  ngOnInit(): void {
-    this.today('jalali');
-    if (this.value) {
-      this.Selected = this.value;
-      this.Current = this.value;
-    } else {
-      this.Current = {
-        format: 'jalali',
-        ...this.Past,
-      };
-    }
-  }
+  ngOnInit(): void {}
 
   public CloseOnClickOutSide(): void {
     setTimeout(() => {
@@ -234,6 +225,20 @@ export class InputSearchCalendarComponent implements OnInit {
   private onCloseOutside() {
     this.menu.closeMenu();
     document.querySelector('app-root')?.removeAllListeners!('click');
+  }
+
+  private setValue(value: ILiveSearchWayDate | undefined) {
+    this.today('jalali');
+
+    if (value) {
+      this.Selected = value;
+      this.Current = value;
+    } else {
+      this.Current = {
+        format: 'jalali',
+        ...this.Past,
+      };
+    }
   }
 }
 

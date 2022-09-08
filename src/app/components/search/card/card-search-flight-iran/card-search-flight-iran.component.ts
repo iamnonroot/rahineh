@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { SearchQueryService } from 'src/app/services/search-query/search-query.service';
 import { SearchFlightIranService } from 'src/app/services/search/flight-iran/flight-iran.service';
 
@@ -11,7 +12,7 @@ import { SearchFlightIranService } from 'src/app/services/search/flight-iran/fli
     class: 'flex flex-col p-4 gap-2',
   },
 })
-export class CardSearchFlightIranComponent implements OnInit {
+export class CardSearchFlightIranComponent implements OnInit, OnDestroy {
   @Input()
   public expansionable: boolean = false;
 
@@ -22,6 +23,8 @@ export class CardSearchFlightIranComponent implements OnInit {
 
   public Errors: string[] = [];
 
+  private subscription!: Subscription;
+
   constructor(
     public Search: SearchFlightIranService,
     private Query: SearchQueryService,
@@ -30,6 +33,13 @@ export class CardSearchFlightIranComponent implements OnInit {
 
   ngOnInit(): void {
     this.opened = !this.expansionable;
+    this.subscription = this.Search.Event.subscribe(() => {
+      this.Submit();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public Submit() {

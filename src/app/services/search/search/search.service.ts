@@ -7,6 +7,7 @@ import { LIVE } from 'projects/enum';
 })
 export class SearchService {
   public Event: EventEmitter<any> = new EventEmitter();
+  public Submit: EventEmitter<void> = new EventEmitter();
 
   constructor(private live: TikLiveService) {
     live.Event.on(LIVE.FILTER, (value) => {

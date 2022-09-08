@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { ISearchPrice } from 'src/app/services/search/search/search.interface';
 import { TCalendaringFormatter } from 'calendaring/dist/interface';
+import { SearchService } from 'src/app/services/search/search/search.service';
 
 @Component({
   selector: 'app-search',
@@ -28,6 +29,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(
     public Result: ResultService,
+    private search: SearchService,
     private app: AppService,
     private bottomSheet: MatBottomSheet,
     private router: Router,
@@ -42,7 +44,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.router.events.subscribe(() => {
         setTimeout(() => {
           if (this.router.url.startsWith('/search'))
-            this.makeResultFromSearch();
+            this.makeResultFromSearch(false, false);
         }, 20);
       })
     );
@@ -69,6 +71,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     switch (this.Result.Type) {
       case 'flight-iran':
         this.searchFlightIran.PushWayDate(event, this.Format);
+        this.searchFlightIran.Event.next();
         break;
 
       default:
@@ -81,7 +84,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.Result.Loading = false;
   }
 
-  private searchForFlightIran() {
+  private searchForFlightIran(withPrices: boolean = false) {
     console.time('fetch/search');
     const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
     this.Format = this.searchFlightIran.GetWayDateByStep(0)?.format!;
@@ -90,7 +93,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       next: (res) => {
         sub_search.unsubscribe();
         console.timeEnd('fetch/search');
-        console.time('fetch/prices');
         console.time('render');
         this.Result.EndTimer();
         this.Result.SetResults(res.status ? res.flights : []);
@@ -102,15 +104,21 @@ export class SearchComponent implements OnInit, OnDestroy {
           });
         }
 
-        let sub_price = this.searchFlightIran.Prices(param).subscribe({
-          next: (res) => {
-            sub_price.unsubscribe();
-            console.timeEnd('fetch/prices');
-            this.Prices = res.status ? res.prices : [];
-          },
-        });
+        if (withPrices) this.fetchPricesForFlightIran();
 
         this.makeSearchFlightIranResult();
+      },
+    });
+  }
+
+  private fetchPricesForFlightIran() {
+    const param = this.searchFlightIran.ConvertLiveSearchToParamSearch();
+    console.time('fetch/prices');
+    let sub_price = this.searchFlightIran.Prices(param).subscribe({
+      next: (res) => {
+        sub_price.unsubscribe();
+        console.timeEnd('fetch/prices');
+        this.Prices = res.status ? res.prices : [];
       },
     });
   }
@@ -125,14 +133,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.dcSearch.make();
   }
 
-  private makeResultFromSearch(force: boolean = false) {
+  private makeResultFromSearch(
+    force: boolean = false,
+    withPrices: boolean = true
+  ) {
     if (this.Result.Loading == true && force == false) return;
     this.Result.StartTimer();
     this.Result.Loading = true;
     this.filter.Clear();
     switch (this.Result.Type) {
       case 'flight-iran':
-        this.searchForFlightIran();
+        this.searchForFlightIran(withPrices);
         break;
 
       default:

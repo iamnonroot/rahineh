@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { TCalendaringFormatter } from 'calendaring/dist/interface';
 import { SearchDeafultRoom, SearchDefaultWay } from './search.default';
 import { SEARCH_PASSENGERS, SEARCH_WAYS, SEARCH_WAY_TYPE } from './search.enum';
@@ -14,6 +15,8 @@ import {
 import { SearchService } from './search.service';
 
 export class SearchVehacel<T> {
+  public Event: EventEmitter<void> = new EventEmitter();
+
   constructor(protected search: SearchService, private type: TLiveSearchType) {}
 
   // get current search by type
