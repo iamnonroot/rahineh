@@ -45,25 +45,47 @@ export class ReserveSubmitComponent implements OnInit {
       switch (this.Result.Type) {
         case 'flight-iran':
           this.Loading = true;
+          let snackbar = this.snackbar.open('در حال اعتبار سنجی درخواست', '', {
+            direction: 'rtl',
+          });
           this.searchFlightIran
-            .Issue({
-              passengers: this.Reserve.Passengers,
-              information: this.Reserve.Information,
-              description: this.Reserve.Description,
-              refrenceId: this.Result.Selected!.refrenceId,
-            })
+            .Revalidate(this.Result.Selected!.refrenceId)
             .subscribe((res) => {
-              this.Loading = false;
-              if (res.status) {
-                this.snackbar.open('در حال انتقال به درگاه پرداخت', '', {
-                  direction: 'rtl',
-                });
-                this.functions.OpenTab(res.reserved.redirect);
+              if (res.status == true) {
+                snackbar.instance.data.message = 'در حال ثبت درخواست';
+                this.searchFlightIran
+                  .Issue({
+                    passengers: this.Reserve.Passengers,
+                    information: this.Reserve.Information,
+                    description: this.Reserve.Description,
+                    refrenceId: this.Result.Selected!.refrenceId,
+                  })
+                  .subscribe((res) => {
+                    this.Loading = false;
+                    if (res.status) {
+                      snackbar.instance.data.message =
+                        'در حال انتقال به درگاه پرداخت';
+                      this.functions.OpenTab(res.reserved.redirect);
+                    } else {
+                      snackbar.dismiss();
+                      this.snackbar.open('خطایی در رزرو رخ داد', 'باشه', {
+                        duration: 3000,
+                        direction: 'rtl',
+                      });
+                    }
+                  });
               } else {
-                this.snackbar.open('خطایی در رزرو رخ داد', 'باشه', {
-                  duration: 3000,
-                  direction: 'rtl',
-                });
+                snackbar.dismiss();
+                this.snackbar.open(
+                  'متاسفانه اعتبار درخواست شما تمام شده',
+                  'باشه',
+                  {
+                    duration: 3000,
+                    direction: 'rtl',
+                  }
+                );
+                // redirect to home
+                this.router.navigate(['/']);
               }
             });
           break;
