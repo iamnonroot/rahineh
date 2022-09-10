@@ -46,30 +46,36 @@ export class ReserveSubmitComponent implements OnInit {
       switch (this.Result.Type) {
         case 'flight-iran':
           this.Loading = true;
+          this.Reserve.Information.disable();
+          this.Reserve.Passengers.forEach((item) => item.disable());
           let snackbar = this.snackbar.open('در حال اعتبار سنجی درخواست', '', {
             direction: 'rtl',
           });
           this.searchFlightIran
             .Revalidate(this.Result.Selected!.refrenceId)
             .subscribe((res) => {
+              const passengers = this.Reserve.Passengers.map((item) =>
+                ConvertFormGroupToJSON(item)
+              );
+
               if (res.status == true) {
                 snackbar.instance.data.message = 'در حال ثبت درخواست';
                 this.searchFlightIran
                   .Issue({
-                    passengers: this.Reserve.Passengers.map((item) =>
-                      ConvertFormGroupToJSON(item)
-                    ),
+                    passengers: passengers,
                     information: this.Reserve.Information,
                     description: this.Reserve.Description,
                     refrenceId: this.Result.Selected!.refrenceId,
                   })
                   .subscribe((res) => {
-                    this.Loading = false;
                     if (res.status) {
                       snackbar.instance.data.message =
                         'در حال انتقال به درگاه پرداخت';
                       this.functions.OpenTab(res.reserved.redirect);
                     } else {
+                      this.Loading = false;
+                      this.Reserve.Information.enable();
+                      this.Reserve.Passengers.forEach((item) => item.enable());
                       snackbar.dismiss();
                       this.snackbar.open('خطایی در رزرو رخ داد', 'باشه', {
                         duration: 3000,

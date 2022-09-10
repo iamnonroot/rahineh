@@ -228,7 +228,7 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
     return this.http
       .post('https://api.rahineh.com/api/v1/flight/reserve', {
         passengers: param.passengers,
-        ...param.information,
+        ...param.information.value,
         description: param.description,
         refrenceId: param.refrenceId,
         callbackUrl: 'https://rahineh.com/bank/result',

@@ -83,7 +83,7 @@ export class DcCardFlightIranResultComponent implements OnInit {
         };
       }),
     };
-    this.Detailed = this.Injected.detailed == true ? true : false;
+    if (this.Injected.detailed) this.ToggleDetailed();
   }
 
   private generateAirlines(

@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import moment from 'jalali-moment';
+import moment, { from } from 'jalali-moment';
 import { IReservePassenger, TReservePassengerType } from './reverse.interface';
 
 export const ReverseDefaultPassenger = (
@@ -35,24 +35,29 @@ export const ReverseDefaultPassenger = (
 };
 
 export const ConvertFormGroupToJSON = (form: FormGroup): any => {
-  const birth_date_year = form.get('birth_date_year')!.value,
-    birth_date_month = form.get('birth_date_month')!.value,
-    birth_date_day = form.get('birth_date_day')!.value;
+  const get = (name: string, defaultValue: any = null) =>
+    form.get(name) && form.get(name)!.value
+      ? form.get(name)!.value
+      : defaultValue;
+  const birth_date_year = get('birth_date_year'),
+    birth_date_month = get('birth_date_month') + 1,
+    birth_date_day = get('birth_date_day');
 
   return {
-    firstname_en: form.get('firstname_en')!.value,
-    lastname_en: form.get('lastname_en')!.value,
-    firstname_fa: form.get('firstname_fa')!.value,
-    lastname_fa: form.get('lastname_fa')!.value,
-    gender: form.get('gender')!.value,
-    birth_country: form.get('birth_country')!.value ?? null,
-    nationality: form.get('nationality')!.value,
-    national_code: form.get('national_code')!.value ?? null,
-    passport_id: form.get('passport_id')!.value ?? null,
-    passport_country: form.get('passport_country')!.value ?? null,
-    passport_expire: form.get('passport_expire')!.value ?? null,
+    firstname_en: get('firstname_en'),
+    lastname_en: get('lastname_en'),
+    firstname_fa: get('firstname_fa'),
+    lastname_fa: get('lastname_fa'),
+    gender: get('gender'),
+    birth_country: get('birth_country'),
+    nationality: get('nationality'),
+    national_code: get('national_code'),
+    passport_id: get('passport_id'),
+    passport_country: get('passport_country'),
+    passport_expire: get('passport_expire'),
     birth_date: moment(
-      `${birth_date_year}-${birth_date_month}-${birth_date_day}`
+      `${birth_date_year}-${birth_date_month}-${birth_date_day}`,
+      'jYYYY-jMM-jDD'
     ).format('yyyy-MM-DD'),
   };
 };

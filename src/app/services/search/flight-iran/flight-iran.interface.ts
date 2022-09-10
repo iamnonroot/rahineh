@@ -1,7 +1,5 @@
-import {
-  IReserveInformation,
-  IReservePassenger,
-} from '../../reserve/reverse.interface';
+import { FormGroup } from '@angular/forms';
+import { IReservePassenger } from '../../reserve/reverse.interface';
 import {
   ILiveSearchPassenger,
   ILiveSearchWay,
@@ -40,7 +38,7 @@ export interface ISearchFlightIranFilterParam {
 
 export interface IReserveFlightIranParam {
   passengers: IReservePassenger[];
-  information: IReserveInformation;
+  information: FormGroup;
   description: string;
   refrenceId: string;
 }

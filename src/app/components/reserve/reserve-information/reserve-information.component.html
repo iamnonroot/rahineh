@@ -2,7 +2,7 @@
   <h3 class="!font-bold">اطلاعات خریدار</h3>
   <p>بلیط و اطلاع‌ رسانی‌ های سفر به شماره موبایل و ایمیل زیر ارسال می‌شود.</p>
 
-  <div class="grid md:grid-cols-3 gap-4">
+  <form [formGroup]="Reserve.Information" class="grid md:grid-cols-3 gap-4">
     <mat-form-field appearance="outline">
       <mat-label>نام و نام خانوادگی</mat-label>
       <input
@@ -10,7 +10,7 @@
         autocomplete="off"
         type="text"
         required
-        [(ngModel)]="Reserve.Information.fullname"
+        formControlName="fullname"
       />
     </mat-form-field>
 
@@ -23,7 +23,7 @@
         required
         dir="ltr"
         class="!text-left"
-        [(ngModel)]="Reserve.Information.phone"
+        formControlName="phone"
       />
     </mat-form-field>
 
@@ -36,8 +36,8 @@
         required
         dir="ltr"
         class="!text-left"
-        [(ngModel)]="Reserve.Information.email"
+        formControlName="email"
       />
     </mat-form-field>
-  </div>
+  </form>
 </mat-card>

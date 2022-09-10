@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ILiveSearchPassenger } from '../search/search/search.interface';
 import { ReverseDefaultPassenger } from './reverse.default';
 import {
@@ -20,11 +20,15 @@ export class ReserveService {
     infant: 0,
   };
   public Description: string = '';
-  public Information: IReserveInformation = {
-    fullname: '',
-    phone: '',
-    email: '',
-  };
+  public Information: FormGroup = new FormGroup({
+    fullname: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.minLength(11),
+      Validators.maxLength(11),
+    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+  });
 
   constructor() {}
 
@@ -36,11 +40,15 @@ export class ReserveService {
       infant: 0,
     };
     this.Description = '';
-    this.Information = {
-      fullname: '',
-      phone: '',
-      email: '',
-    };
+    this.Information = new FormGroup({
+      fullname: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.minLength(11),
+        Validators.maxLength(11),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+    });
   }
 
   public SetPassengersByCount(count: ILiveSearchPassenger) {
@@ -102,7 +110,7 @@ export class ReserveService {
       //   (!item.passport_id || item.passport_id.length == 0)
       // )
       //   return false;
-
+      item.markAllAsTouched();
       if (item.invalid) {
         return false;
       }
@@ -112,14 +120,7 @@ export class ReserveService {
   }
 
   public ValidateInformation(): boolean {
-    const validateEmail = (email: string) => {
-      return /\S+@\S+\.\S+/.test(email);
-    };
-
-    if (this.Information.fullname.length == 0) return false;
-    if (this.Information.phone.length != 11) return false;
-    if (this.Information.email.length == 0) return false;
-    if (validateEmail(this.Information.email) != true) return false;
-    return true;
+    this.Information.markAllAsTouched();
+    return this.Information.valid;
   }
 }

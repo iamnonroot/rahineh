@@ -82,8 +82,8 @@
 
     <mat-form-field
       [ngClass]="{
-        'col-span-2': value.nationality == 'IR',
-        'col-span-1': value.nationality == 'non-IR'
+        'col-span-2': form.get('nationality')!.value == 'IR',
+        'col-span-1': form.get('nationality')!.value == 'non-IR'
       }"
       appearance="outline"
     >
@@ -96,7 +96,7 @@
 
     <mat-form-field
       class="col-span-2"
-      *ngIf="value.nationality == 'IR'"
+      *ngIf="form.get('nationality')!.value == 'IR'"
       appearance="outline"
     >
       <mat-label>کد ملی</mat-label>
@@ -111,7 +111,7 @@
 
     <mat-form-field
       class="col-span-1"
-      *ngIf="value.nationality == 'non-IR'"
+      *ngIf="form.get('nationality')!.value == 'non-IR'"
       appearance="outline"
     >
       <mat-label>کشور</mat-label>
@@ -121,7 +121,7 @@
 
     <mat-form-field
       class="col-span-2"
-      *ngIf="value.nationality == 'non-IR'"
+      *ngIf="form.get('nationality')!.value == 'non-IR'"
       appearance="outline"
     >
       <mat-label>شماره گذرنامه</mat-label>
