@@ -86,6 +86,7 @@ import { FilterHeaderComponent } from './components/result/filter-header/filter-
 import { ReserveSubmitComponent } from './routes/reserve/reserve-submit/reserve-submit.component';
 import { CardFlightIranDetailsResultComponent } from './components/result/card-flight-iran-details-result/card-flight-iran-details-result.component';
 import { ReserveLayoutComponent } from './layouts/reserve-layout/reserve-layout.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +157,7 @@ import { ReserveLayoutComponent } from './layouts/reserve-layout/reserve-layout.
     ReserveSubmitComponent,
     CardFlightIranDetailsResultComponent,
     ReserveLayoutComponent,
+    OrderComponent,
   ],
   imports: [
     HttpClientModule,
@@ -309,6 +311,10 @@ import { ReserveLayoutComponent } from './layouts/reserve-layout/reserve-layout.
             redirectTo: '/help-center',
           },
         ],
+      },
+      {
+        path: 'order',
+        component: OrderComponent,
       },
     ]),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
