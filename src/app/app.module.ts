@@ -87,6 +87,7 @@ import { ReserveSubmitComponent } from './routes/reserve/reserve-submit/reserve-
 import { CardFlightIranDetailsResultComponent } from './components/result/card-flight-iran-details-result/card-flight-iran-details-result.component';
 import { ReserveLayoutComponent } from './layouts/reserve-layout/reserve-layout.component';
 import { OrderComponent } from './order/order.component';
+import { ReservePaymentComponent } from './routes/reserve/reserve-payment/reserve-payment.component';
 
 @NgModule({
   declarations: [
@@ -158,6 +159,7 @@ import { OrderComponent } from './order/order.component';
     CardFlightIranDetailsResultComponent,
     ReserveLayoutComponent,
     OrderComponent,
+    ReservePaymentComponent,
   ],
   imports: [
     HttpClientModule,
@@ -295,6 +297,10 @@ import { OrderComponent } from './order/order.component';
           {
             path: 'submit',
             component: ReserveSubmitComponent,
+          },
+          {
+            path: 'payment',
+            component: ReservePaymentComponent,
           },
         ],
       },
