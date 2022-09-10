@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import moment from 'jalali-moment';
 import { IReservePassenger } from 'src/app/services/reserve/reverse.interface';
 
@@ -24,6 +25,9 @@ export class PassengerCardComponent implements OnInit {
 
   @Input()
   public value!: IReservePassenger;
+
+  @Input()
+  public form!: FormGroup;
 
   @Input()
   public title: string = '';

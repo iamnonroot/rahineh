@@ -9,8 +9,8 @@
 
       <app-passenger-card
         *ngFor="let item of Reserve.Passengers; let i = index"
-        [value]="item"
-        [title]="TitleByType(item.type, i)"
+        [form]="item"
+        [title]="TitleByType(item.get('type')!.value, i)"
         [selectable]="false"
         [removeable]="i != 0"
         (remove)="Reserve.RemovePassengerByIndex(i)"

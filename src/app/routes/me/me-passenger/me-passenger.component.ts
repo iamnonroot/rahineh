@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogPassengerComponent } from 'src/app/dialog/me/dialog-passenger/dialog-passenger.component';
 import { ReverseDefaultPassenger } from 'src/app/services/reserve/reverse.default';
@@ -10,7 +11,7 @@ import { IReservePassenger } from 'src/app/services/reserve/reverse.interface';
   styleUrls: ['./me-passenger.component.scss'],
 })
 export class MePassengerComponent implements OnInit {
-  public Passengers: IReservePassenger[] = [];
+  public Passengers: FormGroup[] = [];
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}

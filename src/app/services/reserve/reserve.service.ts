@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ILiveSearchPassenger } from '../search/search/search.interface';
 import { ReverseDefaultPassenger } from './reverse.default';
 import {
@@ -12,7 +13,7 @@ import {
   providedIn: 'root',
 })
 export class ReserveService {
-  public Passengers: IReservePassenger[] = [];
+  public Passengers: FormGroup[] = [];
   public PassengersCount: IReservePassengerCount = {
     adult: 0,
     child: 0,
@@ -44,12 +45,12 @@ export class ReserveService {
 
   public SetPassengersByCount(count: ILiveSearchPassenger) {
     this.PassengersCount = count;
+    this.Passengers = [];
     const types = [].concat(
       ...Array.from({ length: count.adult }, () => 'adult' as any),
       ...Array.from({ length: count.child }, () => 'child' as any),
       ...Array.from({ length: count.infant }, () => 'infant' as any)
     );
-    this.Passengers = [];
     for (let type of types) {
       this.AddPassengerByType(type);
     }
@@ -69,32 +70,42 @@ export class ReserveService {
 
   public CountPassengers(): ILiveSearchPassenger {
     return {
-      adult: this.Passengers.filter((item) => item.type == 'adult').length,
-      child: this.Passengers.filter((item) => item.type == 'child').length,
-      infant: this.Passengers.filter((item) => item.type == 'infant').length,
+      adult: this.Passengers.filter(
+        (item) => item.get('type')!.value == 'adult'
+      ).length,
+      child: this.Passengers.filter(
+        (item) => item.get('type')!.value == 'child'
+      ).length,
+      infant: this.Passengers.filter(
+        (item) => item.get('type')!.value == 'infant'
+      ).length,
     };
   }
 
   public ValidatePassengers(): boolean {
     for (let item of this.Passengers) {
-      if (item.firstname_en.length == 0) return false;
-      if (item.lastname_en.length == 0) return false;
-      if (!item.gender || item.gender.length == 0) return false;
-      if (
-        item.nationality == 'IR' &&
-        (!item.national_code || item.national_code.length != 10)
-      )
+      // if (item.firstname_en.length == 0) return false;
+      // if (item.lastname_en.length == 0) return false;
+      // if (!item.gender || item.gender.length == 0) return false;
+      // if (
+      //   item.nationality == 'IR' &&
+      //   (!item.national_code || item.national_code.length != 10)
+      // )
+      //   return false;
+      // if (
+      //   item.nationality == 'non-IR' &&
+      //   (!item.passport_country || item.passport_country.length == 0)
+      // )
+      //   return false;
+      // if (
+      //   item.nationality == 'non-IR' &&
+      //   (!item.passport_id || item.passport_id.length == 0)
+      // )
+      //   return false;
+
+      if (item.invalid) {
         return false;
-      if (
-        item.nationality == 'non-IR' &&
-        (!item.passport_country || item.passport_country.length == 0)
-      )
-        return false;
-      if (
-        item.nationality == 'non-IR' &&
-        (!item.passport_id || item.passport_id.length == 0)
-      )
-        return false;
+      }
     }
 
     return true;

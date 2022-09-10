@@ -6,6 +6,7 @@ import { ResultService } from 'src/app/services/result/result.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SearchFlightIranService } from 'src/app/services/search/flight-iran/flight-iran.service';
 import { TikFunctionsService } from 'projects/utils/src/lib/services/functions/functions.service';
+import { ConvertFormGroupToJSON } from 'src/app/services/reserve/reverse.default';
 
 @Component({
   selector: 'app-reserve-submit',
@@ -55,7 +56,9 @@ export class ReserveSubmitComponent implements OnInit {
                 snackbar.instance.data.message = 'در حال ثبت درخواست';
                 this.searchFlightIran
                   .Issue({
-                    passengers: this.Reserve.Passengers,
+                    passengers: this.Reserve.Passengers.map((item) =>
+                      ConvertFormGroupToJSON(item)
+                    ),
                     information: this.Reserve.Information,
                     description: this.Reserve.Description,
                     refrenceId: this.Result.Selected!.refrenceId,

@@ -25,7 +25,7 @@
     </button>
   </div>
 
-  <div class="grid md:grid-cols-4 lg:grid-cols-8 gap-4">
+  <form [formGroup]="form" class="grid md:grid-cols-4 lg:grid-cols-8 gap-4">
     <mat-form-field class="col-span-2" appearance="outline">
       <mat-label>نام ( انگلیسی )</mat-label>
       <input
@@ -35,7 +35,7 @@
         type="text"
         dir="ltr"
         class="!text-left"
-        [(ngModel)]="value.firstname_en"
+        formControlName="firstname_en"
       />
     </mat-form-field>
 
@@ -48,7 +48,7 @@
         type="text"
         dir="ltr"
         class="!text-left"
-        [(ngModel)]="value.lastname_en"
+        formControlName="lastname_en"
       />
     </mat-form-field>
 
@@ -58,7 +58,7 @@
         matInput
         autocomplete="off"
         type="text"
-        [(ngModel)]="value.firstname_fa"
+        formControlName="firstname_fa"
       />
     </mat-form-field>
 
@@ -68,13 +68,13 @@
         matInput
         autocomplete="off"
         type="text"
-        [(ngModel)]="value.lastname_fa"
+        formControlName="lastname_fa"
       />
     </mat-form-field>
 
     <mat-form-field class="col-span-2" appearance="outline">
       <mat-label>جنسیت</mat-label>
-      <mat-select required [(ngModel)]="value.gender">
+      <mat-select required formControlName="gender">
         <mat-option value="male">آقا</mat-option>
         <mat-option value="female">خانم</mat-option>
       </mat-select>
@@ -88,7 +88,7 @@
       appearance="outline"
     >
       <mat-label>ملیت</mat-label>
-      <mat-select required [(ngModel)]="value.nationality">
+      <mat-select required formControlName="nationality">
         <mat-option value="IR">ایرانی</mat-option>
         <mat-option value="non-IR">غیر ایرانی</mat-option>
       </mat-select>
@@ -105,7 +105,7 @@
         required
         autocomplete="off"
         type="tel"
-        [(ngModel)]="value.national_code"
+        formControlName="national_code"
       />
     </mat-form-field>
 
@@ -130,7 +130,7 @@
         required
         autocomplete="off"
         type="tel"
-        [(ngModel)]="value.passport_id"
+        formControlName="passport_id"
       />
     </mat-form-field>
 
@@ -139,7 +139,7 @@
       <div class="grid grid-cols-3 gap-2">
         <mat-form-field appearance="outline">
           <mat-label>روز</mat-label>
-          <mat-select required [(ngModel)]="value.birth_date!.day">
+          <mat-select required formControlName="birth_date_day">
             <mat-option *ngFor="let item of Days" [value]="item">
               {{ item }}
             </mat-option>
@@ -148,7 +148,7 @@
         <!--  -->
         <mat-form-field appearance="outline">
           <mat-label>ماه</mat-label>
-          <mat-select required [(ngModel)]="value.birth_date!.month">
+          <mat-select required formControlName="birth_date_month">
             <mat-option
               *ngFor="let item of Months; let i = index"
               [value]="i + 1"
@@ -160,7 +160,7 @@
         <!--  -->
         <mat-form-field appearance="outline">
           <mat-label>سال</mat-label>
-          <mat-select required [(ngModel)]="value.birth_date!.year">
+          <mat-select required formControlName="birth_date_year">
             <mat-option *ngFor="let item of Years" [value]="item">
               {{ item }}
             </mat-option>
@@ -168,5 +168,5 @@
         </mat-form-field>
       </div>
     </div>
-  </div>
+  </form>
 </mat-card>
