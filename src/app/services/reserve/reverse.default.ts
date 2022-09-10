@@ -44,6 +44,7 @@ export const ConvertFormGroupToJSON = (form: FormGroup): any => {
     birth_date_day = get('birth_date_day');
 
   return {
+    type: get('type', 'adult'),
     firstname_en: get('firstname_en'),
     lastname_en: get('lastname_en'),
     firstname_fa: get('firstname_fa'),
