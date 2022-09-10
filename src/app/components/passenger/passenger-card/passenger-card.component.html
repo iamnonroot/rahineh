@@ -88,7 +88,7 @@
       appearance="outline"
     >
       <mat-label>ملیت</mat-label>
-      <mat-select required formControlName="nationality">
+      <mat-select required formControlName="nationality" (selectionChange)="OnNationalityChange()">
         <mat-option value="IR">ایرانی</mat-option>
         <mat-option value="non-IR">غیر ایرانی</mat-option>
       </mat-select>

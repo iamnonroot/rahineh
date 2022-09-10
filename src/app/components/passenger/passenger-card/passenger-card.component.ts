@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import moment from 'jalali-moment';
-import { IReservePassenger } from 'src/app/services/reserve/reverse.interface';
 
 @Component({
   selector: 'app-passenger-card',
@@ -22,9 +21,6 @@ export class PassengerCardComponent implements OnInit {
     const year = moment().jYear();
     return Array.from({ length: 100 }, (_, i) => year - i);
   }
-
-  @Input()
-  public value!: IReservePassenger;
 
   @Input()
   public form!: FormGroup;
@@ -50,4 +46,21 @@ export class PassengerCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  public OnNationalityChange() {
+    const value = this.form.get('nationality')!.value;
+    if (value == 'IR') {
+      this.form
+        .get('national_code')
+        ?.setValidators([
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ]);
+      this.form.get('passport_id')!.setValidators([]);
+    } else {
+      this.form.get('national_code')!.setValidators([]);
+      this.form.get('passport_id')!.setValidators([Validators.required]);
+    }
+  }
 }
