@@ -28,3 +28,9 @@ export interface IReserveInformation {
   phone: string;
   email: string;
 }
+
+export interface IReservePassengerCount {
+  adult: number;
+  child: number;
+  infant: number;
+}

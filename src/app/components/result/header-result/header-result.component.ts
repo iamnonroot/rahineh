@@ -15,8 +15,13 @@ export class HeaderResultComponent implements OnInit {
 
   public Prices: Price[] = [];
 
+  public MinPrices: number[] = [];
+  public MaxPrices: number[] = [];
+
   @Input('prices')
   set prices(value: ISearchPrice[]) {
+    if (value.length == 0) return;
+    this.calculatePrices(value);
     this.Prices = value.map((item) => {
       const date = moment(item.date);
       return {
@@ -37,6 +42,7 @@ export class HeaderResultComponent implements OnInit {
             : Number(item.totalFare) == 0
             ? 'نامشخص'
             : 'تکمیل ظرفیت',
+        _price: item.totalFare ? Number(item.totalFare) : 0,
       };
     });
   }
@@ -68,12 +74,47 @@ export class HeaderResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  private calculatePrices(value: ISearchPrice[]) {
+    const min = new Set<number>(),
+      max = new Set<number>();
+
+    const result = Array.from(
+      new Set(
+        value
+          .filter((item) => item.totalFare)
+          .map((item) => Number(item.totalFare))
+          .sort((a, b) => a - b)
+      )
+    );
+
+    if (result.length == 2) {
+      min.add(result[0]);
+      max.add(result[1]);
+    } else if (result.length == 3) {
+      min.add(result[0]);
+      max.add(result[2]);
+    } else if (result.length == 4 || result.length == 5) {
+      min.add(result[0]).add(result[1]);
+      max.add(result[result.length - 1]).add(result[result.length - 2]);
+    } else if (result.length >= 6) {
+      min.add(result[0]).add(result[1]).add(result[2]);
+      max
+        .add(result[result.length - 1])
+        .add(result[result.length - 2])
+        .add(result[result.length - 3]);
+    }
+
+    this.MinPrices = Array.from<number>(min);
+    this.MaxPrices = Array.from<number>(max);
+  }
 }
 
 interface Price {
   date: DateTime;
   text: string;
   price: string;
+  _price: number;
 }
 
 interface DateTime {

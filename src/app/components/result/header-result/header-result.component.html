@@ -20,7 +20,12 @@
       >
         <div class="flex flex-col py-2">
           <span class="text-xs opacity-70">{{ item.text }}</span>
-          <span class="text-base">{{ item.price }}</span>
+          <span
+            class="text-base"
+            [ngClass]="{ 'text-primary': MinPrices.includes(item._price) }"
+          >
+            {{ item.price }}
+          </span>
         </div>
       </a>
     </nav>

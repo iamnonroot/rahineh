@@ -7,6 +7,9 @@
   <div class="flex flex-nowrap items-center gap-1">
     <button
       (click)="Reserve.AddPassengerByType('adult')"
+      [disabled]="
+        Reserve.PassengersCount.adult >= Reserve.CountPassengerByType('adult')
+      "
       mat-button
       color="primary"
     >
@@ -15,6 +18,9 @@
     </button>
     <button
       (click)="Reserve.AddPassengerByType('child')"
+      [disabled]="
+        Reserve.PassengersCount.child >= Reserve.CountPassengerByType('child')
+      "
       mat-button
       color="primary"
     >
@@ -23,6 +29,9 @@
     </button>
     <button
       (click)="Reserve.AddPassengerByType('infant')"
+      [disabled]="
+        Reserve.PassengersCount.infant >= Reserve.CountPassengerByType('infant')
+      "
       mat-button
       color="primary"
     >

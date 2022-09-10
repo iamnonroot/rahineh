@@ -32,7 +32,8 @@
         (click)="Search.SetWayType('go-back')"
         class="!cursor-pointer"
         [ngClass]="{
-          '!bg-accent !text-white': Search.GetWayType() == 'go-back' ? 'accent' : ''
+          '!bg-accent !text-white':
+            Search.GetWayType() == 'go-back' ? 'accent' : ''
         }"
       >
         رفت و برگشت
@@ -46,16 +47,16 @@
       [value]="Search.GetWayOriginByStep(0)"
       (valueChange)="Search.SetWayOriginByStep($event, 0)"
       [error]="Errors.includes('origin/0')"
-      [disabled]="disabled"
       class="col-span-2"
+      [ngClass]="{ 'opacity-30 pointer-events-none': disabled }"
     ></app-input-search-flight-iran-city>
     <app-input-search-flight-iran-city
       type="destination"
       [value]="Search.GetWayDestinationByStep(0)"
       (valueChange)="Search.SetWayDestinationByStep($event, 0)"
       [error]="Errors.includes('destination/0')"
-      [disabled]="disabled"
       class="col-span-2"
+      [ngClass]="{ 'opacity-30 pointer-events-none': disabled }"
     ></app-input-search-flight-iran-city>
 
     <app-input-search-calendar
@@ -63,18 +64,18 @@
       [value]="Search.GetWayDateByStep(0)"
       (valueChange)="Search.SetWayDateByStep($event, 0)"
       [error]="Errors.includes('date/0')"
-      [disabled]="disabled"
       class="col-span-2"
+      [ngClass]="{ 'opacity-30 pointer-events-none': disabled }"
     ></app-input-search-calendar>
     <app-input-search-calendar
       type="return"
       [value]="Search.GetWayDateByStep(1)"
       (valueChange)="Search.SetWayDateByStep($event, 1)"
       [error]="Errors.includes('date/1')"
-      [disabled]="disabled"
       class="col-span-2 transition-all"
       [ngClass]="{
-        'pointer-events-none opacity-30': Search.GetWayType() != 'go-back'
+        'pointer-events-none opacity-30':
+          Search.GetWayType() != 'go-back' || disabled
       }"
     ></app-input-search-calendar>
 
@@ -82,8 +83,8 @@
       [value]="Search.CountPassengers()"
       (add)="Search.AddPassengerByType($event)"
       (remove)="Search.RemovePassengerByType($event)"
-      [disabled]="disabled"
       class="-lg:col-span-4 lg:col-span-2"
+      [ngClass]="{ 'opacity-30 pointer-events-none': disabled }"
     ></app-input-search-passenger>
 
     <button

@@ -4,6 +4,7 @@ import { ReverseDefaultPassenger } from './reverse.default';
 import {
   IReserveInformation,
   IReservePassenger,
+  IReservePassengerCount,
   TReservePassengerType,
 } from './reverse.interface';
 
@@ -12,6 +13,11 @@ import {
 })
 export class ReserveService {
   public Passengers: IReservePassenger[] = [];
+  public PassengersCount: IReservePassengerCount = {
+    adult: 0,
+    child: 0,
+    infant: 0,
+  };
   public Description: string = '';
   public Information: IReserveInformation = {
     fullname: '',
@@ -23,6 +29,11 @@ export class ReserveService {
 
   public Clear() {
     this.Passengers = [];
+    this.PassengersCount = {
+      adult: 0,
+      child: 0,
+      infant: 0,
+    };
     this.Description = '';
     this.Information = {
       fullname: '',
@@ -32,6 +43,7 @@ export class ReserveService {
   }
 
   public SetPassengersByCount(count: ILiveSearchPassenger) {
+    this.PassengersCount = count;
     const types = [].concat(
       ...Array.from({ length: count.adult }, () => 'adult' as any),
       ...Array.from({ length: count.child }, () => 'child' as any),
@@ -62,8 +74,6 @@ export class ReserveService {
       infant: this.Passengers.filter((item) => item.type == 'infant').length,
     };
   }
-
-
 
   public ValidatePassengers(): boolean {
     for (let item of this.Passengers) {
