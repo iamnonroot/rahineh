@@ -242,6 +242,20 @@ export class SearchFlightIranService extends SearchVehacel<ILiveSearchFlightIran
       );
   }
 
+  public Details(refrenceId: string) {
+    return this.http
+      .get(
+        `https://api.rahineh.com/api/v1/flight/details?refrenceId=${refrenceId}`
+      )
+      .pipe(
+        map<any, any>((res) => {
+          if ('type' in res && res.type == 0) return undefined;
+          else return res;
+        }),
+        filter((res) => res != undefined)
+      );
+  }
+
   public Revalidate(refrenceId: string) {
     return this.http
       .get(

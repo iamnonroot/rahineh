@@ -135,7 +135,7 @@
       </div>
       <div class="flex-1"></div>
       <button
-        (click)="Detailed = !Detailed"
+        (click)="ToggleDetailed()"
         mat-ripple
         class="px-4 py-3 rounded-xl bg-slate-200"
       >
@@ -172,9 +172,11 @@
       </div>
     </div>
 
-    <div class="flex flex-nowrap items-center justify-between gap-2 border-t border-dashed mt-2 pt-2 lg:hidden">
+    <div
+      class="flex flex-nowrap items-center justify-between gap-2 border-t border-dashed mt-2 pt-2 lg:hidden"
+    >
       <button
-        (click)="Detailed = !Detailed"
+        (click)="ToggleDetailed()"
         mat-ripple
         class="px-4 py-3 rounded-xl bg-slate-200"
       >
@@ -190,20 +192,53 @@
     </div>
   </div>
 
-
   <div
     class="flex -lg:flex-col lg:flex-nowrap w-full"
     [ngClass]="{ '!h-0': !Detailed }"
   >
-    <mat-tab-group class="w-full">
+    <mat-tab-group dynamicHeight class="w-full">
       <mat-tab label="اطلاعات پرواز">
         <app-card-flight-iran-details-result
           class="py-3"
           [item]="Injected"
         ></app-card-flight-iran-details-result>
       </mat-tab>
-      <mat-tab label="قوانین و استرداد"></mat-tab>
-      <mat-tab label="شرایط حمل بار"></mat-tab>
+      <mat-tab label="قوانین و استرداد" *ngIf="Rules">
+        <div class="flex flex-col gap-2 p-1">
+          <div class="flex flex-nowrap items-center justify-between mt-2 px-2">
+            <p>{{ Rules.title }}</p>
+
+            <a [routerLink]="Rules.buttonLink" mat-button color="accent">
+              {{ Rules.buttonText }}
+            </a>
+          </div>
+
+          <ng-container *ngIf="RulesType == 2">
+            <div
+              *ngFor="let item of Rules.infos"
+              class="border rounded-xl flex flex-nowrap items-center gap-4 p-1"
+            >
+              <span class="bg-red-500 text-white p-2 rounded-xl text-xs">
+                {{ item.penaltyPercent }}%
+              </span>
+              <p [innerText]="item.description" class="!m-0"></p>
+            </div>
+          </ng-container>
+        </div>
+      </mat-tab>
+      <mat-tab label="شرایط حمل بار" *ngIf="Baggages">
+        <div class="flex flex-col gap-2 p-1">
+          <div
+            *ngFor="let item of Baggages"
+            class="flex flex-nowrap items-center gap-4 p-2 border-b"
+          >
+            <span class="bg-accent text-white px-3 py-2 rounded-xl text-xs">
+              {{ item.baggage }}
+            </span>
+            <p [innerText]="item.description" class="!m-0"></p>
+          </div>
+        </div>
+      </mat-tab>
     </mat-tab-group>
 
     <div

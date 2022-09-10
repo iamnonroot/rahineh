@@ -21,6 +21,12 @@ export class DcCardFlightIranResultComponent implements OnInit {
 
   public Detailed: boolean = false;
 
+  public RulesType: number = -1;
+  public Rules: any | undefined = undefined;
+  public Baggages: IDetailBaggage[] | undefined = undefined;
+
+  public Loading: boolean = false;
+
   constructor(
     private result: ResultService,
     private search: SearchFlightIranService
@@ -95,7 +101,7 @@ export class DcCardFlightIranResultComponent implements OnInit {
     };
   }
 
-  public Select() {    
+  public Select() {
     this.result.Select(this.Injected!, this.search.CountPassengers());
   }
 
@@ -127,6 +133,27 @@ export class DcCardFlightIranResultComponent implements OnInit {
   public GetTotalPrice(): number {
     const prices = this.GetPrices();
     return prices.adult.price + prices.child.price + prices.infant.price;
+  }
+
+  public ToggleDetailed() {
+    this.Detailed = !this.Detailed;
+    if (this.Baggages == undefined || this.Rules == undefined) {
+      this.loadDetails();
+    }
+  }
+
+  private loadDetails() {
+    this.Loading = true;
+    this.search.Details(this.Injected.refrenceId).subscribe({
+      next: (res) => {
+        this.Loading = false;
+        if (res.status == true) {
+          this.RulesType = res.details.rulesType;
+          this.Rules = res.details.rules;
+          this.Baggages = res.details.baggages;
+        }
+      },
+    });
   }
 }
 
@@ -182,4 +209,9 @@ interface PricePassengerItem {
   text: string;
   count: number;
   price: number;
+}
+
+interface IDetailBaggage {
+  baggage: string;
+  description: string;
 }

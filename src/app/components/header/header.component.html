@@ -8,7 +8,10 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <a routerLink="/" class="h-[48px] w-[85px] -md:mx-auto">
+      <a
+        routerLink="/"
+        class="md:h-[48px] md:w-[85px] -md:h-[24px] -md:w-[42px] -md:mx-auto"
+      >
         <picture>
           <img
             class="w-full h-full object-contains"
@@ -34,7 +37,7 @@
 
       <a
         routerLink="/order"
-        class="text-sm !text-slate-500 hover:!text-primary"
+        class="text-sm !text-slate-500 hover:!text-primary -md:hidden"
       >
         پیگیری یا استرداد
       </a>
@@ -74,11 +77,18 @@
         mat-list-item
         class="opacity-70"
         [ngClass]="{
-          '!opacity-100 bg-accent/10 !text-accent': item.type == Result.Type
+          '!opacity-100 bg-accent/10 !text-accent': item.type == Result.Type,
+          'pointer-events-none !opacity-30': item.disable
         }"
       >
         <mat-icon class="ml-4">{{ item.icon }}</mat-icon>
         <span class="text-sm">{{ item.text }}</span>
+
+        <span
+          *ngIf="item.disable"
+          class="bg-accent text-white rounded-full px-2 py-1 text-xs mr-auto"
+          >بزودی</span
+        >
       </a>
     </mat-list>
     <mat-divider></mat-divider>
