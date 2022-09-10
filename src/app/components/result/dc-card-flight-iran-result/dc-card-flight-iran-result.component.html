@@ -171,9 +171,30 @@
         </span>
       </div>
     </div>
+
+    <div class="flex flex-nowrap items-center justify-between gap-2 border-t border-dashed mt-2 pt-2 lg:hidden">
+      <button
+        (click)="Detailed = !Detailed"
+        mat-ripple
+        class="px-4 py-3 rounded-xl bg-slate-200"
+      >
+        اطلاعات بیشتر
+      </button>
+      <button
+        (click)="Select()"
+        mat-ripple
+        class="px-4 py-3 rounded-xl bg-primary text-white"
+      >
+        انتخاب بلیط
+      </button>
+    </div>
   </div>
 
-  <div class="flex flex-nowrap w-full" [ngClass]="{ '!h-0': !Detailed }">
+
+  <div
+    class="flex -lg:flex-col lg:flex-nowrap w-full"
+    [ngClass]="{ '!h-0': !Detailed }"
+  >
     <mat-tab-group class="w-full">
       <mat-tab label="اطلاعات پرواز">
         <app-card-flight-iran-details-result
@@ -195,12 +216,12 @@
           class="flex flex-nowrap items-center gap-2 m-2"
         >
           <span class="ml-auto">{{ item.text }}</span>
-          <span class="w-[20px] opacity-70 whitespace-pre"
-            >{{ item.count }} ×</span
-          >
-          <span class="opacity-70"
-            >{{ item.price | format: "price" }} تومان</span
-          >
+          <span class="w-[20px] opacity-70 whitespace-pre">
+            {{ item.count }} ×
+          </span>
+          <span class="opacity-70">
+            {{ item.price | format: "price" }} تومان
+          </span>
         </div>
       </ng-container>
 

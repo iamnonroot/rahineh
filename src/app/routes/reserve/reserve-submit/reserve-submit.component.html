@@ -1,8 +1,7 @@
-<div class="container mx-auto my-6 relative">
+<div class="-md:mx-4 md:container md:mx-auto my-6 relative flex flex-col gap-4">
   <app-header-reserve [step]="3"></app-header-reserve>
-  <br />
 
-  <div class="grid grid-cols-12 gap-4 relative">
+  <div class="-lg:flex -lg:flex-col lg:grid lg:grid-cols-12 gap-4 relative">
     <div class="flex flex-col gap-4 col-span-9">
       <app-reserve-information></app-reserve-information>
 
@@ -16,7 +15,7 @@
       (change)="Back()"
       (submit)="Submit()"
       [disabled]="Loading"
-      class="col-span-3 sticky top-8 h-fit"
+      class="col-span-3 sticky top-8 h-fit -lg:w-full"
     ></app-card-reserve>
   </div>
 </div>

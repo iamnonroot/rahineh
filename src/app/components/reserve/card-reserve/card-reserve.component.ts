@@ -10,6 +10,9 @@ import {
   selector: 'app-card-reserve',
   templateUrl: './card-reserve.component.html',
   styleUrls: ['./card-reserve.component.scss'],
+  host: {
+    class: 'block'
+  }
 })
 export class CardReserveComponent implements OnInit {
   @Input()
